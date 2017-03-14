@@ -11,6 +11,7 @@ namespace CUI
     {
         static void Main(string[] args)
         {
+            
             // Journée 1 :
 
             // Exercice 1 : Construire une liste désorganisée de Competitro
