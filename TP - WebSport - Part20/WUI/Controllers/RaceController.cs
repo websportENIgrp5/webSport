@@ -120,6 +120,7 @@ namespace WUI.Controllers
         // si le token issu du cookie d'authentification a été bien été défini dans
         // la requête HTTP POST pour l'envoi du formulaire
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="organizator,administrator")]
         public ActionResult Create(RaceModel race)
         {
             try
