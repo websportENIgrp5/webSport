@@ -31,6 +31,8 @@ namespace DAL.Extensions
                 Description = bo.Description,
                 DateStart = bo.DateStart,
                 Town = bo.Town,
+                Distance = bo.Distance,
+                IdDifficulte = bo.IdDifficulte,
 
                 Organisers = withJoin && bo.Contributors != null ? bo.Contributors.Where(x => x.IsOrganiser).Select(x => x.ToOrganiserBo()).ToList() : null,
                 Competitors = withJoin && bo.Contributors != null ? bo.Contributors.Where(x => x.IsCompetitor).Select(x => x.ToCompetitorBo()).ToList() : null
@@ -48,6 +50,8 @@ namespace DAL.Extensions
                 Description = model.Description,
                 DateStart = model.DateStart,
                 Town = model.Town,
+                Distance = model.Distance,
+                IdDifficulte = model.IdDifficulte
             };
         }
 
@@ -62,7 +66,10 @@ namespace DAL.Extensions
                 Title = entity.CTitre,
                 Description = entity.CDescription,
                 DateStart = entity.CDateStart,
-                Town = entity.CVille
+                DateEnd = entity.CDateEnd,
+                Town = entity.CVille,
+                Distance = entity.Distance,
+                IdDifficulte = entity.IdDifficulte
             };
         }
 

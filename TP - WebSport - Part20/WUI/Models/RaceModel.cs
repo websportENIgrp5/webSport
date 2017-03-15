@@ -35,6 +35,14 @@ namespace WUI.Models
         [Required(ErrorMessage = "La {0} est requise")]
         public string Town { get; set; }
 
+        [Display(Name = "Distance")]
+        [Required(ErrorMessage = "La {0} est requise")]
+        public int Distance { get; set; }
+
+        [Display(Name = "Niveau")]
+        [Required(ErrorMessage = "Le {0} est requise")]
+        public int IdDifficulte { get; set; }
+
 
         public List<CompetitorModel> Competitors { get; set; }
 
