@@ -12,20 +12,19 @@ namespace DAL.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class ContributorEntity
+    public partial class Poi
     {
-        public ContributorEntity()
+        public Poi()
         {
-            this.Inscription = new HashSet<Inscription>();
+            this.Parcours1 = new HashSet<Parcours>();
         }
     
-        public int PersonId { get; set; }
-        public int RaceId { get; set; }
-        public bool IsCompetitor { get; set; }
-        public bool IsOrganiser { get; set; }
+        public int Id { get; set; }
+        public int IdCategoriePoi { get; set; }
+        public string longitude { get; set; }
+        public string latitude { get; set; }
     
-        public virtual RaceEntity Race { get; set; }
-        public virtual PersonEntity Person { get; set; }
-        public virtual ICollection<Inscription> Inscription { get; set; }
+        public virtual CategoriePoi CategoriePoi { get; set; }
+        public virtual ICollection<Parcours> Parcours1 { get; set; }
     }
 }

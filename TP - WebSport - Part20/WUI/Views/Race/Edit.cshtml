@@ -59,6 +59,22 @@
             @Html.ValidationMessageFor(model => model.Town)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Distance)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Distance)
+            @Html.ValidationMessageFor(model => model.Distance)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdDifficulte)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IdDifficulte)
+            @Html.ValidationMessageFor(model => model.IdDifficulte)
+        </div>
+
         <p>
             <input type="submit" value="Save" />
         </p>

@@ -19,5 +19,8 @@ namespace DAL.EntityFramework
         public System.DateTime CDateStart { get; set; }
         public System.DateTime CDateEnd { get; set; }
         public string CVille { get; set; }
+        public object Niveau { get; internal set; }
+        public int Distance { get; internal set; }
+        public int IdDifficulte { get; internal set; }
     }
 }

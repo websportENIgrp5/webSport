@@ -30,14 +30,14 @@ namespace DAL
 
         private const string RQT_GET_RACE = "SELECT Pct.EstCompetiteur as PctEstCompetiteur, Pct.EstOrganisateur as PctEstOrganisateur " +
                                             ", P.Id as PId, P.Nom as PNom, P.Prenom as PPrenom, P.Email as PEmail, P.Telephone as PTelephone, P.DateNaissance as PDateNaissance " +
-                                            ", C.Id as CId, C.Titre as CTitre, C.Description as CDescription, C.DateStart as CDateStart, C.DateEnd as CDateEnd, C.Ville as CVille " +
+                                            ", C.Id as CId, C.Titre as CTitre, C.Description as CDescription, C.DateStart as CDateStart, C.DateEnd as CDateEnd, C.Ville as CVille, C.Distance as CDistance, C.IdDifficulte as CIdDifficulte " +
                                             "FROM Participant Pct " +
                                             "INNER JOIN Personne P ON Pct.PersonneId = P.Id " +
                                             "INNER JOIN Course C ON Pct.CourseId = C.Id";
 
         private const string RQT_GET_RACE_PS = "GetRaceById";
 
-        private const string RQT_ADD_RACE = "INSERT INTO Course VALUES (@title, @description, @datestart, @dateend, @ville)";
+        private const string RQT_ADD_RACE = "INSERT INTO Course VALUES (@title, @description, @datestart, @dateend, @ville, @Distance, @Niveau)";
 
         private const string RQT_GET_LAST_ADDED = "SELECT IDENT_CURRENT('Course')";
         
@@ -61,6 +61,8 @@ namespace DAL
                     DateStart = race.DateStart,
                     DateEnd = race.DateEnd,
                     Town = race.Town,
+                    Distance = race.Distance,
+                    IdDifficulte = race.IdDifficulte
                 };
 
                 context.RaceEntities.Add(newRace);
@@ -175,6 +177,8 @@ namespace DAL
                     initialRace.DateStart = race.DateStart;
                     initialRace.DateEnd = race.DateEnd;
                     initialRace.Town = race.Town;
+                    initialRace.Distance = race.Distance;
+                    initialRace.IdDifficulte = race.IdDifficulte;
                 }
                 else
                 {
@@ -229,6 +233,8 @@ namespace DAL
                         DateStart = reader.GetDateTime(reader.GetOrdinal("CDateStart")),
                         DateEnd = reader.GetDateTime(reader.GetOrdinal("CDateEnd")),
                         Town = reader.GetString(reader.GetOrdinal("CVille")),
+                        Distance = reader.GetInt32(reader.GetOrdinal("CDistance")),
+                        IdDifficulte = reader.GetInt32(reader.GetOrdinal("CIdDifficulte")),
                         Competitors = new List<Competitor>(),
                         Organisers = new List<Organizer>()
                     };
@@ -291,7 +297,9 @@ namespace DAL
                     Description = reader.GetString(reader.GetOrdinal("CDescription")),
                     DateStart = reader.GetDateTime(reader.GetOrdinal("CDateStart")),
                     DateEnd = reader.GetDateTime(reader.GetOrdinal("CDateEnd")),
-                    Town = reader.GetString(reader.GetOrdinal("CVille"))
+                    Town = reader.GetString(reader.GetOrdinal("CVille")),
+                    Distance = reader.GetInt32(reader.GetOrdinal("CDistance")),
+                    IdDifficulte = reader.GetInt32(reader.GetOrdinal("CIdDifficulte"))
                 };
             }
 

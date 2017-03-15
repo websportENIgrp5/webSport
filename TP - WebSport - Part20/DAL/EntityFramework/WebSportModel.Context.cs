@@ -18,7 +18,6 @@ namespace DAL.EntityFramework
         public WebSportEntities()
             : base("name=WebSportEntities")
         {
-            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -29,5 +28,11 @@ namespace DAL.EntityFramework
         public DbSet<RaceEntity> RaceEntities { get; set; }
         public DbSet<ContributorEntity> ContributorEntities { get; set; }
         public DbSet<PersonEntity> PersonEntities { get; set; }
+        public DbSet<CategoriePoi> CategoriePoi { get; set; }
+        public DbSet<Difficulte> Difficulte { get; set; }
+        public DbSet<Inscription> Inscription { get; set; }
+        public DbSet<Poi> Poi { get; set; }
+        public DbSet<SuiviInscription> SuiviInscription { get; set; }
+        public DbSet<Parcours> ParcoursSet { get; set; }
     }
 }
