@@ -11,7 +11,6 @@ namespace CUI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Test ecriture mmarin2");
             // Journée 1 :
 
             // Exercice 1 : Construire une liste désorganisée de Competitro

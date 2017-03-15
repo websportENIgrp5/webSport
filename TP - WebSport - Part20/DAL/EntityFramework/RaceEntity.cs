@@ -17,6 +17,7 @@ namespace DAL.EntityFramework
         public RaceEntity()
         {
             this.Contributors = new HashSet<ContributorEntity>();
+            this.Parcours = new HashSet<ParcoursEntity>();
         }
     
         public int Id { get; set; }
@@ -25,7 +26,11 @@ namespace DAL.EntityFramework
         public System.DateTime DateStart { get; set; }
         public System.DateTime DateEnd { get; set; }
         public string Town { get; set; }
+        public Nullable<int> IdDifficulte { get; set; }
+        public Nullable<int> Distance { get; set; }
     
         public virtual ICollection<ContributorEntity> Contributors { get; set; }
+        public virtual DifficulteEntity Difficulte { get; set; }
+        public virtual ICollection<ParcoursEntity> Parcours { get; set; }
     }
 }

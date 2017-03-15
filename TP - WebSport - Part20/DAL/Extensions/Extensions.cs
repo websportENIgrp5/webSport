@@ -123,5 +123,64 @@ namespace DAL.Extensions
         }
 
         #endregion
+
+        #region Poi
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bos"></param>
+        /// <returns></returns>
+        public static List<Poi> ToPoisBos(this List<PoiEntity> bos)
+        {
+            return bos != null
+                 ? bos.Where(x => x != null).Select(x => x.ToPoiBo()).ToList()
+                 : null;
+        }
+
+        /// <summary>
+        /// Permet de convertir un PoiEntity en BO
+        /// </summary>
+        /// <param name="bo"></param>
+        /// <returns></returns>
+        public static Poi ToPoiBo(this PoiEntity bo)
+        {
+            return new Poi
+            {
+                Id = bo.Id,
+                idCategory = bo.IdCategoriePoi,
+                Longitude = bo.longitude,
+                Latitude = bo.latitude,
+            };
+        }
+
+        /// <summary>
+        /// Permet de modifier une liste Poi en liste de PoiEntity
+        /// </summary>
+        /// <param name="pois">Liste poi</param>
+        /// <returns></returns>
+        public static List<PoiEntity> ToDataEntities(List<Poi> pois)
+        {
+            return pois != null
+           ? pois.Where(x => x != null).Select(x => x.ToDataEntity()).ToList()
+           : null;
+        }
+
+        /// <summary>
+        /// Permet de convertir un Poi en PoiEntity
+        /// </summary>
+        /// <param name="poi"></param>
+        /// <returns></returns>
+        public static PoiEntity ToDataEntity(this Poi poi)
+        {
+            return new PoiEntity()
+            {
+                Id = poi.Id,
+                latitude = poi.Latitude,
+                longitude = poi.Longitude,
+                IdCategoriePoi = poi.idCategory,
+            };
+        }
+        #endregion
     }
 }

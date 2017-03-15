@@ -132,7 +132,7 @@ namespace WUI.Extensions
 
         #endregion
 
-
+        #region Personne
         public static PersonneModel ToModel(this Personne bo)
         {
             if (bo == null) return null;
@@ -149,7 +149,9 @@ namespace WUI.Extensions
                 //DisplayConfigurations = bo.DisplayConfigurations.Select(x => x.ToModel()).ToList()
             };
         }
-
+        #endregion
+       
+        #region Organisateur
         public static OrganizerModel ToModel(this Organizer bo)
         {
             if (bo == null) return null;
@@ -165,7 +167,14 @@ namespace WUI.Extensions
                 DisplayConfigurations = bo.DisplayConfigurations.Select(x => x.ToModel()).ToList()
             };
         }
+        #endregion
 
+        #region Poi
+        /// <summary>
+        /// Permet de convertir un Bo Poi en Poi Model
+        /// </summary>
+        /// <param name="bo"></param>
+        /// <returns></returns>
         public static PoiModel ToModel(this Poi bo)
         {
             if (bo == null) return null;
@@ -173,21 +182,28 @@ namespace WUI.Extensions
             return new PoiModel
             {
                 Id = bo.Id,
-                GpsCoordinates = new CoordGpsModel
-                {
-                    Accuracy = bo.Accuracy,
-                    Altitude = bo.Altitude,
-                    AltitudeAccuracy = bo.AltitudeAccuracy,
-                    Latitude = bo.Latitude,
-                    Longitude = bo.Longitude
-                },
-                Category = bo.Category.ToModel(),
-                Heading = bo.Heading,
-                Speed = bo.Speed,
-                Timestamp = bo.Timestamp,
-                Title = bo.Title
+                Latitude = bo.Latitude,
+                Longitude = bo.Longitude,
+                Category = bo.idCategory,
+
             };
         }
+        
+
+        public static Poi toBo(this PoiModel model)
+        {
+            if (model == null) return null;
+
+            return new Poi()
+            {
+                Id = model.Id,
+                Latitude = model.Latitude,
+                Longitude = model.Longitude,
+                idCategory = model.Category,
+            };
+        }
+        #endregion
+
 
         public static UnitDistanceModel ToModel(this UnitDistance bo)
         {
