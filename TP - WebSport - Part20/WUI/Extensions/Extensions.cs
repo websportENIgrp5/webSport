@@ -78,7 +78,6 @@ namespace WUI.Extensions
                 Title = bo.Title,
                 Description = bo.Description,
                 DateStart = bo.DateStart,
-                DateEnd = bo.DateEnd,
                 Town = bo.Town,
 
                 Organisers = withJoin && bo.Organisers != null ? bo.Organisers.Select(x => x.ToModel()).ToList() : null,
@@ -97,7 +96,6 @@ namespace WUI.Extensions
                 Title = model.Title,
                 Description = model.Description,
                 DateStart = model.DateStart,
-                DateEnd = model.DateEnd,
                 Town = model.Town,
             };
         }

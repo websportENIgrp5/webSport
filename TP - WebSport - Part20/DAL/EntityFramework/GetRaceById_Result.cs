@@ -17,7 +17,6 @@ namespace DAL.EntityFramework
         public string CTitre { get; set; }
         public string CDescription { get; set; }
         public System.DateTime CDateStart { get; set; }
-        public System.DateTime CDateEnd { get; set; }
         public string CVille { get; set; }
     }
 }

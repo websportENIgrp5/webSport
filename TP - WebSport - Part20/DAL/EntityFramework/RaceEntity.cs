@@ -24,7 +24,6 @@ namespace DAL.EntityFramework
         public string Title { get; set; }
         public string Description { get; set; }
         public System.DateTime DateStart { get; set; }
-        public System.DateTime DateEnd { get; set; }
         public string Town { get; set; }
         public Nullable<int> IdDifficulte { get; set; }
         public Nullable<int> Distance { get; set; }
