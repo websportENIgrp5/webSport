@@ -30,7 +30,7 @@ namespace DAL
 
         private const string RQT_GET_RACE = "SELECT Pct.EstCompetiteur as PctEstCompetiteur, Pct.EstOrganisateur as PctEstOrganisateur " +
                                             ", P.Id as PId, P.Nom as PNom, P.Prenom as PPrenom, P.Email as PEmail, P.Telephone as PTelephone, P.DateNaissance as PDateNaissance " +
-                                            ", C.Id as CId, C.Titre as CTitre, C.Description as CDescription, C.DateStart as CDateStart, C.DateEnd as CDateEnd, C.Ville as CVille " +
+                                            ", C.Id as CId, C.Titre as CTitre, C.Description as CDescription, C.DateStart as CDateStart, C.Ville as CVille " +
                                             "FROM Participant Pct " +
                                             "INNER JOIN Personne P ON Pct.PersonneId = P.Id " +
                                             "INNER JOIN Course C ON Pct.CourseId = C.Id";
@@ -59,7 +59,6 @@ namespace DAL
                     Title = race.Title,
                     Description = race.Description,
                     DateStart = race.DateStart,
-                    DateEnd = race.DateEnd,
                     Town = race.Town,
                 };
 
@@ -100,7 +99,6 @@ namespace DAL
             //    instance.CreerParametre(commandAdd, "@title", race.Title);
             //    instance.CreerParametre(commandAdd, "@description", race.Description);
             //    instance.CreerParametre(commandAdd, "@datestart", race.DateStart);
-            //    instance.CreerParametre(commandAdd, "@dateend", race.DateEnd);
             //    instance.CreerParametre(commandAdd, "@ville", race.Town);
             //    commandAdd.Transaction = transac;
             //    commandAdd.ExecuteNonQuery();
@@ -173,7 +171,6 @@ namespace DAL
                     initialRace.Title = race.Title;
                     initialRace.Description = race.Description;
                     initialRace.DateStart = race.DateStart;
-                    initialRace.DateEnd = race.DateEnd;
                     initialRace.Town = race.Town;
                 }
                 else
@@ -227,7 +224,6 @@ namespace DAL
                         Title = reader.GetString(reader.GetOrdinal("CTitre")),
                         Description = reader.GetString(reader.GetOrdinal("CDescription")),
                         DateStart = reader.GetDateTime(reader.GetOrdinal("CDateStart")),
-                        DateEnd = reader.GetDateTime(reader.GetOrdinal("CDateEnd")),
                         Town = reader.GetString(reader.GetOrdinal("CVille")),
                         Competitors = new List<Competitor>(),
                         Organisers = new List<Organizer>()
@@ -290,7 +286,6 @@ namespace DAL
                     Title = reader.GetString(reader.GetOrdinal("CTitre")),
                     Description = reader.GetString(reader.GetOrdinal("CDescription")),
                     DateStart = reader.GetDateTime(reader.GetOrdinal("CDateStart")),
-                    DateEnd = reader.GetDateTime(reader.GetOrdinal("CDateEnd")),
                     Town = reader.GetString(reader.GetOrdinal("CVille"))
                 };
             }

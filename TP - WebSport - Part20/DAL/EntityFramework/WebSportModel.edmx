@@ -26,7 +26,6 @@
           <Property Name="Titre" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="Description" Type="varchar" MaxLength="100" />
           <Property Name="DateStart" Type="datetime" Nullable="false" />
-          <Property Name="DateEnd" Type="datetime" Nullable="false" />
           <Property Name="Ville" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Participant">
@@ -100,7 +99,6 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Town" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Contributors" Relationship="BddLoginModel.FK_Competiteur_Course" FromRole="Race" ToRole="Contributor" />
         </EntityType>
@@ -165,7 +163,6 @@
                 <ScalarProperty Name="Title" ColumnName="Titre" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DateStart" ColumnName="DateStart" />
-                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
                 <ScalarProperty Name="Town" ColumnName="Ville" />
               </MappingFragment>
             </EntityTypeMapping>

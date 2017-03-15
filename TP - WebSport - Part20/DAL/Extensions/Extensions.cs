@@ -30,7 +30,6 @@ namespace DAL.Extensions
                 Title = bo.Title,
                 Description = bo.Description,
                 DateStart = bo.DateStart,
-                DateEnd = bo.DateEnd,
                 Town = bo.Town,
 
                 Organisers = withJoin && bo.Contributors != null ? bo.Contributors.Where(x => x.IsOrganiser).Select(x => x.ToOrganiserBo()).ToList() : null,
@@ -48,7 +47,6 @@ namespace DAL.Extensions
                 Title = model.Title,
                 Description = model.Description,
                 DateStart = model.DateStart,
-                DateEnd = model.DateEnd,
                 Town = model.Town,
             };
         }
@@ -64,7 +62,6 @@ namespace DAL.Extensions
                 Title = entity.CTitre,
                 Description = entity.CDescription,
                 DateStart = entity.CDateStart,
-                DateEnd = entity.CDateEnd,
                 Town = entity.CVille
             };
         }

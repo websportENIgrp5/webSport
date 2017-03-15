@@ -24,7 +24,6 @@
           <Property Type="String" Name="CTitre" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="CDescription" Nullable="true" MaxLength="100" />
           <Property Type="DateTime" Name="CDateStart" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="CDateEnd" Nullable="false" Precision="23" />
           <Property Type="String" Name="CVille" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
@@ -40,7 +39,6 @@
                 <ScalarProperty Name="CTitre" ColumnName="CTitre" />
                 <ScalarProperty Name="CDescription" ColumnName="CDescription" />
                 <ScalarProperty Name="CDateStart" ColumnName="CDateStart" />
-                <ScalarProperty Name="CDateEnd" ColumnName="CDateEnd" />
                 <ScalarProperty Name="CVille" ColumnName="CVille" />
               </ComplexTypeMapping>
             </ResultMapping>
