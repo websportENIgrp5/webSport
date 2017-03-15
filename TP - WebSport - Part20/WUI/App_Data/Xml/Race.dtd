@@ -3,14 +3,12 @@
                 title*,
                 description*,
                 datestart*,
-                dateend*,
                 ville*,
                 competitors*,
                 organisers+)>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT description (#PCDATA)>
 <!ELEMENT datestart (#PCDATA)>
-<!ELEMENT dateend (#PCDATA)>
 <!ELEMENT ville (#PCDATA)>
 
 <!ELEMENT competitors (competitor*)>

@@ -5,7 +5,6 @@
     <title>Foulées de l'éléphant</title>
     <description>Course nocturne de 10km sur l'Île de Nantes</description>
     <datestart>27/04/2017 21:00:00</datestart>
-    <dateend>28/04/2017 00:00:00</dateend>
     <ville>Nantes</ville>
     <competitors>
       <competitor>
@@ -49,7 +48,6 @@
     <title>Semi-marathon de Nantes</title>
     <description>Course de 21,1km dans la métropole Nantes</description>
     <datestart>28/04/2017 09:00:00</datestart>
-    <dateend>28/04/2017 13:00:00</dateend>
     <ville>Paris</ville>
     <competitors>
       <competitor>
@@ -85,7 +83,6 @@
     <title>Marathon de Nantes</title>
     <description>Course de 42.195km dans la métropole Nantes</description>
     <datestart>28/04/2017 14:00:00</datestart>
-    <dateend>28/04/2017 20:00:00</dateend>
     <ville>Amiens</ville>
     <organisers>
       <organiser>
