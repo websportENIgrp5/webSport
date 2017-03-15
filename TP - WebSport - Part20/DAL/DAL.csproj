@@ -64,11 +64,23 @@
     <Compile Include="DbHelper\DbFactory.cs" />
     <Compile Include="DbRace.cs" />
     <Compile Include="DbHelper\DbTools.cs" />
+    <Compile Include="EntityFramework\CategorieCourse.cs">
+      <DependentUpon>WebSportModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\CategoriePoi.cs">
+      <DependentUpon>WebSportModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\ContributorEntity.cs">
+      <DependentUpon>WebSportModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Difficulte.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\GetRaceById_Result.cs">
       <DependentUpon>WebsportPsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Inscription.cs">
+      <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -85,10 +97,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\Parcours.cs">
+      <DependentUpon>WebSportModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\PersonEntity.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\Poi.cs">
+      <DependentUpon>WebSportModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\RaceEntity.cs">
+      <DependentUpon>WebSportModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\SuiviInscription.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\WebSportModel.Context.cs">
