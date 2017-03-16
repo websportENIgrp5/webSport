@@ -292,7 +292,6 @@ namespace DAL
                     Title = reader.GetString(reader.GetOrdinal("CTitre")),
                     Description = reader.GetString(reader.GetOrdinal("CDescription")),
                     DateStart = reader.GetDateTime(reader.GetOrdinal("CDateStart")),
-                    DateEnd = reader.GetDateTime(reader.GetOrdinal("CDateEnd")),
                     Town = reader.GetString(reader.GetOrdinal("CVille")),
                     Distance = reader.GetInt32(reader.GetOrdinal("CDistance")),
                     IdDifficulte = reader.GetInt32(reader.GetOrdinal("CIdDifficulte"))

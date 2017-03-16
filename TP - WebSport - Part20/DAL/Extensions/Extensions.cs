@@ -66,7 +66,6 @@ namespace DAL.Extensions
                 Title = entity.CTitre,
                 Description = entity.CDescription,
                 DateStart = entity.CDateStart,
-                DateEnd = entity.CDateEnd,
                 Town = entity.CVille,
                 Distance = entity.Distance,
                 IdDifficulte = entity.IdDifficulte
