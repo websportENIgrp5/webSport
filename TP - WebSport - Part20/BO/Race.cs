@@ -19,13 +19,13 @@ namespace BO
 
         public DateTime DateStart { get; set; }
 
-        public DateTime DateEnd { get; set; }
-
         public string Town { get; set; }
 
         public int Distance { get; set; }
 
         public int IdDifficulte { get; set; }
+
+        public virtual Difficulte Difficulte { get; set; }
 
         public virtual List<Competitor> Competitors { get; set; }
 

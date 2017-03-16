@@ -12,9 +12,9 @@ namespace DAL.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Difficulte
+    public partial class DifficulteEntity
     {
-        public Difficulte()
+        public DifficulteEntity()
         {
             this.Course = new HashSet<RaceEntity>();
         }

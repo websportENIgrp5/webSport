@@ -24,12 +24,16 @@ namespace DAL.EntityFramework
         public string Title { get; set; }
         public string Description { get; set; }
         public System.DateTime DateStart { get; set; }
-        public System.DateTime DateEnd { get; set; }
         public string Town { get; set; }
         public int IdDifficulte { get; set; }
         public int Distance { get; set; }
+        public Nullable<int> IdCategorieCourse { get; set; }
+        public Nullable<System.TimeSpan> HeureStart { get; set; }
+        public Nullable<System.TimeSpan> HeureEnd { get; set; }
     
         public virtual ICollection<ContributorEntity> Contributors { get; set; }
+        public virtual DifficulteEntity  Difficulte { get; set; }
         public virtual ICollection<Parcours> Parcours { get; set; }
+        public virtual CategorieCourse CategorieCourse { get; set; }
     }
 }

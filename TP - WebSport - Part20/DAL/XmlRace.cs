@@ -185,9 +185,6 @@ namespace DAL
                 XmlElement elementDateStart = documentXml.CreateElement(NODE_DATESTART);
                 elementDateStart.InnerText = race.DateStart.ToString();
                 elementRace.AppendChild(elementDateStart);
-                XmlElement elementDateEnd = documentXml.CreateElement(NODE_DATEEND);
-                elementDateEnd.InnerText = race.DateEnd.ToString();
-                elementRace.AppendChild(elementDateEnd);
                 XmlElement elementTown = documentXml.CreateElement(NODE_TOWN);
                 elementTown.InnerText = race.Town;
                 elementRace.AppendChild(elementTown);
@@ -243,7 +240,6 @@ namespace DAL
                     Title = elementRace[NODE_TITLE].InnerText,
                     Description = elementRace[NODE_DESCRIPTION].InnerText,
                     DateStart = DateTime.Parse(elementRace[NODE_DATESTART].InnerText ?? string.Empty),
-                    DateEnd = DateTime.Parse(elementRace[NODE_DATEEND].InnerText ?? string.Empty),
                     Town = elementRace[NODE_TOWN].InnerText,
                     Competitors = new List<Competitor>(),
                     Organisers = new List<Organizer>()
@@ -349,7 +345,6 @@ namespace DAL
                     Title = "Foulées de l'éléphant",
                     Description = "Course nocturne de 10km sur l'Île de Nantes",
                     DateStart = new DateTime(2017, 4, 27, 21, 0, 0),
-                    DateEnd = new DateTime(2017, 4, 28, 0, 0, 0),
                     Town = "Nantes",
 
                     Competitors = new List<Competitor>
@@ -402,7 +397,6 @@ namespace DAL
                     Title = "Semi-marathon de Nantes",
                     Description = "Course de 21,1km dans la métropole Nantes",
                     DateStart = new DateTime(2017, 4, 28, 9, 0, 0),
-                    DateEnd = new DateTime(2017, 4, 28, 13, 0, 0),
                     Town = "Paris",
 
                     Competitors = new List<Competitor>
@@ -446,7 +440,6 @@ namespace DAL
                     Title = "Marathon de Nantes",
                     Description = "Course de 42.195km dans la métropole Nantes",
                     DateStart = new DateTime(2017, 4, 28, 14, 0, 0),
-                    DateEnd = new DateTime(2017, 4, 28, 20, 0, 0),
                     Town = "Amiens",
 
                     Competitors = null,

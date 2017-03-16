@@ -64,13 +64,16 @@
     <Compile Include="DbHelper\DbFactory.cs" />
     <Compile Include="DbRace.cs" />
     <Compile Include="DbHelper\DbTools.cs" />
+    <Compile Include="EntityFramework\CategorieCourse.cs">
+      <DependentUpon>WebSportModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\CategoriePoi.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\ContributorEntity.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\Difficulte.cs">
+    <Compile Include="EntityFramework\DifficulteEntity.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\GetRaceById_Result.cs">

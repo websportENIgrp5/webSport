@@ -34,6 +34,9 @@ namespace WUI.Controllers
         {
             List<BO.Race> result;
 
+            //var service = new MgtRace(DifficulteRace);
+            
+
             switch (sortType)
             {
                 case SortType.BY_TITLE:

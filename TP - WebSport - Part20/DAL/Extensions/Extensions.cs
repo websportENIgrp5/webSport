@@ -30,11 +30,11 @@ namespace DAL.Extensions
                 Title = bo.Title,
                 Description = bo.Description,
                 DateStart = bo.DateStart,
-                DateEnd = bo.DateEnd,
                 Town = bo.Town,
                 Distance = bo.Distance,
                 IdDifficulte = bo.IdDifficulte,
-
+                
+                Difficulte = withJoin && bo.Difficulte != null ? bo.Difficulte.ToBo() : null,
                 Organisers = withJoin && bo.Contributors != null ? bo.Contributors.Where(x => x.IsOrganiser).Select(x => x.ToOrganiserBo()).ToList() : null,
                 Competitors = withJoin && bo.Contributors != null ? bo.Contributors.Where(x => x.IsCompetitor).Select(x => x.ToCompetitorBo()).ToList() : null
             };
@@ -50,7 +50,6 @@ namespace DAL.Extensions
                 Title = model.Title,
                 Description = model.Description,
                 DateStart = model.DateStart,
-                DateEnd = model.DateEnd,
                 Town = model.Town,
                 Distance = model.Distance,
                 IdDifficulte = model.IdDifficulte
@@ -68,12 +67,75 @@ namespace DAL.Extensions
                 Title = entity.CTitre,
                 Description = entity.CDescription,
                 DateStart = entity.CDateStart,
-                DateEnd = entity.CDateEnd,
                 Town = entity.CVille,
                 Distance = entity.Distance,
                 IdDifficulte = entity.IdDifficulte
             };
         }
+
+        #endregion
+
+        #region Difficulte
+
+        public static List<Difficulte> ToBos(this List<DifficulteEntity> bos, bool withJoin = false)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToBo(withJoin)).ToList()
+                : null;
+        }
+
+        public static Difficulte ToBo(this DifficulteEntity bo, bool withJoin = false)
+        {
+            if (bo == null) return null;
+
+            return new Difficulte
+            {
+                Id = bo.Id,
+                Libelle = bo.Libelle
+            };
+        }
+
+        public static List<Difficulte> ToDifficulteBos(this List<DifficulteEntity> bos)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToDifficulteBo()).ToList()
+                : null;
+        }
+
+        public static Difficulte ToDifficulteBo(this DifficulteEntity bo)
+        {
+            if (bo == null) return null;
+
+            return new Difficulte
+            {
+                Id = bo.Id,
+                Libelle = bo.Libelle
+            };
+        }
+
+        public static DifficulteEntity ToDataEntity(this Difficulte model)
+        {
+            if (model == null) return null;
+
+            return new DifficulteEntity
+            {
+                Id = model.Id,
+                Libelle = model.Libelle
+           
+            };
+        }
+
+
+        //public static Difficulte ToBo(this GetDifficulteById_Result entity)
+        //{
+        //    if (entity == null) return null;
+
+        //    return new Difficulte
+        //    {
+        //        Id = entity.CId,
+        //        Libelle = entity.CLibelle,
+        //    };
+        //}
 
         #endregion
 

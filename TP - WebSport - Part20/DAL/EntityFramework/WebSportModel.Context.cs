@@ -29,10 +29,11 @@ namespace DAL.EntityFramework
         public DbSet<ContributorEntity> ContributorEntities { get; set; }
         public DbSet<PersonEntity> PersonEntities { get; set; }
         public DbSet<CategoriePoi> CategoriePoi { get; set; }
-        public DbSet<Difficulte> Difficulte { get; set; }
+        public DbSet<DifficulteEntity> Difficulte { get; set; }
         public DbSet<Inscription> Inscription { get; set; }
         public DbSet<Poi> Poi { get; set; }
         public DbSet<SuiviInscription> SuiviInscription { get; set; }
         public DbSet<Parcours> ParcoursSet { get; set; }
+        public DbSet<CategorieCourse> CategorieCourse { get; set; }
     }
 }

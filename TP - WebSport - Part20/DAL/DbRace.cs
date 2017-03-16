@@ -30,14 +30,16 @@ namespace DAL
 
         private const string RQT_GET_RACE = "SELECT Pct.EstCompetiteur as PctEstCompetiteur, Pct.EstOrganisateur as PctEstOrganisateur " +
                                             ", P.Id as PId, P.Nom as PNom, P.Prenom as PPrenom, P.Email as PEmail, P.Telephone as PTelephone, P.DateNaissance as PDateNaissance " +
-                                            ", C.Id as CId, C.Titre as CTitre, C.Description as CDescription, C.DateStart as CDateStart, C.DateEnd as CDateEnd, C.Ville as CVille, C.Distance as CDistance, C.IdDifficulte as CIdDifficulte " +
+                                            ", C.Id as CId, C.Titre as CTitre, C.Description as CDescription, C.DateStart as CDateStart, C.Ville as CVille, C.Distance as CDistance, C.IdDifficulte as CIdDifficulte " + 
+                                            ", D.Id as DId, D.Libelle as DLibelle" +
                                             "FROM Participant Pct " +
                                             "INNER JOIN Personne P ON Pct.PersonneId = P.Id " +
-                                            "INNER JOIN Course C ON Pct.CourseId = C.Id";
+                                            "INNER JOIN Course C ON Pct.CourseId = C.Id" +
+                                            "INNER JOIN Difficulte D ON C.IdDifficulte = D.Id" ;
 
         private const string RQT_GET_RACE_PS = "GetRaceById";
 
-        private const string RQT_ADD_RACE = "INSERT INTO Course VALUES (@title, @description, @datestart, @dateend, @ville, @Distance, @Niveau)";
+        private const string RQT_ADD_RACE = "INSERT INTO Course VALUES (@title, @description, @datestart, @ville, @Distance, @Niveau)";
 
         private const string RQT_GET_LAST_ADDED = "SELECT IDENT_CURRENT('Course')";
         
@@ -59,7 +61,6 @@ namespace DAL
                     Title = race.Title,
                     Description = race.Description,
                     DateStart = race.DateStart,
-                    DateEnd = race.DateEnd,
                     Town = race.Town,
                     Distance = race.Distance,
                     IdDifficulte = race.IdDifficulte
@@ -175,7 +176,6 @@ namespace DAL
                     initialRace.Title = race.Title;
                     initialRace.Description = race.Description;
                     initialRace.DateStart = race.DateStart;
-                    initialRace.DateEnd = race.DateEnd;
                     initialRace.Town = race.Town;
                     initialRace.Distance = race.Distance;
                     initialRace.IdDifficulte = race.IdDifficulte;
@@ -231,10 +231,10 @@ namespace DAL
                         Title = reader.GetString(reader.GetOrdinal("CTitre")),
                         Description = reader.GetString(reader.GetOrdinal("CDescription")),
                         DateStart = reader.GetDateTime(reader.GetOrdinal("CDateStart")),
-                        DateEnd = reader.GetDateTime(reader.GetOrdinal("CDateEnd")),
                         Town = reader.GetString(reader.GetOrdinal("CVille")),
                         Distance = reader.GetInt32(reader.GetOrdinal("CDistance")),
                         IdDifficulte = reader.GetInt32(reader.GetOrdinal("CIdDifficulte")),
+                        Difficulte = new Difficulte(),
                         Competitors = new List<Competitor>(),
                         Organisers = new List<Organizer>()
                     };
@@ -243,6 +243,18 @@ namespace DAL
                 else
                 {
                     r = list.Single(x => x.Id == raceId);
+                }
+
+                // Récupération de la difficulte 
+                var difficulte = reader.GetString(reader.GetOrdinal("DLibelle"));
+                if (difficulte != null)
+                {
+                    Difficulte d = new Difficulte
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal("DId")),
+                        Libelle = reader.GetString(reader.GetOrdinal("DLibelle")),
+                    };
+                    r.Difficulte = d;
                 }
 
                 // Récupération du type de participans
@@ -296,7 +308,6 @@ namespace DAL
                     Title = reader.GetString(reader.GetOrdinal("CTitre")),
                     Description = reader.GetString(reader.GetOrdinal("CDescription")),
                     DateStart = reader.GetDateTime(reader.GetOrdinal("CDateStart")),
-                    DateEnd = reader.GetDateTime(reader.GetOrdinal("CDateEnd")),
                     Town = reader.GetString(reader.GetOrdinal("CVille")),
                     Distance = reader.GetInt32(reader.GetOrdinal("CDistance")),
                     IdDifficulte = reader.GetInt32(reader.GetOrdinal("CIdDifficulte"))

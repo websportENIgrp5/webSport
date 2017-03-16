@@ -59,6 +59,37 @@ namespace WUI.Extensions
 
         #endregion
 
+        #region Difficulte
+        public static List<DifficulteModel> ToModels(this List<Difficulte> bos)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToModel()).ToList()
+                : null;
+        }
+
+        public static DifficulteModel ToModel(this Difficulte bo)
+        {
+            if (bo == null) return null;
+
+            return new DifficulteModel
+            {
+                Id = bo.Id,
+                Libelle = bo.Libelle
+            };
+        }
+
+        public static Difficulte ToBo(this DifficulteModel model)
+        {
+            if (model == null) return null;
+
+            return new Difficulte
+            {
+                Id = model.Id,
+                Libelle = model.Libelle
+            };
+        }
+        #endregion
+
         #region Race
 
         public static List<RaceModel> ToModels(this List<Race> bos, bool withJoin = false)
@@ -78,11 +109,11 @@ namespace WUI.Extensions
                 Title = bo.Title,
                 Description = bo.Description,
                 DateStart = bo.DateStart,
-                DateEnd = bo.DateEnd,
                 Town = bo.Town,
                 Distance = bo.Distance,
                 IdDifficulte = bo.IdDifficulte,
 
+                Difficulte = withJoin && bo.Difficulte != null ? bo.Difficulte.ToModel() : null,
                 Organisers = withJoin && bo.Organisers != null ? bo.Organisers.Select(x => x.ToModel()).ToList() : null,
                 Competitors = withJoin && bo.Competitors != null ? bo.Competitors.Select(x => x.ToModel()).ToList() : null,
                 //Pois = bo.Pois.Select(x => x.ToModel()).ToList(),
@@ -99,7 +130,6 @@ namespace WUI.Extensions
                 Title = model.Title,
                 Description = model.Description,
                 DateStart = model.DateStart,
-                DateEnd = model.DateEnd,
                 Town = model.Town,
                 Distance = model.Distance,
                 IdDifficulte = model.IdDifficulte
