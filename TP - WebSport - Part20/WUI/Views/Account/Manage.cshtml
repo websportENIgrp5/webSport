@@ -2,31 +2,34 @@
 @{
     ViewBag.Title = "Gérer le compte";
 }
-
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
-
-<p class="message-success">@ViewBag.StatusMessage</p>
-
-<p>Vous êtes connecté en tant que <strong>@User.Identity.Name</strong>.</p>
-
-@if (ViewBag.HasLocalPassword)
-{
-    @Html.Partial("_ChangePasswordPartial")
-}
-else
-{ 
-    @Html.Partial("_SetPasswordPartial")
+@section css {
+    @Styles.Render("~/Content/Account/css")
 }
 
-<section id="externalLogins">
-    @Html.Action("RemoveExternalLogins")
+<div class="two-columns-left">
+    <div class="column left">
+        @Html.Partial("_MenuPartial")
+    </div>
 
-    <h3>Ajouter une connexion externe</h3>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
+    <div class="main-container">
+        <h1>Mes informations personnelles</h1>
 
-@section Scripts {
+        <p class="message-success">@ViewBag.StatusMessage</p>
 
-}
+        @if (ViewBag.HasLocalPassword)
+        {
+            @Html.Partial("_ChangePasswordPartial")
+        }
+        else
+        {
+            @Html.Partial("_SetPasswordPartial")
+        }
+
+        <section id="externalLogins">
+            @Html.Action("RemoveExternalLogins")
+
+            <h3>Ajouter une connexion externe</h3>
+            @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+</div>
