@@ -4,9 +4,18 @@
     ViewBag.Title = "Details";
 }
 
+@section scripts{
+    @Scripts.Render("~/bundles/Maps/js");
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzTP3POU1y-NMj2XQVp8EaF4duTdcgEq0&callback=initMap" async defer>
+</script>
+    <script>
+        idCourse =@Model.Id
+    </script>
+}
 @section css {
     @Styles.Render("~/Content/Race/css")
 }
+
 
 <h2>Details</h2>
 
@@ -61,7 +70,10 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Difficulte.Libelle)
     </div>
+    <div id="map">
+    </div>
 </fieldset>
 <p>
     @Html.ActionLink("Inscription", "Inscrire", new { id = Model.Id })
 </p>
+

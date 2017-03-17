@@ -44,6 +44,9 @@
     <Compile Include="MgtDifficulte.cs" />
     <Compile Include="MgtDisplayConfiguration.cs" />
     <Compile Include="MgtInscription.cs" />
+    <Compile Include="MgtOrganisateur.cs" />
+    <Compile Include="MgtPoi.cs" />
+    <Compile Include="MgtPoiCategory.cs" />
     <Compile Include="MgtRace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
