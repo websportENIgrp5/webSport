@@ -194,6 +194,7 @@ namespace DAL.Extensions
         /// <returns></returns>
         public static List<Poi> ToPoisBos(this List<PoiEntity> bos)
         {
+            bos;
             return bos != null
                  ? bos.Where(x => x != null).Select(x => x.ToPoiBo()).ToList()
                  : null;
