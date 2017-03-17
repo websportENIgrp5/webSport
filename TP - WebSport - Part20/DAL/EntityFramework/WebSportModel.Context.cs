@@ -33,7 +33,7 @@ namespace DAL.EntityFramework
         public DbSet<Difficulte> Difficulte { get; set; }
         public DbSet<Inscription> Inscription { get; set; }
         public DbSet<Parcours> Parcours { get; set; }
-        public DbSet<Poi> Poi { get; set; }
+        public DbSet<PoiEntity> Poi { get; set; }
         public DbSet<SuiviInscription> SuiviInscription { get; set; }
         public DbSet<UserTable> UserTable { get; set; }
     }

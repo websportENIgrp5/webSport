@@ -30,17 +30,19 @@ namespace DAL
 
         private const string RQT_GET_RACE = "SELECT Pct.EstCompetiteur as PctEstCompetiteur, Pct.EstOrganisateur as PctEstOrganisateur " +
                                             ", P.Id as PId, P.Nom as PNom, P.Prenom as PPrenom, P.Email as PEmail, P.Telephone as PTelephone, P.DateNaissance as PDateNaissance " +
-                                            ", C.Id as CId, C.Titre as CTitre, C.Description as CDescription, C.DateStart as CDateStart, C.Ville as CVille, C.Distance as CDistance, C.IdDifficulte as CIdDifficulte " + 
+                                            ", C.Id as CId, C.Titre as CTitre, C.Description as CDescription, C.DateStart as CDateStart, C.Ville as CVille, C.Distance as CDistance, C.IdDifficulte as CIdDifficulte, C.IdCategorieCourse as CIdCategorieCourse " + 
                                             ", D.Id as DId, D.Libelle as DLibelle" +
-                                            "FROM ContributorEntity Pct " +
-                                            "INNER JOIN Inscription I ON Pct.PersonneId = I.IdContributorEntity" +
+                                            ", CA.Id as CAId, CA.Libelle as CALibelle" +
+                                            "FROM Participant Pct " +
+                                            "INNER JOIN Inscription I ON Pct.PersonneId = I.IdParticipant" +
                                             "INNER JOIN Personne P ON Pct.PersonneId = P.Id " +
-                                            "INNER JOIN RaceEntity C ON I.IdRaceEntity = C.Id" +
-                                            "INNER JOIN Difficulte D ON C.IdDifficulte = D.Id" ;
+                                            "INNER JOIN Course C ON I.IdCourse = C.Id" +
+                                            "INNER JOIN Difficulte D ON C.IdDifficulte = D.Id" +
+                                            "INNER JOIN CategorieCourse CA ON C.IdCategorieCourse = CA.Id";
 
         private const string RQT_GET_RACE_PS = "GetRaceById";
 
-        private const string RQT_ADD_RACE = "INSERT INTO RaceEntity VALUES (@title, @description, @datestart, @ville, @Distance, @Niveau)";
+        private const string RQT_ADD_RACE = "INSERT INTO RaceEntity VALUES (@title, @description, @datestart, @ville, @distance, @niveau, @categorie)";
 
         private const string RQT_GET_LAST_ADDED = "SELECT IDENT_CURRENT('RaceEntity')";
         
@@ -59,15 +61,16 @@ namespace DAL
             {
                 var newRace = new RaceEntity()
                 {
-                    Titre = race.Title,
+                    Title = race.Title,
                     Description = race.Description,
                     DateStart = race.DateStart,
                     Town = race.Town,
                     Distance = race.Distance,
-                    IdDifficulte = race.IdDifficulte
+                    IdDifficulte = race.IdDifficulte,
+                    IdCategorieCourse = race.IdCategoryRace
                 };
 
-                context.RaceEntity.Add(newRace);
+                context.RaceEntities.Add(newRace);
                 context.SaveChanges();
                 retour = newRace.Id;
             }
@@ -137,7 +140,7 @@ namespace DAL
             // Utilisation d'Entity Framework
             using (var context = new WebSportEntities())
             {
-                return context.RaceEntity.ToList().Select(x => x.ToBo()).ToList();
+                return context.RaceEntities.ToList().Select(x => x.ToBo()).ToList();
             }
 
             // Si on utilise ADO.NET en direct, on utiliserait le code ci-dessous
@@ -170,15 +173,16 @@ namespace DAL
             // Utilisation d'Entity Framework
             using (var context = new WebSportEntities())
             {
-                var initialRace = context.RaceEntity.SingleOrDefault(x => x.Id == race.Id);
+                var initialRace = context.RaceEntities.SingleOrDefault(x => x.Id == race.Id);
                 if (initialRace != null)
                 {
-                    initialRace.Titre = race.Title;
+                    initialRace.Title = race.Title;
                     initialRace.Description = race.Description;
                     initialRace.DateStart = race.DateStart;
                     initialRace.Town = race.Town;
                     initialRace.Distance = race.Distance;
                     initialRace.IdDifficulte = race.IdDifficulte;
+                    initialRace.IdCategorieCourse = race.IdCategoryRace;
                 }
                 else
                 {
@@ -195,10 +199,10 @@ namespace DAL
             // Utilisation d'Entity Framework
             using (var context = new WebSportEntities())
             {
-                var raceToDelete = context.RaceEntity.SingleOrDefault(x => x.Id == raceId);
+                var raceToDelete = context.RaceEntities.SingleOrDefault(x => x.Id == raceId);
                 if (raceToDelete != null)
                 {
-                    context.RaceEntity.Remove(raceToDelete);
+                    context.RaceEntities.Remove(raceToDelete);
                 }
                 else
                 {
@@ -234,9 +238,9 @@ namespace DAL
                         Town = reader.GetString(reader.GetOrdinal("CVille")),
                         Distance = reader.GetInt32(reader.GetOrdinal("CDistance")),
                         IdDifficulte = reader.GetInt32(reader.GetOrdinal("CIdDifficulte")),
+                        IdCategoryRace = reader.GetInt32(reader.GetOrdinal("CIdCategorieCourse")),
                         Difficulte = new BO.Difficulte(),
-                        Competitors = new List<Competitor>(),
-                        Organisers = new List<Organizer>()
+                        CategoryRace = new CategoryRace()
                     };
                     list.Add(r);
                 }
@@ -246,8 +250,8 @@ namespace DAL
                 }
 
                 // Récupération de la difficulte 
-                var difficulte = reader.GetString(reader.GetOrdinal("DLibelle"));
-                if (difficulte != null)
+                var difficulte = reader.GetInt32(reader.GetOrdinal("CIdDifficulte"));
+                if (difficulte != 0)
                 {
                     BO.Difficulte d = new BO.Difficulte
                     {
@@ -257,7 +261,19 @@ namespace DAL
                     r.Difficulte = d;
                 }
 
-                // Récupération du type de participans
+                // Récupération de la catégorie 
+                var categorie = reader.GetInt32(reader.GetOrdinal("CIdCategorieCourse"));
+                if (categorie != 0)
+                {
+                    CategoryRace ca = new CategoryRace
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal("CAId")),
+                        Title = reader.GetString(reader.GetOrdinal("CALibelle")),
+                    };
+                    r.CategoryRace = ca;
+                }
+
+                // Récupération du type de participants
                 var isCompetitor = reader.GetBoolean(reader.GetOrdinal("PctEstCompetiteur"));
                 var isOrganiser = reader.GetBoolean(reader.GetOrdinal("PctEstOrganisateur"));
                 if (isCompetitor)
@@ -272,7 +288,7 @@ namespace DAL
                         DateNaissance = reader.GetDateTime(reader.GetOrdinal("PDateNaissance")),
                         Race = r
                     };
-                    r.Competitors.Add(c);
+                    
                 }
 
                 if (isOrganiser)
@@ -286,7 +302,7 @@ namespace DAL
                         Phone = reader.GetString(reader.GetOrdinal("PTelephone")),
                         DateNaissance = reader.GetDateTime(reader.GetOrdinal("PDateNaissance"))
                     };
-                    r.Organisers.Add(o);
+                    
                 }
             }
 
@@ -310,7 +326,8 @@ namespace DAL
                     DateStart = reader.GetDateTime(reader.GetOrdinal("CDateStart")),
                     Town = reader.GetString(reader.GetOrdinal("CVille")),
                     Distance = reader.GetInt32(reader.GetOrdinal("CDistance")),
-                    IdDifficulte = reader.GetInt32(reader.GetOrdinal("CIdDifficulte"))
+                    IdDifficulte = reader.GetInt32(reader.GetOrdinal("CIdDifficulte")),
+                    IdCategoryRace = reader.GetInt32(reader.GetOrdinal("CIdCategorieCourse"))
                 };
             }
 

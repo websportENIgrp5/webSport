@@ -25,6 +25,10 @@ namespace BO
 
         public int IdDifficulte { get; set; }
 
+        public int IdCategoryRace { get; set; }
+
+        public CategoryRace CategoryRace { get; set; }
+
         public virtual Difficulte Difficulte { get; set; }
 
         public virtual List<Competitor> Competitors { get; set; }

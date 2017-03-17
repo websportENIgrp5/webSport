@@ -30,7 +30,12 @@ namespace DAL.Extensions
                 Title = bo.Title,
                 Description = bo.Description,
                 DateStart = bo.DateStart,
-                Town = bo.Town
+                Town = bo.Town,
+                Distance = bo.Distance,
+                IdDifficulte = bo.IdDifficulte,
+
+                Difficulte = bo.Difficulte.ToBo(),
+                
             };
         }
 
@@ -46,7 +51,9 @@ namespace DAL.Extensions
                 DateStart = model.DateStart,
                 Town = model.Town,
                 Distance = model.Distance,
-                IdDifficulte = model.IdDifficulte
+                IdDifficulte = model.IdDifficulte,
+
+                Difficulte = model.ToDataEntity().Difficulte
             };
         }
 
@@ -133,6 +140,58 @@ namespace DAL.Extensions
 
         #endregion
 
+        #region CategoryRace
+
+        public static List<CategoryRace> ToBos(this List<CategorieCourse> bos, bool withJoin = false)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToBo(withJoin)).ToList()
+                : null;
+        }
+
+        public static CategoryRace ToBo(this CategorieCourse bo, bool withJoin = false)
+        {
+            if (bo == null) return null;
+
+            return new CategoryRace
+            {
+                Id = bo.Id,
+                Title = bo.Libelle
+            };
+        }
+
+        public static List<CategoryRace> ToCategoryRaceBos(this List<CategoryRace> bos)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToCategoryRaceBo()).ToList()
+                : null;
+        }
+
+        public static CategoryRace ToCategoryRaceBo(this CategoryRace bo)
+        {
+            if (bo == null) return null;
+
+            return new CategoryRace
+            {
+                Id = bo.Id,
+                Title = bo.Title
+            };
+        }
+
+        public static CategorieCourse ToDataEntity(this CategoryRace model)
+        {
+            if (model == null) return null;
+
+            return new CategorieCourse
+            {
+                Id = model.Id,
+                Libelle = model.Title
+
+            };
+        }
+
+        #endregion
+
         #region Competitor
 
         public static List<Competitor> ToCompetitorBos(this List<ContributorEntity> bos)
@@ -183,66 +242,6 @@ namespace DAL.Extensions
             };
         }
 
-        #endregion
-
-        #region Poi
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bos"></param>
-        /// <returns></returns>
-        public static List<Poi> ToPoisBos(this List<PoiEntity> bos)
-        {
-            bos;
-            return bos != null
-                 ? bos.Where(x => x != null).Select(x => x.ToPoiBo()).ToList()
-                 : null;
-        }
-
-        /// <summary>
-        /// Permet de convertir un PoiEntity en BO
-        /// </summary>
-        /// <param name="bo"></param>
-        /// <returns></returns>
-        public static Poi ToPoiBo(this PoiEntity bo)
-        {
-            return new Poi
-            {
-                Id = bo.Id,
-                idCategory = bo.IdCategoriePoi,
-                Longitude = bo.longitude,
-                Latitude = bo.latitude,
-            };
-        }
-
-        /// <summary>
-        /// Permet de modifier une liste Poi en liste de PoiEntity
-        /// </summary>
-        /// <param name="pois">Liste poi</param>
-        /// <returns></returns>
-        public static List<PoiEntity> ToDataEntities(List<Poi> pois)
-        {
-            return pois != null
-           ? pois.Where(x => x != null).Select(x => x.ToDataEntity()).ToList()
-           : null;
-        }
-
-        /// <summary>
-        /// Permet de convertir un Poi en PoiEntity
-        /// </summary>
-        /// <param name="poi"></param>
-        /// <returns></returns>
-        public static PoiEntity ToDataEntity(this Poi poi)
-        {
-            return new PoiEntity()
-            {
-                Id = poi.Id,
-                latitude = poi.Latitude,
-                longitude = poi.Longitude,
-                IdCategoriePoi = poi.idCategory,
-            };
-        }
         #endregion
     }
 }

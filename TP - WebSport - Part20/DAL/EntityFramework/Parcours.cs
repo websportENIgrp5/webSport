@@ -15,11 +15,11 @@ namespace DAL.EntityFramework
     public partial class Parcours
     {
         public int Id { get; set; }
-        public int IdRaceEntity { get; set; }
+        public int IdCourse { get; set; }
         public int IdPoi { get; set; }
         public Nullable<int> NumOrdrePoi { get; set; }
     
-        public virtual RaceEntity RaceEntity { get; set; }
-        public virtual Poi Poi { get; set; }
+        public virtual RaceEntity Course { get; set; }
+        public virtual PoiEntity Poi { get; set; }
     }
 }

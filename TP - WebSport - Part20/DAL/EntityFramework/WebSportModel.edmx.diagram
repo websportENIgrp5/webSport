@@ -15,7 +15,7 @@
         <EntityTypeShape EntityType="BddLoginModel.Difficulte" Width="1.5" PointX="1.625" PointY="8.25" />
         <EntityTypeShape EntityType="BddLoginModel.Inscription" Width="1.5" PointX="5.625" PointY="4.5" />
         <EntityTypeShape EntityType="BddLoginModel.Parcours" Width="1.5" PointX="12.125" PointY="2.875" />
-        <EntityTypeShape EntityType="BddLoginModel.Poi" Width="1.5" PointX="9.875" PointY="4.875" />
+        <EntityTypeShape EntityType="BddLoginModel.PoiEntity" Width="1.5" PointX="9.875" PointY="4.875" />
         <EntityTypeShape EntityType="BddLoginModel.SuiviInscription" Width="1.5" PointX="3.375" PointY="12" />
         <EntityTypeShape EntityType="BddLoginModel.UserTable" Width="1.5" PointX="0.75" PointY="11.5" />
         <AssociationConnector Association="BddLoginModel.FK_Course_CategorieCourse" />

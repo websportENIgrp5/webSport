@@ -16,7 +16,7 @@ namespace DAL.EntityFramework
     {
         public PoiEntity()
         {
-            this.Parcours = new HashSet<ParcoursEntity>();
+            this.Parcours = new HashSet<Parcours>();
         }
     
         public int Id { get; set; }
@@ -24,7 +24,7 @@ namespace DAL.EntityFramework
         public string longitude { get; set; }
         public string latitude { get; set; }
     
-        public virtual CategoriePoiEntity CategoriePoi { get; set; }
-        public virtual ICollection<ParcoursEntity> Parcours { get; set; }
+        public virtual CategoriePoi CategoriePoi { get; set; }
+        public virtual ICollection<Parcours> Parcours { get; set; }
     }
 }

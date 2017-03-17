@@ -59,11 +59,11 @@
             <PropertyRef Name="IdPoi" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdRaceEntity" Type="int" Nullable="false" />
+          <Property Name="IdCourse" Type="int" Nullable="false" />
           <Property Name="IdPoi" Type="int" Nullable="false" />
           <Property Name="NumOrdrePoi" Type="int" />
         </EntityType>
-        <EntityType Name="ContributorEntity">
+        <EntityType Name="Participant">
           <Key>
             <PropertyRef Name="PersonneId" />
           </Key>
@@ -132,12 +132,12 @@
         </Association>
         <Association Name="FK_RaceEntity_Difficulte">
           <End Role="Difficulte" Type="Self.Difficulte" Multiplicity="0..1" />
-          <End Role="RaceEntity" Type="Self.RaceEntity" Multiplicity="*" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Difficulte">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="RaceEntity">
+            <Dependent Role="Course">
               <PropertyRef Name="IdDifficulte" />
             </Dependent>
           </ReferentialConstraint>
@@ -246,7 +246,7 @@
             <End Role="CategorieCourse" EntitySet="CategorieCourse" />
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>
-          <AssociationSet Name="FK_Course_Difficulte" Association="Self.FK_Course_Difficulte">
+          <AssociationSet Name="FK_RaceEntity_Difficulte" Association="Self.FK_RaceEntity_Difficulte">
             <End Role="Difficulte" EntitySet="Difficulte" />
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>
@@ -296,7 +296,7 @@
           <EntitySet Name="Difficulte" EntityType="BddLoginModel.Difficulte" />
           <EntitySet Name="Inscription" EntityType="BddLoginModel.Inscription" />
           <EntitySet Name="Parcours" EntityType="BddLoginModel.Parcours" />
-          <EntitySet Name="Poi" EntityType="BddLoginModel.Poi" />
+          <EntitySet Name="Poi" EntityType="BddLoginModel.PoiEntity" />
           <EntitySet Name="SuiviInscription" EntityType="BddLoginModel.SuiviInscription" />
           <EntitySet Name="UserTable" EntityType="BddLoginModel.UserTable" />
           <AssociationSet Name="FK_Course_CategorieCourse" Association="BddLoginModel.FK_Course_CategorieCourse">
@@ -442,7 +442,7 @@
           <NavigationProperty Name="Course" Relationship="BddLoginModel.FK_Parcours_Course" FromRole="Parcours" ToRole="RaceEntity" />
           <NavigationProperty Name="Poi" Relationship="BddLoginModel.FK_Parcours_Poi" FromRole="Parcours" ToRole="Poi" />
         </EntityType>
-        <EntityType Name="Poi">
+        <EntityType Name="PoiEntity">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -483,7 +483,7 @@
         </Association>
         <Association Name="FK_Poi_CategoriePoi">
           <End Type="BddLoginModel.CategoriePoi" Role="CategoriePoi" Multiplicity="1" />
-          <End Type="BddLoginModel.Poi" Role="Poi" Multiplicity="*" />
+          <End Type="BddLoginModel.PoiEntity" Role="Poi" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CategoriePoi">
               <PropertyRef Name="Id" />
@@ -554,7 +554,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Parcours_Poi">
-          <End Type="BddLoginModel.Poi" Role="Poi" Multiplicity="1" />
+          <End Type="BddLoginModel.PoiEntity" Role="Poi" Multiplicity="1" />
           <End Type="BddLoginModel.Parcours" Role="Parcours" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Poi">
@@ -668,7 +668,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Poi">
-            <EntityTypeMapping TypeName="BddLoginModel.Poi">
+            <EntityTypeMapping TypeName="BddLoginModel.PoiEntity">
               <MappingFragment StoreEntitySet="Poi">
                 <ScalarProperty Name="latitude" ColumnName="latitude" />
                 <ScalarProperty Name="longitude" ColumnName="longitude" />
