@@ -30,12 +30,7 @@ namespace DAL.Extensions
                 Title = bo.Title,
                 Description = bo.Description,
                 DateStart = bo.DateStart,
-                Town = bo.Town,
-                Distance = bo.Distance,
-                IdDifficulte = bo.IdDifficulte,
-
-                Organisers = withJoin && bo.Contributors != null ? bo.Contributors.Where(x => x.IsOrganiser).Select(x => x.ToOrganiserBo()).ToList() : null,
-                Competitors = withJoin && bo.Contributors != null ? bo.Contributors.Where(x => x.IsCompetitor).Select(x => x.ToCompetitorBo()).ToList() : null
+                Town = bo.Town
             };
         }
 
@@ -94,8 +89,7 @@ namespace DAL.Extensions
                 Prenom = bo.Person.Firstname,
                 DateNaissance = bo.Person.BirthDate.HasValue ? bo.Person.BirthDate.Value : DateTime.MinValue,
                 Email = bo.Person.Mail,
-                Phone = bo.Person.Phone,
-                Race = bo.Race.ToBo()
+                Phone = bo.Person.Phone
             };
         }
 

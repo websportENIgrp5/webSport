@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+@section css {
+    @Styles.Render("~/Content/Account/css")
+}
+
+<div class="two-columns-left">
+    <div class="column left">
+        @Html.Partial("_MenuPartial")
+    </div>
+
+    <div class="main-container">
+        <h1>Mes courses</h1>
+
+        <div class="dashboard-races block">
+            @Html.Partial("_MyRacesPartial")
+        </div>
+    </div>
+</div>

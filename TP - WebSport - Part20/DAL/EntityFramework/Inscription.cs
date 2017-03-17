@@ -21,6 +21,7 @@ namespace DAL.EntityFramework
         public Nullable<int> NumClassement { get; set; }
         public string Temps { get; set; }
     
+        public virtual RaceEntity Course { get; set; }
         public virtual ContributorEntity Participant { get; set; }
         public virtual SuiviInscription SuiviInscription { get; set; }
     }

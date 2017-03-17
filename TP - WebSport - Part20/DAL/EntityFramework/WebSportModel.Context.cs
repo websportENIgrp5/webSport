@@ -35,5 +35,6 @@ namespace DAL.EntityFramework
         public DbSet<Parcours> Parcours { get; set; }
         public DbSet<Poi> Poi { get; set; }
         public DbSet<SuiviInscription> SuiviInscription { get; set; }
+        public DbSet<UserTable> UserTable { get; set; }
     }
 }
