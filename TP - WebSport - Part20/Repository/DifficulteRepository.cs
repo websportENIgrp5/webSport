@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class DifficulteRepository : GenericRepository<DifficulteEntity>
+    public class DifficulteRepository : GenericRepository<DAL.EntityFramework.Difficulte>
     {
 
         #region Constructor
@@ -23,20 +23,20 @@ namespace Repository
 
         #region Public methods
 
-        public int Add(Difficulte element)
-        {
-            try
-            {
-                var result = base.Add(element.ToDataEntity());
-                return result.Id;
-            }
-            catch
-            {
-                return 0;
-            }
-        }
+        //public int Add(BO.Difficulte element)
+        //{
+        //    try
+        //    {
+        //        var result = base.Add(element.ToDataEntity());
+        //        return result.Id;
+        //    }
+        //    catch
+        //    {
+        //        return 0;
+        //    }
+        //}
 
-        public List<Difficulte> GetAllItems()
+        public List<BO.Difficulte> GetAllItems()
         {
             return base.GetAll().ToBos();
         }

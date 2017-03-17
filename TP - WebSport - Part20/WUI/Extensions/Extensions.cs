@@ -11,14 +11,14 @@ namespace WUI.Extensions
     {
         #region Category
 
-        public static List<CategoryModel> ToModels(this List<Category> bos)
+        public static List<CategoryModel> ToModels(this List<CategoryRace> bos)
         {
             return bos != null
                 ? bos.Where(x => x != null).Select(x => x.ToModel()).ToList()
                 : null;
         }
 
-        public static CategoryModel ToModel(this Category bo)
+        public static CategoryModel ToModel(this CategoryRace bo)
         {
             if (bo == null) return null;
 

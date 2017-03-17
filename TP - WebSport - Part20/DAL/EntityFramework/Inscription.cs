@@ -15,13 +15,14 @@ namespace DAL.EntityFramework
     public partial class Inscription
     {
         public int Id { get; set; }
-        public int IdParticipant { get; set; }
-        public int IdCourse { get; set; }
+        public int IdContributorEntity { get; set; }
+        public int IdRaceEntity { get; set; }
         public int IdSuiviInscription { get; set; }
         public Nullable<int> NumClassement { get; set; }
         public string Temps { get; set; }
     
-        public virtual ContributorEntity Participant { get; set; }
+        public virtual RaceEntity RaceEntity { get; set; }
+        public virtual ContributorEntity ContributorEntity { get; set; }
         public virtual SuiviInscription SuiviInscription { get; set; }
     }
 }

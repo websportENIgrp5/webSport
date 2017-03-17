@@ -32,16 +32,17 @@ namespace DAL
                                             ", P.Id as PId, P.Nom as PNom, P.Prenom as PPrenom, P.Email as PEmail, P.Telephone as PTelephone, P.DateNaissance as PDateNaissance " +
                                             ", C.Id as CId, C.Titre as CTitre, C.Description as CDescription, C.DateStart as CDateStart, C.Ville as CVille, C.Distance as CDistance, C.IdDifficulte as CIdDifficulte " + 
                                             ", D.Id as DId, D.Libelle as DLibelle" +
-                                            "FROM Participant Pct " +
+                                            "FROM ContributorEntity Pct " +
+                                            "INNER JOIN Inscription I ON Pct.PersonneId = I.IdContributorEntity" +
                                             "INNER JOIN Personne P ON Pct.PersonneId = P.Id " +
-                                            "INNER JOIN Course C ON Pct.CourseId = C.Id" +
+                                            "INNER JOIN RaceEntity C ON I.IdRaceEntity = C.Id" +
                                             "INNER JOIN Difficulte D ON C.IdDifficulte = D.Id" ;
 
         private const string RQT_GET_RACE_PS = "GetRaceById";
 
-        private const string RQT_ADD_RACE = "INSERT INTO Course VALUES (@title, @description, @datestart, @ville, @Distance, @Niveau)";
+        private const string RQT_ADD_RACE = "INSERT INTO RaceEntity VALUES (@title, @description, @datestart, @ville, @Distance, @Niveau)";
 
-        private const string RQT_GET_LAST_ADDED = "SELECT IDENT_CURRENT('Course')";
+        private const string RQT_GET_LAST_ADDED = "SELECT IDENT_CURRENT('RaceEntity')";
         
         #endregion
 
@@ -58,15 +59,15 @@ namespace DAL
             {
                 var newRace = new RaceEntity()
                 {
-                    Title = race.Title,
+                    Titre = race.Title,
                     Description = race.Description,
                     DateStart = race.DateStart,
-                    Town = race.Town,
+                    Ville = race.Town,
                     Distance = race.Distance,
                     IdDifficulte = race.IdDifficulte
                 };
 
-                context.RaceEntities.Add(newRace);
+                context.RaceEntity.Add(newRace);
                 context.SaveChanges();
                 retour = newRace.Id;
             }
@@ -137,7 +138,7 @@ namespace DAL
             // Utilisation d'Entity Framework
             using (var context = new WebSportEntities())
             {
-                return context.RaceEntities.ToList().Select(x => x.ToBo()).ToList();
+                return context.RaceEntity.ToList().Select(x => x.ToBo()).ToList();
             }
 
             // Si on utilise ADO.NET en direct, on utiliserait le code ci-dessous
@@ -170,13 +171,13 @@ namespace DAL
             // Utilisation d'Entity Framework
             using (var context = new WebSportEntities())
             {
-                var initialRace = context.RaceEntities.SingleOrDefault(x => x.Id == race.Id);
+                var initialRace = context.RaceEntity.SingleOrDefault(x => x.Id == race.Id);
                 if (initialRace != null)
                 {
-                    initialRace.Title = race.Title;
+                    initialRace.Titre = race.Title;
                     initialRace.Description = race.Description;
                     initialRace.DateStart = race.DateStart;
-                    initialRace.Town = race.Town;
+                    initialRace.Ville = race.Town;
                     initialRace.Distance = race.Distance;
                     initialRace.IdDifficulte = race.IdDifficulte;
                 }
@@ -195,10 +196,10 @@ namespace DAL
             // Utilisation d'Entity Framework
             using (var context = new WebSportEntities())
             {
-                var raceToDelete = context.RaceEntities.SingleOrDefault(x => x.Id == raceId);
+                var raceToDelete = context.RaceEntity.SingleOrDefault(x => x.Id == raceId);
                 if (raceToDelete != null)
                 {
-                    context.RaceEntities.Remove(raceToDelete);
+                    context.RaceEntity.Remove(raceToDelete);
                 }
                 else
                 {
@@ -234,7 +235,7 @@ namespace DAL
                         Town = reader.GetString(reader.GetOrdinal("CVille")),
                         Distance = reader.GetInt32(reader.GetOrdinal("CDistance")),
                         IdDifficulte = reader.GetInt32(reader.GetOrdinal("CIdDifficulte")),
-                        Difficulte = new Difficulte(),
+                        Difficulte = new BO.Difficulte(),
                         Competitors = new List<Competitor>(),
                         Organisers = new List<Organizer>()
                     };
@@ -249,7 +250,7 @@ namespace DAL
                 var difficulte = reader.GetString(reader.GetOrdinal("DLibelle"));
                 if (difficulte != null)
                 {
-                    Difficulte d = new Difficulte
+                    BO.Difficulte d = new BO.Difficulte
                     {
                         Id = reader.GetInt32(reader.GetOrdinal("DId")),
                         Libelle = reader.GetString(reader.GetOrdinal("DLibelle")),

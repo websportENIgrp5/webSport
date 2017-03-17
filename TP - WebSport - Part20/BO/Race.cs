@@ -6,7 +6,7 @@ using System.Text;
 namespace BO
 {
     /// <summary>
-    /// Course
+    /// RaceEntity
     /// </summary>
     [Serializable]
     public class Race : IComparable<Race>

@@ -1,4 +1,5 @@
 ﻿using BO;
+using DAL.EntityFramework;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace BLL
 
         #region Propriétés
 
-        private List<Difficulte> _listDifficulte;
+        private List<BO.Difficulte> _listDifficulte;
 
         private UnitOfWork _uow { get; set; }
 

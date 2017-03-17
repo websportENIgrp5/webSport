@@ -73,7 +73,7 @@
     <Compile Include="EntityFramework\ContributorEntity.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\DifficulteEntity.cs">
+    <Compile Include="EntityFramework\Difficulte.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\GetRaceById_Result.cs">
@@ -110,6 +110,9 @@
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\SuiviInscription.cs">
+      <DependentUpon>WebSportModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\UserTable.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\WebSportModel.Context.cs">

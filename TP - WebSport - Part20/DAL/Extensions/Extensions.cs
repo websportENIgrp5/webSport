@@ -27,16 +27,14 @@ namespace DAL.Extensions
             return new Race
             {
                 Id = bo.Id,
-                Title = bo.Title,
+                Title = bo.Titre,
                 Description = bo.Description,
                 DateStart = bo.DateStart,
-                Town = bo.Town,
+                Town = bo.Ville,
                 Distance = bo.Distance,
                 IdDifficulte = bo.IdDifficulte,
                 
-                Difficulte = withJoin && bo.Difficulte != null ? bo.Difficulte.ToBo() : null,
-                Organisers = withJoin && bo.Contributors != null ? bo.Contributors.Where(x => x.IsOrganiser).Select(x => x.ToOrganiserBo()).ToList() : null,
-                Competitors = withJoin && bo.Contributors != null ? bo.Contributors.Where(x => x.IsCompetitor).Select(x => x.ToCompetitorBo()).ToList() : null
+                Difficulte = withJoin && bo.Difficulte != null ? bo.Difficulte.ToBo() : null
             };
         }
 
@@ -47,10 +45,10 @@ namespace DAL.Extensions
             return new RaceEntity
             {
                 Id = model.Id,
-                Title = model.Title,
+                Titre = model.Title,
                 Description = model.Description,
                 DateStart = model.DateStart,
-                Town = model.Town,
+                Ville = model.Town,
                 Distance = model.Distance,
                 IdDifficulte = model.IdDifficulte
             };
@@ -77,47 +75,47 @@ namespace DAL.Extensions
 
         #region Difficulte
 
-        public static List<Difficulte> ToBos(this List<DifficulteEntity> bos, bool withJoin = false)
+        public static List<BO.Difficulte> ToBos(this List<EntityFramework.Difficulte> bos, bool withJoin = false)
         {
             return bos != null
                 ? bos.Where(x => x != null).Select(x => x.ToBo(withJoin)).ToList()
                 : null;
         }
 
-        public static Difficulte ToBo(this DifficulteEntity bo, bool withJoin = false)
+        public static BO.Difficulte ToBo(this EntityFramework.Difficulte bo, bool withJoin = false)
         {
             if (bo == null) return null;
 
-            return new Difficulte
+            return new BO.Difficulte
             {
                 Id = bo.Id,
                 Libelle = bo.Libelle
             };
         }
 
-        public static List<Difficulte> ToDifficulteBos(this List<DifficulteEntity> bos)
+        public static List<BO.Difficulte> ToDifficulteBos(this List<EntityFramework.Difficulte> bos)
         {
             return bos != null
                 ? bos.Where(x => x != null).Select(x => x.ToDifficulteBo()).ToList()
                 : null;
         }
 
-        public static Difficulte ToDifficulteBo(this DifficulteEntity bo)
+        public static BO.Difficulte ToDifficulteBo(this EntityFramework.Difficulte bo)
         {
             if (bo == null) return null;
 
-            return new Difficulte
+            return new BO.Difficulte
             {
                 Id = bo.Id,
                 Libelle = bo.Libelle
             };
         }
 
-        public static DifficulteEntity ToDataEntity(this Difficulte model)
+        public static BO.Difficulte ToDataEntity(this EntityFramework.Difficulte model)
         {
             if (model == null) return null;
 
-            return new DifficulteEntity
+            return new BO.Difficulte
             {
                 Id = model.Id,
                 Libelle = model.Libelle
@@ -154,13 +152,12 @@ namespace DAL.Extensions
 
             return new Competitor
             {
-                Id = bo.PersonId,
-                Nom = bo.Person.Lastname,
-                Prenom = bo.Person.Firstname,
-                DateNaissance = bo.Person.BirthDate.HasValue ? bo.Person.BirthDate.Value : DateTime.MinValue,
-                Email = bo.Person.Mail,
-                Phone = bo.Person.Phone,
-                Race = bo.Race.ToBo()
+                Id = bo.PersonneId,
+                Nom = bo.Personne.Nom,
+                Prenom = bo.Personne.Prenom,
+                DateNaissance = bo.Personne.DateNaissance.HasValue ? bo.Personne.DateNaissance.Value : DateTime.MinValue,
+                Email = bo.Personne.Email,
+                Phone = bo.Personne.Telephone
             };
         }
 
@@ -181,12 +178,12 @@ namespace DAL.Extensions
 
             return new Organizer
             {
-                Id = bo.PersonId,
-                Nom = bo.Person.Lastname,
-                Prenom = bo.Person.Firstname,
-                DateNaissance = bo.Person.BirthDate.HasValue ? bo.Person.BirthDate.Value : DateTime.MinValue,
-                Email = bo.Person.Mail,
-                Phone = bo.Person.Phone
+                Id = bo.PersonneId,
+                Nom = bo.Personne.Nom,
+                Prenom = bo.Personne.Prenom,
+                DateNaissance = bo.Personne.DateNaissance.HasValue ? bo.Personne.DateNaissance.Value : DateTime.MinValue,
+                Email = bo.Personne.Email,
+                Phone = bo.Personne.Telephone
             };
         }
 

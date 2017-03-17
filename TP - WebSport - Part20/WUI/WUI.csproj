@@ -170,7 +170,7 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CategoryRaceController.cs" />
     <Compile Include="Controllers\CompetitorController.cs" />
     <Compile Include="Controllers\DifficulteController.cs" />
     <Compile Include="Controllers\DisplayConfigurationController.cs" />
@@ -187,7 +187,8 @@
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\CompetitorModel.cs" />
     <Compile Include="Models\CoordGpsModel.cs" />
-    <Compile Include="Models\DifficulteModel.cs" />
+    <Compile Include="Models\CategoryRaceModel.cs" />
+    <Compile Include="Models\LevelModel.cs" />
     <Compile Include="Models\DisplayConfigurationModel.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\OrganizerModel.cs" />
@@ -342,7 +343,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Competitor\Index.cshtml" />
-    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\CategoryRace\Index.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Race\Index.cshtml" />

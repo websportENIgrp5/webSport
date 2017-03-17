@@ -11,7 +11,7 @@ using WUI.Models.Attributes;
 namespace WUI.Models
 {
     /// <summary>
-    /// Course
+    /// RaceEntity
     /// </summary>
     public class RaceModel
     {
@@ -51,6 +51,8 @@ namespace WUI.Models
         public int IdDifficulte { get; set; }
 
         public DifficulteModel Difficulte { get; set; }
+
+        public CategoryRaceModel CategoryRace { get; set; }
 
         public List<CompetitorModel> Competitors { get; set; }
 

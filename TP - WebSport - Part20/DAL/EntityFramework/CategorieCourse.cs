@@ -16,12 +16,12 @@ namespace DAL.EntityFramework
     {
         public CategorieCourse()
         {
-            this.Course = new HashSet<RaceEntity>();
+            this.RaceEntity = new HashSet<RaceEntity>();
         }
     
         public int Id { get; set; }
         public string Libelle { get; set; }
     
-        public virtual ICollection<RaceEntity> Course { get; set; }
+        public virtual ICollection<RaceEntity> RaceEntity { get; set; }
     }
 }

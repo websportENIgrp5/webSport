@@ -14,6 +14,13 @@
     <legend>RaceModel</legend>
 
     <div class="display-label">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Catégorie</div>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryRace.Libelle)
+    </div>
+
+    <div class="display-label">
          @Html.DisplayNameFor(model => model.Title)
     </div>
     <div class="display-field">
@@ -49,13 +56,12 @@
     </div>
 
     <div class="display-label">
-        @Html.DisplayNameFor(model => model.IdDifficulte)
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Niveau</div>
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.IdDifficulte)
+        @Html.DisplayFor(model => model.Difficulte.Libelle)
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Modifier", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Retour à la liste", "Index")
+    @Html.ActionLink("Inscription", "Inscrire", new { id = Model.Id })
 </p>

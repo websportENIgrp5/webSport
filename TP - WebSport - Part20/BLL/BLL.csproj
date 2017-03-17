@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MgtCategory.cs" />
+    <Compile Include="MgtCategoryRace.cs" />
     <Compile Include="MgtCompetitor.cs" />
     <Compile Include="MgtDifficulte.cs" />
     <Compile Include="MgtDisplayConfiguration.cs" />

@@ -12,16 +12,16 @@ namespace DAL.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class DifficulteEntity
+    public partial class UserTable
     {
-        public DifficulteEntity()
+        public UserTable()
         {
-            this.Course = new HashSet<RaceEntity>();
+            this.ContributorEntity = new HashSet<ContributorEntity>();
         }
     
         public int Id { get; set; }
-        public string Libelle { get; set; }
+        public string Name { get; set; }
     
-        public virtual ICollection<RaceEntity> Course { get; set; }
+        public virtual ICollection<ContributorEntity> ContributorEntity { get; set; }
     }
 }

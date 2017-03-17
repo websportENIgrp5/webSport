@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BddLoginModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="CategorieCourse">
+        <EntityType Name="CategorieRaceEntity">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -19,7 +19,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Libelle" Type="varchar" MaxLength="15" Nullable="false" />
         </EntityType>
-        <EntityType Name="Course">
+        <EntityType Name="RaceEntity">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -30,7 +30,7 @@
           <Property Name="Ville" Type="varchar" MaxLength="100" />
           <Property Name="IdDifficulte" Type="int" />
           <Property Name="Distance" Type="int" />
-          <Property Name="IdCategorieCourse" Type="int" />
+          <Property Name="IdCategorieRaceEntity" Type="int" />
           <Property Name="HeureStart" Type="time" Precision="7" />
           <Property Name="HeureEnd" Type="time" Precision="7" />
         </EntityType>
@@ -46,8 +46,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdParticipant" Type="int" Nullable="false" />
-          <Property Name="IdCourse" Type="int" Nullable="false" />
+          <Property Name="IdContributorEntity" Type="int" Nullable="false" />
+          <Property Name="IdRaceEntity" Type="int" Nullable="false" />
           <Property Name="IdSuiviInscription" Type="int" Nullable="false" />
           <Property Name="NumClassement" Type="int" />
           <Property Name="Temps" Type="char" MaxLength="15" />
@@ -55,22 +55,22 @@
         <EntityType Name="Parcours">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="IdCourse" />
+            <PropertyRef Name="IdRaceEntity" />
             <PropertyRef Name="IdPoi" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdCourse" Type="int" Nullable="false" />
+          <Property Name="IdRaceEntity" Type="int" Nullable="false" />
           <Property Name="IdPoi" Type="int" Nullable="false" />
+          <Property Name="NumOrdrePoi" Type="int" />
         </EntityType>
-        <EntityType Name="Participant">
+        <EntityType Name="ContributorEntity">
           <Key>
             <PropertyRef Name="PersonneId" />
-            <PropertyRef Name="CourseId" />
           </Key>
           <Property Name="PersonneId" Type="int" Nullable="false" />
-          <Property Name="CourseId" Type="int" Nullable="false" />
           <Property Name="EstCompetiteur" Type="bit" Nullable="false" />
           <Property Name="EstOrganisateur" Type="bit" Nullable="false" />
+          <Property Name="IdUser" Type="int" />
         </EntityType>
         <EntityType Name="Personne">
           <Key>
@@ -99,65 +99,70 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Libelle" Type="varchar" MaxLength="15" />
         </EntityType>
-        <Association Name="FK_Competiteur_Course">
-          <End Role="Course" Type="Self.Course" Multiplicity="1" />
-          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Course">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Participant">
-              <PropertyRef Name="CourseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="UserTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="56" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Competiteur_Personne">
           <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
-          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+          <End Role="ContributorEntity" Type="Self.ContributorEntity" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Personne">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Participant">
+            <Dependent Role="ContributorEntity">
               <PropertyRef Name="PersonneId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Course_CategorieCourse">
-          <End Role="CategorieCourse" Type="Self.CategorieCourse" Multiplicity="0..1" />
-          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+        <Association Name="FK_RaceEntity_CategorieRaceEntity">
+          <End Role="CategorieRaceEntity" Type="Self.CategorieRaceEntity" Multiplicity="0..1" />
+          <End Role="RaceEntity" Type="Self.RaceEntity" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CategorieCourse">
+            <Principal Role="CategorieRaceEntity">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Course">
-              <PropertyRef Name="IdCategorieCourse" />
+            <Dependent Role="RaceEntity">
+              <PropertyRef Name="IdCategorieRaceEntity" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Course_Difficulte">
+        <Association Name="FK_RaceEntity_Difficulte">
           <End Role="Difficulte" Type="Self.Difficulte" Multiplicity="0..1" />
-          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <End Role="RaceEntity" Type="Self.RaceEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Difficulte">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Course">
+            <Dependent Role="RaceEntity">
               <PropertyRef Name="IdDifficulte" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Inscription_Participant">
-          <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
+        <Association Name="FK_Inscription_RaceEntity">
+          <End Role="RaceEntity" Type="Self.RaceEntity" Multiplicity="1" />
           <End Role="Inscription" Type="Self.Inscription" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Participant">
-              <PropertyRef Name="PersonneId" />
-              <PropertyRef Name="CourseId" />
+            <Principal Role="RaceEntity">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Inscription">
-              <PropertyRef Name="IdParticipant" />
-              <PropertyRef Name="IdCourse" />
+              <PropertyRef Name="IdRaceEntity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inscription_ContributorEntity">
+          <End Role="ContributorEntity" Type="Self.ContributorEntity" Multiplicity="1" />
+          <End Role="Inscription" Type="Self.Inscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContributorEntity">
+              <PropertyRef Name="PersonneId" />
+            </Principal>
+            <Dependent Role="Inscription">
+              <PropertyRef Name="IdContributorEntity" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -173,15 +178,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Parcours_Course">
-          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+        <Association Name="FK_Parcours_RaceEntity">
+          <End Role="RaceEntity" Type="Self.RaceEntity" Multiplicity="1" />
           <End Role="Parcours" Type="Self.Parcours" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Course">
+            <Principal Role="RaceEntity">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Parcours">
-              <PropertyRef Name="IdCourse" />
+              <PropertyRef Name="IdRaceEntity" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -194,6 +199,18 @@
             </Principal>
             <Dependent Role="Parcours">
               <PropertyRef Name="IdPoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContributorEntity_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="ContributorEntity" Type="Self.ContributorEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContributorEntity">
+              <PropertyRef Name="IdUser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -210,47 +227,52 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="BddLoginModelStoreContainer">
-          <EntitySet Name="CategorieCourse" EntityType="Self.CategorieCourse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategorieRaceEntity" EntityType="Self.CategorieRaceEntity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoriePoi" EntityType="Self.CategoriePoi" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RaceEntity" EntityType="Self.RaceEntity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Difficulte" EntityType="Self.Difficulte" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inscription" EntityType="Self.Inscription" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parcours" EntityType="Self.Parcours" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Participant" EntityType="Self.Participant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContributorEntity" EntityType="Self.ContributorEntity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personne" EntityType="Self.Personne" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Poi" EntityType="Self.Poi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SuiviInscription" EntityType="Self.SuiviInscription" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Competiteur_Course" Association="Self.FK_Competiteur_Course">
-            <End Role="Course" EntitySet="Course" />
-            <End Role="Participant" EntitySet="Participant" />
-          </AssociationSet>
+          <EntitySet Name="UserTable" EntityType="Self.UserTable" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Competiteur_Personne" Association="Self.FK_Competiteur_Personne">
             <End Role="Personne" EntitySet="Personne" />
-            <End Role="Participant" EntitySet="Participant" />
+            <End Role="ContributorEntity" EntitySet="ContributorEntity" />
           </AssociationSet>
-          <AssociationSet Name="FK_Course_CategorieCourse" Association="Self.FK_Course_CategorieCourse">
-            <End Role="CategorieCourse" EntitySet="CategorieCourse" />
-            <End Role="Course" EntitySet="Course" />
+          <AssociationSet Name="FK_RaceEntity_CategorieRaceEntity" Association="Self.FK_RaceEntity_CategorieRaceEntity">
+            <End Role="CategorieRaceEntity" EntitySet="CategorieRaceEntity" />
+            <End Role="RaceEntity" EntitySet="RaceEntity" />
           </AssociationSet>
-          <AssociationSet Name="FK_Course_Difficulte" Association="Self.FK_Course_Difficulte">
+          <AssociationSet Name="FK_RaceEntity_Difficulte" Association="Self.FK_RaceEntity_Difficulte">
             <End Role="Difficulte" EntitySet="Difficulte" />
-            <End Role="Course" EntitySet="Course" />
+            <End Role="RaceEntity" EntitySet="RaceEntity" />
           </AssociationSet>
-          <AssociationSet Name="FK_Inscription_Participant" Association="Self.FK_Inscription_Participant">
-            <End Role="Participant" EntitySet="Participant" />
+          <AssociationSet Name="FK_Inscription_RaceEntity" Association="Self.FK_Inscription_RaceEntity">
+            <End Role="RaceEntity" EntitySet="RaceEntity" />
+            <End Role="Inscription" EntitySet="Inscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inscription_ContributorEntity" Association="Self.FK_Inscription_ContributorEntity">
+            <End Role="ContributorEntity" EntitySet="ContributorEntity" />
             <End Role="Inscription" EntitySet="Inscription" />
           </AssociationSet>
           <AssociationSet Name="FK_Inscription_SuiviInscription" Association="Self.FK_Inscription_SuiviInscription">
             <End Role="SuiviInscription" EntitySet="SuiviInscription" />
             <End Role="Inscription" EntitySet="Inscription" />
           </AssociationSet>
-          <AssociationSet Name="FK_Parcours_Course" Association="Self.FK_Parcours_Course">
-            <End Role="Course" EntitySet="Course" />
+          <AssociationSet Name="FK_Parcours_RaceEntity" Association="Self.FK_Parcours_RaceEntity">
+            <End Role="RaceEntity" EntitySet="RaceEntity" />
             <End Role="Parcours" EntitySet="Parcours" />
           </AssociationSet>
           <AssociationSet Name="FK_Parcours_Poi" Association="Self.FK_Parcours_Poi">
             <End Role="Poi" EntitySet="Poi" />
             <End Role="Parcours" EntitySet="Parcours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContributorEntity_UserTable" Association="Self.FK_ContributorEntity_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="ContributorEntity" EntitySet="ContributorEntity" />
           </AssociationSet>
           <AssociationSet Name="FK_Poi_CategoriePoi" Association="Self.FK_Poi_CategoriePoi">
             <End Role="CategoriePoi" EntitySet="CategoriePoi" />
@@ -262,121 +284,66 @@
     <edmx:ConceptualModels>
       <Schema Namespace="BddLoginModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="WebSportEntities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="RaceEntities" EntityType="BddLoginModel.RaceEntity" />
-          <EntitySet Name="ContributorEntities" EntityType="BddLoginModel.ContributorEntity" />
-          <EntitySet Name="PersonEntities" EntityType="BddLoginModel.PersonEntity" />
-          <AssociationSet Name="FK_Competiteur_Course" Association="BddLoginModel.FK_Competiteur_Course">
-            <End Role="Race" EntitySet="RaceEntities" />
-            <End Role="Contributor" EntitySet="ContributorEntities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Competiteur_Personne" Association="BddLoginModel.FK_Competiteur_Personne">
-            <End Role="Person" EntitySet="PersonEntities" />
-            <End Role="Contributor" EntitySet="ContributorEntities" />
-          </AssociationSet>
+          <EntitySet Name="CategorieRaceEntity" EntityType="BddLoginModel.CategorieCourse" />
           <EntitySet Name="CategoriePoi" EntityType="BddLoginModel.CategoriePoi" />
-          <EntitySet Name="Difficulte" EntityType="BddLoginModel.DifficulteEntity" />
+          <EntitySet Name="RaceEntity" EntityType="BddLoginModel.RaceEntity" />
+          <EntitySet Name="Difficulte" EntityType="BddLoginModel.Difficulte" />
           <EntitySet Name="Inscription" EntityType="BddLoginModel.Inscription" />
+          <EntitySet Name="Parcours" EntityType="BddLoginModel.Parcours" />
+          <EntitySet Name="ContributorEntity" EntityType="BddLoginModel.ContributorEntity" />
+          <EntitySet Name="Personne" EntityType="BddLoginModel.PersonEntity" />
           <EntitySet Name="Poi" EntityType="BddLoginModel.Poi" />
           <EntitySet Name="SuiviInscription" EntityType="BddLoginModel.SuiviInscription" />
+          <EntitySet Name="UserTable" EntityType="BddLoginModel.UserTable" />
+          <AssociationSet Name="FK_RaceEntity_CategorieRaceEntity" Association="BddLoginModel.FK_RaceEntity_CategorieRaceEntity">
+            <End Role="CategorieRaceEntity" EntitySet="CategorieRaceEntity" />
+            <End Role="RaceEntity" EntitySet="RaceEntity" />
+          </AssociationSet>
           <AssociationSet Name="FK_Poi_CategoriePoi" Association="BddLoginModel.FK_Poi_CategoriePoi">
             <End Role="CategoriePoi" EntitySet="CategoriePoi" />
             <End Role="Poi" EntitySet="Poi" />
           </AssociationSet>
-          <AssociationSet Name="FK_Course_Difficulte" Association="BddLoginModel.FK_Course_Difficulte">
+          <AssociationSet Name="FK_RaceEntity_Difficulte" Association="BddLoginModel.FK_RaceEntity_Difficulte">
             <End Role="Difficulte" EntitySet="Difficulte" />
-            <End Role="RaceEntity" EntitySet="RaceEntities" />
+            <End Role="RaceEntity" EntitySet="RaceEntity" />
           </AssociationSet>
-          <AssociationSet Name="FK_Inscription_Participant" Association="BddLoginModel.FK_Inscription_Participant">
-            <End Role="ContributorEntity" EntitySet="ContributorEntities" />
+          <AssociationSet Name="FK_Inscription_RaceEntity" Association="BddLoginModel.FK_Inscription_RaceEntity">
+            <End Role="RaceEntity" EntitySet="RaceEntity" />
+            <End Role="Inscription" EntitySet="Inscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parcours_RaceEntity" Association="BddLoginModel.FK_Parcours_RaceEntity">
+            <End Role="RaceEntity" EntitySet="RaceEntity" />
+            <End Role="Parcours" EntitySet="Parcours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inscription_ContributorEntity" Association="BddLoginModel.FK_Inscription_ContributorEntity">
+            <End Role="ContributorEntity" EntitySet="ContributorEntity" />
             <End Role="Inscription" EntitySet="Inscription" />
           </AssociationSet>
           <AssociationSet Name="FK_Inscription_SuiviInscription" Association="BddLoginModel.FK_Inscription_SuiviInscription">
             <End Role="SuiviInscription" EntitySet="SuiviInscription" />
             <End Role="Inscription" EntitySet="Inscription" />
           </AssociationSet>
-          <EntitySet Name="ParcoursSet" EntityType="BddLoginModel.Parcours" />
-          <AssociationSet Name="FK_Parcours_Course" Association="BddLoginModel.FK_Parcours_Course">
-            <End Role="RaceEntity" EntitySet="RaceEntities" />
-            <End Role="Parcours1" EntitySet="ParcoursSet" />
-          </AssociationSet>
           <AssociationSet Name="FK_Parcours_Poi" Association="BddLoginModel.FK_Parcours_Poi">
             <End Role="Poi" EntitySet="Poi" />
-            <End Role="Parcours1" EntitySet="ParcoursSet" />
+            <End Role="Parcours" EntitySet="Parcours" />
           </AssociationSet>
-          <EntitySet Name="CategorieCourse" EntityType="BddLoginModel.CategorieCourse" />
-          <AssociationSet Name="FK_Course_CategorieCourse" Association="BddLoginModel.FK_Course_CategorieCourse">
-            <End Role="CategorieCourse" EntitySet="CategorieCourse" />
-            <End Role="RaceEntity" EntitySet="RaceEntities" />
+          <AssociationSet Name="FK_Competiteur_Personne" Association="BddLoginModel.FK_Competiteur_Personne">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="ContributorEntity" EntitySet="ContributorEntity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContributorEntity_UserTable" Association="BddLoginModel.FK_ContributorEntity_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="ContributorEntity" EntitySet="ContributorEntity" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="RaceEntity">
+        <EntityType Name="CategorieCourse">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Town" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Contributors" Relationship="BddLoginModel.FK_Competiteur_Course" FromRole="Race" ToRole="Contributor" />
-          <Property Name="IdDifficulte" Type="Int32" />
-          <Property Name="Distance" Type="Int32" />
-          <NavigationProperty Name="Difficulte" Relationship="BddLoginModel.FK_Course_Difficulte" FromRole="RaceEntity" ToRole="Difficulte" />
-          <NavigationProperty Name="Parcours" Relationship="BddLoginModel.FK_Parcours_Course" FromRole="RaceEntity" ToRole="Parcours1" />
-          <Property Name="IdCategorieCourse" Type="Int32" />
-          <Property Name="HeureStart" Type="Time" Precision="7" />
-          <Property Name="HeureEnd" Type="Time" Precision="7" />
-          <NavigationProperty Name="CategorieCourse" Relationship="BddLoginModel.FK_Course_CategorieCourse" FromRole="RaceEntity" ToRole="CategorieCourse" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RaceEntity" Relationship="BddLoginModel.FK_RaceEntity_CategorieRaceEntity" FromRole="CategorieRaceEntity" ToRole="RaceEntity" />
         </EntityType>
-        <EntityType Name="ContributorEntity">
-          <Key>
-            <PropertyRef Name="PersonId" />
-            <PropertyRef Name="RaceId" />
-          </Key>
-          <Property Name="PersonId" Type="Int32" Nullable="false" />
-          <Property Name="RaceId" Type="Int32" Nullable="false" />
-          <Property Name="IsCompetitor" Type="Boolean" Nullable="false" />
-          <Property Name="IsOrganiser" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Race" Relationship="BddLoginModel.FK_Competiteur_Course" FromRole="Contributor" ToRole="Race" />
-          <NavigationProperty Name="Person" Relationship="BddLoginModel.FK_Competiteur_Personne" FromRole="Contributor" ToRole="Person" />
-          <NavigationProperty Name="Inscription" Relationship="BddLoginModel.FK_Inscription_Participant" FromRole="ContributorEntity" ToRole="Inscription" />
-        </EntityType>
-        <EntityType Name="PersonEntity">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="Mail" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
-          <Property Name="Phone" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="BirthDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Contributors" Relationship="BddLoginModel.FK_Competiteur_Personne" FromRole="Person" ToRole="Contributor" />
-        </EntityType>
-        <Association Name="FK_Competiteur_Course">
-          <End Role="Race" Type="BddLoginModel.RaceEntity" Multiplicity="1" />
-          <End Role="Contributor" Type="BddLoginModel.ContributorEntity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Race">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contributor">
-              <PropertyRef Name="RaceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Competiteur_Personne">
-          <End Role="Person" Type="BddLoginModel.PersonEntity" Multiplicity="1" />
-          <End Role="Contributor" Type="BddLoginModel.ContributorEntity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contributor">
-              <PropertyRef Name="PersonId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="CategoriePoi">
           <Key>
             <PropertyRef Name="Id" />
@@ -385,26 +352,83 @@
           <Property Name="Libelle" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Poi" Relationship="BddLoginModel.FK_Poi_CategoriePoi" FromRole="CategoriePoi" ToRole="Poi" />
         </EntityType>
-        <EntityType Name="DifficulteEntity">
+        <EntityType Name="RaceEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Ville" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdDifficulte" Type="Int32" />
+          <Property Name="Distance" Type="Int32" />
+          <Property Name="IdCategorieCourse" Type="Int32" />
+          <Property Name="HeureStart" Type="Time" Precision="7" />
+          <Property Name="HeureEnd" Type="Time" Precision="7" />
+          <NavigationProperty Name="CategorieCourse" Relationship="BddLoginModel.FK_RaceEntity_CategorieRaceEntity" FromRole="RaceEntity" ToRole="CategorieRaceEntity" />
+          <NavigationProperty Name="Difficulte" Relationship="BddLoginModel.FK_RaceEntity_Difficulte" FromRole="RaceEntity" ToRole="Difficulte" />
+          <NavigationProperty Name="Inscription" Relationship="BddLoginModel.FK_Inscription_RaceEntity" FromRole="RaceEntity" ToRole="Inscription" />
+          <NavigationProperty Name="Parcours" Relationship="BddLoginModel.FK_Parcours_RaceEntity" FromRole="RaceEntity" ToRole="Parcours" />
+        </EntityType>
+        <EntityType Name="Difficulte">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Libelle" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Course" Relationship="BddLoginModel.FK_Course_Difficulte" FromRole="Difficulte" ToRole="RaceEntity" />
+          <NavigationProperty Name="RaceEntity" Relationship="BddLoginModel.FK_RaceEntity_Difficulte" FromRole="Difficulte" ToRole="RaceEntity" />
         </EntityType>
         <EntityType Name="Inscription">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdParticipant" Type="Int32" Nullable="false" />
-          <Property Name="IdCourse" Type="Int32" Nullable="false" />
+          <Property Name="IdContributorEntity" Type="Int32" Nullable="false" />
+          <Property Name="IdRaceEntity" Type="Int32" Nullable="false" />
           <Property Name="IdSuiviInscription" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Participant" Relationship="BddLoginModel.FK_Inscription_Participant" FromRole="Inscription" ToRole="ContributorEntity" />
-          <NavigationProperty Name="SuiviInscription" Relationship="BddLoginModel.FK_Inscription_SuiviInscription" FromRole="Inscription" ToRole="SuiviInscription" />
           <Property Name="NumClassement" Type="Int32" />
           <Property Name="Temps" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="RaceEntity" Relationship="BddLoginModel.FK_Inscription_RaceEntity" FromRole="Inscription" ToRole="RaceEntity" />
+          <NavigationProperty Name="ContributorEntity" Relationship="BddLoginModel.FK_Inscription_ContributorEntity" FromRole="Inscription" ToRole="ContributorEntity" />
+          <NavigationProperty Name="SuiviInscription" Relationship="BddLoginModel.FK_Inscription_SuiviInscription" FromRole="Inscription" ToRole="SuiviInscription" />
+        </EntityType>
+        <EntityType Name="Parcours">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdRaceEntity" />
+            <PropertyRef Name="IdPoi" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRaceEntity" Type="Int32" Nullable="false" />
+          <Property Name="IdPoi" Type="Int32" Nullable="false" />
+          <Property Name="NumOrdrePoi" Type="Int32" />
+          <NavigationProperty Name="RaceEntity" Relationship="BddLoginModel.FK_Parcours_RaceEntity" FromRole="Parcours" ToRole="RaceEntity" />
+          <NavigationProperty Name="Poi" Relationship="BddLoginModel.FK_Parcours_Poi" FromRole="Parcours" ToRole="Poi" />
+        </EntityType>
+        <EntityType Name="ContributorEntity">
+          <Key>
+            <PropertyRef Name="PersonneId" />
+          </Key>
+          <Property Name="PersonneId" Type="Int32" Nullable="false" />
+          <Property Name="EstCompetiteur" Type="Boolean" Nullable="false" />
+          <Property Name="EstOrganisateur" Type="Boolean" Nullable="false" />
+          <Property Name="IdUser" Type="Int32" />
+          <NavigationProperty Name="Inscription" Relationship="BddLoginModel.FK_Inscription_ContributorEntity" FromRole="ContributorEntity" ToRole="Inscription" />
+          <NavigationProperty Name="Personne" Relationship="BddLoginModel.FK_Competiteur_Personne" FromRole="ContributorEntity" ToRole="Personne" />
+          <NavigationProperty Name="UserTable" Relationship="BddLoginModel.FK_ContributorEntity_UserTable" FromRole="ContributorEntity" ToRole="UserTable" />
+        </EntityType>
+        <EntityType Name="PersonEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DateNaissance" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ContributorEntity" Relationship="BddLoginModel.FK_Competiteur_Personne" FromRole="Personne" ToRole="ContributorEntity" />
         </EntityType>
         <EntityType Name="Poi">
           <Key>
@@ -415,7 +439,7 @@
           <Property Name="longitude" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="latitude" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CategoriePoi" Relationship="BddLoginModel.FK_Poi_CategoriePoi" FromRole="Poi" ToRole="CategoriePoi" />
-          <NavigationProperty Name="Parcours" Relationship="BddLoginModel.FK_Parcours_Poi" FromRole="Poi" ToRole="Parcours1" />
+          <NavigationProperty Name="Parcours" Relationship="BddLoginModel.FK_Parcours_Poi" FromRole="Poi" ToRole="Parcours" />
         </EntityType>
         <EntityType Name="SuiviInscription">
           <Key>
@@ -425,6 +449,26 @@
           <Property Name="Libelle" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Inscription" Relationship="BddLoginModel.FK_Inscription_SuiviInscription" FromRole="SuiviInscription" ToRole="Inscription" />
         </EntityType>
+        <EntityType Name="UserTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ContributorEntity" Relationship="BddLoginModel.FK_ContributorEntity_UserTable" FromRole="UserTable" ToRole="ContributorEntity" />
+        </EntityType>
+        <Association Name="FK_RaceEntity_CategorieRaceEntity">
+          <End Type="BddLoginModel.CategorieCourse" Role="CategorieRaceEntity" Multiplicity="0..1" />
+          <End Type="BddLoginModel.RaceEntity" Role="RaceEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorieRaceEntity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RaceEntity">
+              <PropertyRef Name="IdCategorieCourse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Poi_CategoriePoi">
           <End Type="BddLoginModel.CategoriePoi" Role="CategoriePoi" Multiplicity="1" />
           <End Type="BddLoginModel.Poi" Role="Poi" Multiplicity="*" />
@@ -437,8 +481,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Course_Difficulte">
-          <End Type="BddLoginModel.DifficulteEntity" Role="Difficulte" Multiplicity="0..1" />
+        <Association Name="FK_RaceEntity_Difficulte">
+          <End Type="BddLoginModel.Difficulte" Role="Difficulte" Multiplicity="0..1" />
           <End Type="BddLoginModel.RaceEntity" Role="RaceEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Difficulte">
@@ -449,17 +493,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Inscription_Participant">
+        <Association Name="FK_Inscription_RaceEntity">
+          <End Type="BddLoginModel.RaceEntity" Role="RaceEntity" Multiplicity="1" />
+          <End Type="BddLoginModel.Inscription" Role="Inscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RaceEntity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inscription">
+              <PropertyRef Name="IdRaceEntity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parcours_RaceEntity">
+          <End Type="BddLoginModel.RaceEntity" Role="RaceEntity" Multiplicity="1" />
+          <End Type="BddLoginModel.Parcours" Role="Parcours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RaceEntity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parcours">
+              <PropertyRef Name="IdRaceEntity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inscription_ContributorEntity">
           <End Type="BddLoginModel.ContributorEntity" Role="ContributorEntity" Multiplicity="1" />
           <End Type="BddLoginModel.Inscription" Role="Inscription" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContributorEntity">
-              <PropertyRef Name="PersonId" />
-              <PropertyRef Name="RaceId" />
+              <PropertyRef Name="PersonneId" />
             </Principal>
             <Dependent Role="Inscription">
-              <PropertyRef Name="IdParticipant" />
-              <PropertyRef Name="IdCourse" />
+              <PropertyRef Name="IdContributorEntity" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -475,103 +541,53 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Parcours">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="IdCourse" />
-            <PropertyRef Name="IdPoi" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdCourse" Type="Int32" Nullable="false" />
-          <Property Name="IdPoi" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Course" Relationship="BddLoginModel.FK_Parcours_Course" FromRole="Parcours1" ToRole="RaceEntity" />
-          <NavigationProperty Name="Poi" Relationship="BddLoginModel.FK_Parcours_Poi" FromRole="Parcours1" ToRole="Poi" />
-        </EntityType>
-        <Association Name="FK_Parcours_Course">
-          <End Type="BddLoginModel.RaceEntity" Role="RaceEntity" Multiplicity="1" />
-          <End Type="BddLoginModel.Parcours" Role="Parcours1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RaceEntity">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Parcours1">
-              <PropertyRef Name="IdCourse" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Parcours_Poi">
           <End Type="BddLoginModel.Poi" Role="Poi" Multiplicity="1" />
-          <End Type="BddLoginModel.Parcours" Role="Parcours1" Multiplicity="*" />
+          <End Type="BddLoginModel.Parcours" Role="Parcours" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Poi">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Parcours1">
+            <Dependent Role="Parcours">
               <PropertyRef Name="IdPoi" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CategorieCourse">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Libelle" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Course" Relationship="BddLoginModel.FK_Course_CategorieCourse" FromRole="CategorieCourse" ToRole="RaceEntity" />
-        </EntityType>
-        <Association Name="FK_Course_CategorieCourse">
-          <End Type="BddLoginModel.CategorieCourse" Role="CategorieCourse" Multiplicity="0..1" />
-          <End Type="BddLoginModel.RaceEntity" Role="RaceEntity" Multiplicity="*" />
+        <Association Name="FK_Competiteur_Personne">
+          <End Type="BddLoginModel.PersonEntity" Role="Personne" Multiplicity="1" />
+          <End Type="BddLoginModel.ContributorEntity" Role="ContributorEntity" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="CategorieCourse">
+            <Principal Role="Personne">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="RaceEntity">
-              <PropertyRef Name="IdCategorieCourse" />
+            <Dependent Role="ContributorEntity">
+              <PropertyRef Name="PersonneId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_ContributorEntity_UserTable">
+          <End Type="BddLoginModel.UserTable" Role="UserTable" Multiplicity="0..1" />
+          <End Type="BddLoginModel.ContributorEntity" Role="ContributorEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContributorEntity">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BddLoginModelStoreContainer" CdmEntityContainer="WebSportEntities">
-          <EntitySetMapping Name="RaceEntities">
-            <EntityTypeMapping TypeName="BddLoginModel.RaceEntity">
-              <MappingFragment StoreEntitySet="Course">
-                <ScalarProperty Name="HeureEnd" ColumnName="HeureEnd" />
-                <ScalarProperty Name="HeureStart" ColumnName="HeureStart" />
-                <ScalarProperty Name="IdCategorieCourse" ColumnName="IdCategorieCourse" />
-                <ScalarProperty Name="Distance" ColumnName="Distance" />
-                <ScalarProperty Name="IdDifficulte" ColumnName="IdDifficulte" />
+          <EntitySetMapping Name="CategorieRaceEntity">
+            <EntityTypeMapping TypeName="BddLoginModel.CategorieCourse">
+              <MappingFragment StoreEntitySet="CategorieRaceEntity">
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Title" ColumnName="Titre" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
-                <ScalarProperty Name="Town" ColumnName="Ville" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ContributorEntities">
-            <EntityTypeMapping TypeName="BddLoginModel.ContributorEntity">
-              <MappingFragment StoreEntitySet="Participant">
-                <ScalarProperty Name="PersonId" ColumnName="PersonneId" />
-                <ScalarProperty Name="RaceId" ColumnName="CourseId" />
-                <ScalarProperty Name="IsCompetitor" ColumnName="EstCompetiteur" />
-                <ScalarProperty Name="IsOrganiser" ColumnName="EstOrganisateur" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PersonEntities">
-            <EntityTypeMapping TypeName="BddLoginModel.PersonEntity">
-              <MappingFragment StoreEntitySet="Personne">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Lastname" ColumnName="Nom" />
-                <ScalarProperty Name="Firstname" ColumnName="Prenom" />
-                <ScalarProperty Name="Mail" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Telephone" />
-                <ScalarProperty Name="BirthDate" ColumnName="DateNaissance" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -583,8 +599,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="RaceEntity">
+            <EntityTypeMapping TypeName="BddLoginModel.RaceEntity">
+              <MappingFragment StoreEntitySet="RaceEntity">
+                <ScalarProperty Name="HeureEnd" ColumnName="HeureEnd" />
+                <ScalarProperty Name="HeureStart" ColumnName="HeureStart" />
+                <ScalarProperty Name="IdCategorieCourse" ColumnName="IdCategorieRaceEntity" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="IdDifficulte" ColumnName="IdDifficulte" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Difficulte">
-            <EntityTypeMapping TypeName="BddLoginModel.DifficulteEntity">
+            <EntityTypeMapping TypeName="BddLoginModel.Difficulte">
               <MappingFragment StoreEntitySet="Difficulte">
                 <ScalarProperty Name="Libelle" ColumnName="Libelle" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -597,8 +629,40 @@
                 <ScalarProperty Name="Temps" ColumnName="Temps" />
                 <ScalarProperty Name="NumClassement" ColumnName="NumClassement" />
                 <ScalarProperty Name="IdSuiviInscription" ColumnName="IdSuiviInscription" />
-                <ScalarProperty Name="IdCourse" ColumnName="IdCourse" />
-                <ScalarProperty Name="IdParticipant" ColumnName="IdParticipant" />
+                <ScalarProperty Name="IdRaceEntity" ColumnName="IdRaceEntity" />
+                <ScalarProperty Name="IdContributorEntity" ColumnName="IdContributorEntity" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parcours">
+            <EntityTypeMapping TypeName="BddLoginModel.Parcours">
+              <MappingFragment StoreEntitySet="Parcours">
+                <ScalarProperty Name="NumOrdrePoi" ColumnName="NumOrdrePoi" />
+                <ScalarProperty Name="IdPoi" ColumnName="IdPoi" />
+                <ScalarProperty Name="IdRaceEntity" ColumnName="IdRaceEntity" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContributorEntity">
+            <EntityTypeMapping TypeName="BddLoginModel.ContributorEntity">
+              <MappingFragment StoreEntitySet="ContributorEntity">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="EstOrganisateur" ColumnName="EstOrganisateur" />
+                <ScalarProperty Name="EstCompetiteur" ColumnName="EstCompetiteur" />
+                <ScalarProperty Name="PersonneId" ColumnName="PersonneId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personne">
+            <EntityTypeMapping TypeName="BddLoginModel.PersonEntity">
+              <MappingFragment StoreEntitySet="Personne">
+                <ScalarProperty Name="DateNaissance" ColumnName="DateNaissance" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -621,19 +685,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ParcoursSet">
-            <EntityTypeMapping TypeName="BddLoginModel.Parcours">
-              <MappingFragment StoreEntitySet="Parcours">
-                <ScalarProperty Name="IdPoi" ColumnName="IdPoi" />
-                <ScalarProperty Name="IdCourse" ColumnName="IdCourse" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CategorieCourse">
-            <EntityTypeMapping TypeName="BddLoginModel.CategorieCourse">
-              <MappingFragment StoreEntitySet="CategorieCourse">
-                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+          <EntitySetMapping Name="UserTable">
+            <EntityTypeMapping TypeName="BddLoginModel.UserTable">
+              <MappingFragment StoreEntitySet="UserTable">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

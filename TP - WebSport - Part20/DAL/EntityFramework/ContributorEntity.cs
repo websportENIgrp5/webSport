@@ -19,13 +19,13 @@ namespace DAL.EntityFramework
             this.Inscription = new HashSet<Inscription>();
         }
     
-        public int PersonId { get; set; }
-        public int RaceId { get; set; }
-        public bool IsCompetitor { get; set; }
-        public bool IsOrganiser { get; set; }
+        public int PersonneId { get; set; }
+        public bool EstCompetiteur { get; set; }
+        public bool EstOrganisateur { get; set; }
+        public Nullable<int> IdUser { get; set; }
     
-        public virtual RaceEntity Race { get; set; }
-        public virtual PersonEntity Person { get; set; }
         public virtual ICollection<Inscription> Inscription { get; set; }
+        public virtual PersonEntity Personne { get; set; }
+        public virtual UserTable UserTable { get; set; }
     }
 }

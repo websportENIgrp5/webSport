@@ -5,25 +5,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b4baff9f34404351a109dc39d6782cb9" Name="Diagramme1">
-        <EntityTypeShape EntityType="BddLoginModel.RaceEntity" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BddLoginModel.ContributorEntity" Width="1.875" PointX="2.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BddLoginModel.PersonEntity" Width="1.5" PointX="5.625" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="BddLoginModel.FK_Competiteur_Course" ManuallyRouted="false" />
-        <AssociationConnector Association="BddLoginModel.FK_Competiteur_Personne" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="BddLoginModel.CategoriePoi" Width="1.5" PointX="3.125" PointY="7.5" />
-        <EntityTypeShape EntityType="BddLoginModel.DifficulteEntity" Width="1.5" PointX="2.625" PointY="5.5" />
-        <EntityTypeShape EntityType="BddLoginModel.Inscription" Width="1.5" PointX="5.625" PointY="4.375" />
-        <EntityTypeShape EntityType="BddLoginModel.Poi" Width="1.5" PointX="0.625" PointY="7.5" />
-        <EntityTypeShape EntityType="BddLoginModel.SuiviInscription" Width="1.5" PointX="5.5" PointY="7.25" />
+        <EntityTypeShape EntityType="BddLoginModel.CategorieCourse" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BddLoginModel.CategoriePoi" Width="1.5" PointX="3.75" PointY="15.75" />
+        <EntityTypeShape EntityType="BddLoginModel.RaceEntity" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="BddLoginModel.Difficulte" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BddLoginModel.Inscription" Width="1.5" PointX="5.25" PointY="3.125" />
+        <EntityTypeShape EntityType="BddLoginModel.Parcours" Width="1.5" PointX="8.25" PointY="3.5" />
+        <EntityTypeShape EntityType="BddLoginModel.ContributorEntity" Width="1.5" PointX="3" PointY="11.375" />
+        <EntityTypeShape EntityType="BddLoginModel.PersonEntity" Width="1.5" PointX="0.75" PointY="12.625" />
+        <EntityTypeShape EntityType="BddLoginModel.Poi" Width="1.5" PointX="6" PointY="15.5" />
+        <EntityTypeShape EntityType="BddLoginModel.SuiviInscription" Width="1.5" PointX="3" PointY="7.875" />
+        <EntityTypeShape EntityType="BddLoginModel.UserTable" Width="1.5" PointX="0.75" PointY="10.25" />
+        <AssociationConnector Association="BddLoginModel.FK_RaceEntity_CategorieRaceEntity" />
         <AssociationConnector Association="BddLoginModel.FK_Poi_CategoriePoi" />
-        <AssociationConnector Association="BddLoginModel.FK_Course_Difficulte" />
-        <AssociationConnector Association="BddLoginModel.FK_Inscription_Participant" />
+        <AssociationConnector Association="BddLoginModel.FK_RaceEntity_Difficulte" />
+        <AssociationConnector Association="BddLoginModel.FK_Inscription_RaceEntity" />
+        <AssociationConnector Association="BddLoginModel.FK_Parcours_RaceEntity" />
+        <AssociationConnector Association="BddLoginModel.FK_Inscription_ContributorEntity" />
         <AssociationConnector Association="BddLoginModel.FK_Inscription_SuiviInscription" />
-        <EntityTypeShape EntityType="BddLoginModel.Parcours" Width="1.5" PointX="0.5" PointY="5" />
-        <AssociationConnector Association="BddLoginModel.FK_Parcours_Course" />
         <AssociationConnector Association="BddLoginModel.FK_Parcours_Poi" />
-        <EntityTypeShape EntityType="BddLoginModel.CategorieCourse" Width="1.5" PointX="2.875" PointY="3.625" />
-        <AssociationConnector Association="BddLoginModel.FK_Course_CategorieCourse" />
+        <AssociationConnector Association="BddLoginModel.FK_Competiteur_Personne" />
+        <AssociationConnector Association="BddLoginModel.FK_ContributorEntity_UserTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

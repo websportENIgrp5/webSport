@@ -343,7 +343,7 @@ namespace DAL
                 {
                     Id = 1,
                     Title = "Foulées de l'éléphant",
-                    Description = "Course nocturne de 10km sur l'Île de Nantes",
+                    Description = "RaceEntity nocturne de 10km sur l'Île de Nantes",
                     DateStart = new DateTime(2017, 4, 27, 21, 0, 0),
                     Town = "Nantes",
 
@@ -395,7 +395,7 @@ namespace DAL
                 {
                     Id = 2,
                     Title = "Semi-marathon de Nantes",
-                    Description = "Course de 21,1km dans la métropole Nantes",
+                    Description = "RaceEntity de 21,1km dans la métropole Nantes",
                     DateStart = new DateTime(2017, 4, 28, 9, 0, 0),
                     Town = "Paris",
 
@@ -438,7 +438,7 @@ namespace DAL
                 {
                     Id = 3,
                     Title = "Marathon de Nantes",
-                    Description = "Course de 42.195km dans la métropole Nantes",
+                    Description = "RaceEntity de 42.195km dans la métropole Nantes",
                     DateStart = new DateTime(2017, 4, 28, 14, 0, 0),
                     Town = "Amiens",
 

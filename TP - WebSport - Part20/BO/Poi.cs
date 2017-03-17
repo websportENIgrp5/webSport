@@ -15,8 +15,8 @@ namespace BO
     {
         public string Title { get; set; }
 
-        private Category _category;
-        public Category Category
+        private CategoryRace _category;
+        public CategoryRace Category
         {
             get { return _category; }
             set { _category = value; }
