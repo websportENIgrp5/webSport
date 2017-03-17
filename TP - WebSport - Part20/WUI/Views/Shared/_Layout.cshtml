@@ -6,6 +6,7 @@
         <title>@ViewBag.Title - Mon application ASP.NET MVC</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
         @Styles.Render("~/Content/css")
         @Styles.Render("~/bundles/Bootstrap/css")
         @RenderSection("css", required: false)
@@ -36,6 +37,8 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/bundles/bootstrap/js")
+        @Scripts.Render("~/bundles/Site/js")
+        @*@Scripts.Render("~/bundles/chart/js")*@
         @RenderSection("scripts", required: false)
     </body>
 </html>
