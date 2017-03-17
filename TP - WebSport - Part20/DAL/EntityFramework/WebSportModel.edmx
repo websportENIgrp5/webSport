@@ -59,11 +59,11 @@
             <PropertyRef Name="IdPoi" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdCourse" Type="int" Nullable="false" />
+          <Property Name="IdRaceEntity" Type="int" Nullable="false" />
           <Property Name="IdPoi" Type="int" Nullable="false" />
           <Property Name="NumOrdrePoi" Type="int" />
         </EntityType>
-        <EntityType Name="Participant">
+        <EntityType Name="ContributorEntity">
           <Key>
             <PropertyRef Name="PersonneId" />
           </Key>
@@ -130,14 +130,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Course_Difficulte">
+        <Association Name="FK_RaceEntity_Difficulte">
           <End Role="Difficulte" Type="Self.Difficulte" Multiplicity="0..1" />
-          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <End Role="RaceEntity" Type="Self.RaceEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Difficulte">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Course">
+            <Dependent Role="RaceEntity">
               <PropertyRef Name="IdDifficulte" />
             </Dependent>
           </ReferentialConstraint>

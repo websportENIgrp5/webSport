@@ -224,12 +224,12 @@ ko.utils = new (function () {
             return string.substring(0, startsWith.length) === startsWith;
         },
 
-        buildEvalWithinScopeFunction: function (expression, scopeLevels) {
+        buildEvalWithinScopeFunction: function (expression, scopeDifficultes) {
             // Build the source for a function that evaluates "expression"
-            // For each scope variable, add an extra level of "with" nesting
+            // For each scope variable, add an extra Difficulte of "with" nesting
             // Example result: with(sc[1]) { with(sc[0]) { return (expression) } }
             var functionBody = "return (" + expression + ")";
-            for (var i = 0; i < scopeLevels; i++) {
+            for (var i = 0; i < scopeDifficultes; i++) {
                 functionBody = "with(sc[" + i + "]) { " + functionBody + " } ";
             }
             return new Function("sc", functionBody);
@@ -1274,7 +1274,7 @@ ko.exportSymbol('isComputed', ko.isComputed);
         if (arguments.length == 0)
             throw new Error("When calling ko.toJS, pass the object you want to convert.");
 
-        // We just unwrap everything at every level in the object graph
+        // We just unwrap everything at every Difficulte in the object graph
         return mapJsObjectGraph(rootObject, function(valueToMap) {
             // Loop because an observable's value might in turn be another observable wrapper
             for (var i = 0; ko.isObservable(valueToMap) && (i < maxNestedObservableDepth); i++)
@@ -1458,7 +1458,7 @@ ko.jsonExpressionRewriting = (function () {
 
         parseObjectLiteral: function(objectLiteralString) {
             // A full tokeniser+lexer would add too much weight to this library, so here's a simple parser
-            // that is sufficient just to split an object literal string into a set of top-level key-value pairs
+            // that is sufficient just to split an object literal string into a set of top-Difficulte key-value pairs
 
             var str = ko.utils.stringTrim(objectLiteralString);
             if (str.length < 3)
@@ -2875,7 +2875,7 @@ ko.exportSymbol('templateRewriting.applyMemoizedBindingsToNextSibling', ko.templ
     function activateBindingsOnContinuousNodeArray(continuousNodeArray, bindingContext) {
         // To be used on any nodes that have been rendered by a template and have been inserted into some parent element
         // Walks through continuousNodeArray (which *must* be continuous, i.e., an uninterrupted sequence of sibling nodes, because
-        // the algorithm for walking them relies on this), and for each top-level item in the virtual-element sense,
+        // the algorithm for walking them relies on this), and for each top-Difficulte item in the virtual-element sense,
         // (1) Does a regular "applyBindings" to associate bindingContext with this node and to activate any non-memoized bindings
         // (2) Unmemoizes any memos in the DOM subtree (e.g., to activate bindings that had been memoized during template rewriting)
 

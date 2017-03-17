@@ -69,6 +69,70 @@ namespace DAL.Extensions
 
         #endregion
 
+        #region Difficulte
+
+        public static List<BO.Difficulte> ToBos(this List<EntityFramework.Difficulte> bos, bool withJoin = false)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToBo(withJoin)).ToList()
+                : null;
+        }
+
+        public static BO.Difficulte ToBo(this EntityFramework.Difficulte bo, bool withJoin = false)
+        {
+            if (bo == null) return null;
+
+            return new BO.Difficulte
+            {
+                Id = bo.Id,
+                Libelle = bo.Libelle
+            };
+        }
+
+        public static List<BO.Difficulte> ToDifficulteBos(this List<EntityFramework.Difficulte> bos)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToDifficulteBo()).ToList()
+                : null;
+        }
+
+        public static BO.Difficulte ToDifficulteBo(this EntityFramework.Difficulte bo)
+        {
+            if (bo == null) return null;
+
+            return new BO.Difficulte
+            {
+                Id = bo.Id,
+                Libelle = bo.Libelle
+            };
+        }
+
+        public static BO.Difficulte ToDataEntity(this EntityFramework.Difficulte model)
+        {
+            if (model == null) return null;
+
+            return new BO.Difficulte
+            {
+                Id = model.Id,
+                Libelle = model.Libelle
+           
+            };
+        }
+
+
+        //public static Difficulte ToBo(this GetDifficulteById_Result entity)
+        //{
+        //    if (entity == null) return null;
+
+        //    return new Difficulte
+        //    {
+        //        Id = entity.CId,
+        //        Libelle = entity.CLibelle,
+        //    };
+        //}
+
+        #endregion
+
         #region Competitor
 
         public static List<Competitor> ToCompetitorBos(this List<ContributorEntity> bos)

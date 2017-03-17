@@ -8,7 +8,7 @@
     @Styles.Render("~/Content/Race/css")
 }
 
-<h2>Création d'une course</h2>
+<h2>Création d'une RaceEntity</h2>
 
 @using (Html.BeginForm("Create", "Race", FormMethod.Post, new { @class = "form-design" }))
 {
@@ -64,16 +64,23 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.IdDifficulte)
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Niveau</div>
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.IdDifficulte, new { @class = "form-control", size = "30" })
-            @Html.ValidationMessageFor(model => model.IdDifficulte)
-            @Html.DropDownListFor(model => model.IdDifficulte, new SelectList(model.IdDifficulte, "", ""))
+            @*@Html.DropDownListFor(model => model.Difficultes, Model.Difficultes)
+            @Html.ValidationMessageFor(model => model.IdDifficulte)*@
+        </div>
+
+        <div class="editor-label">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Catégorie</div>
+        </div>
+        <div class="editor-field">
+            @*@Html.DropDownListFor(model => model.Difficultes, Model.Difficultes)
+            @Html.ValidationMessageFor(model => model.IdDifficulte)*@
         </div>
 
         <p>
-            <input type="submit" value="Créer la course" />
+            <input type="submit" value="Créer la RaceEntity" />
         </p>
     </fieldset>
 }

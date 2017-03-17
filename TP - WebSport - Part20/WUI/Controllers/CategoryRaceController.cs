@@ -8,7 +8,7 @@ using WUI.Models;
 
 namespace WUI.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryRaceController : Controller
     {
         private List<CategoryModel> maListeEnCache;
 
@@ -29,7 +29,7 @@ namespace WUI.Controllers
             // Cela évite de faire des appels en bases inutiles et potentiellement longs
             if (string.IsNullOrEmpty(field) || string.IsNullOrEmpty(dirct))
             {
-                MgtCategory service = new MgtCategory();
+                MgtCategoryRace service = new MgtCategoryRace();
                 maListeEnCache = service.GetCategory().ToModels();
             }
 

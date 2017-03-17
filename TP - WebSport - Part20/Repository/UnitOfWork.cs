@@ -47,6 +47,17 @@ namespace Repository
             }
         }
 
+        private DifficulteRepository _difficulteRepo;
+        public DifficulteRepository DifficulteRepo
+        {
+            get
+            {
+                if (_difficulteRepo == null)
+                    _difficulteRepo = new DifficulteRepository(this.context);
+                return _difficulteRepo;
+            }
+        }
+
         // Etc... on liste les repositories
 
         #endregion
