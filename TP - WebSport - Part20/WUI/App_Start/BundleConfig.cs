@@ -61,6 +61,8 @@ namespace WUI
             bundles.Add(new ScriptBundle("~/bundles/Race/js")
                 .Include("~/Scripts/Race/Race.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/Maps/js")
+                .Include("~/Scripts/Maps/map.js"));
 
             bundles.Add(new StyleBundle("~/Content/Race/css")
                 .Include("~/Content/Race.css"));

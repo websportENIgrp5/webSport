@@ -221,5 +221,18 @@ namespace WUI.Controllers
                 return View();
             }
         }
+
+        /// <summary>
+        /// Methode appeler par ajax afin de recupéré les pois de la course
+        /// </summary>
+        /// <param name="idCourse"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult GetParcoursById(int idCourse)
+        {
+            MgtPoi pois = new MgtPoi();
+            return Json(pois.Convert(idCourse), JsonRequestBehavior.AllowGet);
+        }
     }
 }
