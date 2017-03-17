@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,7 +11,7 @@ using WUI.Models.Attributes;
 namespace WUI.Models
 {
     /// <summary>
-    /// Course
+    /// RaceEntity
     /// </summary>
     public class RaceModel
     {
@@ -26,7 +27,7 @@ namespace WUI.Models
         [Required(ErrorMessage = "La {0} est requise")]
         public string Description { get; set; }
 
-        [Display(Name = "Date de début")]
+        [Display(Name = "Date")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         // Par défaut, une date est requise car le type DateTime n'est pas "Nullable"
         public DateTime DateStart { get; set; }
@@ -35,6 +36,16 @@ namespace WUI.Models
         [Required(ErrorMessage = "La {0} est requise")]
         public string Town { get; set; }
 
+        [Display(Name = "Distance")]
+        [Required(ErrorMessage = "La {0} est requise")]
+        public int Distance { get; set; }
+
+        [Required(ErrorMessage = "Le {0} est requise")]
+        public int IdDifficulte { get; set; }
+
+        public DifficulteModel Difficulte { get; set; }
+
+        public CategoryRaceModel CategoryRace { get; set; }
 
         public List<CompetitorModel> Competitors { get; set; }
 

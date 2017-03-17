@@ -49,7 +49,7 @@ namespace BO
             set
             {
                 if(value.Length > 15)
-                {
+    {
                     value = value.Substring(0, 15);
                 }
                 _long = value;

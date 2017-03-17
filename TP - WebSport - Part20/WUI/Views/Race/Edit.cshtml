@@ -51,6 +51,30 @@
             @Html.ValidationMessageFor(model => model.Town)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Distance)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Distance)
+            @Html.ValidationMessageFor(model => model.Distance)
+        </div>
+
+        <div class="editor-label">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Niveau</div>
+        </div>
+        @*<div class="editor-field">
+            @Html.DropDownListFor(model => model.SelectedDifficulteId, Model.Difficultes)
+            @Html.ValidationMessageFor(model => Model.SelectedDifficulteId)
+        </div>*@
+
+        <div class="editor-label">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Catégorie</div>
+        </div>
+        @*<div class="editor-field">
+            @Html.DropDownListFor(model => model.SelectedDifficulteId, Model.Difficultes)
+            @Html.ValidationMessageFor(model => Model.SelectedDifficulteId)
+        </div>*@
+
         <p>
             <input type="submit" value="Save" />
         </p>

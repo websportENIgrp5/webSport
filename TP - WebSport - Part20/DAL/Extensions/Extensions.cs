@@ -30,10 +30,7 @@ namespace DAL.Extensions
                 Title = bo.Title,
                 Description = bo.Description,
                 DateStart = bo.DateStart,
-                Town = bo.Town,
-
-                Organisers = withJoin && bo.Contributors != null ? bo.Contributors.Where(x => x.IsOrganiser).Select(x => x.ToOrganiserBo()).ToList() : null,
-                Competitors = withJoin && bo.Contributors != null ? bo.Contributors.Where(x => x.IsCompetitor).Select(x => x.ToCompetitorBo()).ToList() : null
+                Town = bo.Town
             };
         }
 
@@ -48,6 +45,8 @@ namespace DAL.Extensions
                 Description = model.Description,
                 DateStart = model.DateStart,
                 Town = model.Town,
+                Distance = model.Distance,
+                IdDifficulte = model.IdDifficulte
             };
         }
 
@@ -62,9 +61,75 @@ namespace DAL.Extensions
                 Title = entity.CTitre,
                 Description = entity.CDescription,
                 DateStart = entity.CDateStart,
-                Town = entity.CVille
+                Town = entity.CVille,
+                Distance = entity.Distance,
+                IdDifficulte = entity.IdDifficulte
             };
         }
+
+        #endregion
+
+        #region Difficulte
+
+        public static List<BO.Difficulte> ToBos(this List<EntityFramework.Difficulte> bos, bool withJoin = false)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToBo(withJoin)).ToList()
+                : null;
+        }
+
+        public static BO.Difficulte ToBo(this EntityFramework.Difficulte bo, bool withJoin = false)
+        {
+            if (bo == null) return null;
+
+            return new BO.Difficulte
+            {
+                Id = bo.Id,
+                Libelle = bo.Libelle
+            };
+        }
+
+        public static List<BO.Difficulte> ToDifficulteBos(this List<EntityFramework.Difficulte> bos)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToDifficulteBo()).ToList()
+                : null;
+        }
+
+        public static BO.Difficulte ToDifficulteBo(this EntityFramework.Difficulte bo)
+        {
+            if (bo == null) return null;
+
+            return new BO.Difficulte
+            {
+                Id = bo.Id,
+                Libelle = bo.Libelle
+            };
+        }
+
+        public static BO.Difficulte ToDataEntity(this EntityFramework.Difficulte model)
+        {
+            if (model == null) return null;
+
+            return new BO.Difficulte
+            {
+                Id = model.Id,
+                Libelle = model.Libelle
+           
+            };
+        }
+
+
+        //public static Difficulte ToBo(this GetDifficulteById_Result entity)
+        //{
+        //    if (entity == null) return null;
+
+        //    return new Difficulte
+        //    {
+        //        Id = entity.CId,
+        //        Libelle = entity.CLibelle,
+        //    };
+        //}
 
         #endregion
 
@@ -88,8 +153,7 @@ namespace DAL.Extensions
                 Prenom = bo.Person.Firstname,
                 DateNaissance = bo.Person.BirthDate.HasValue ? bo.Person.BirthDate.Value : DateTime.MinValue,
                 Email = bo.Person.Mail,
-                Phone = bo.Person.Phone,
-                Race = bo.Race.ToBo()
+                Phone = bo.Person.Phone
             };
         }
 

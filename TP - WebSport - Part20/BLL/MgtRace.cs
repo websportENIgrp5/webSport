@@ -138,6 +138,8 @@ namespace BLL
                     raceToUpdate.Description = race.Description;
                     raceToUpdate.DateStart = race.DateStart;
                     raceToUpdate.Town = race.Town;
+                    raceToUpdate.Distance = race.Distance;
+                    raceToUpdate.IdDifficulte = race.IdDifficulte;
                 }
             }
 

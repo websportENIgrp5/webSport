@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "_MenuPartial.cshtml";
+}
+
+@section css {
+    @Styles.Render("~/Content/Account/css")
+}
+
+<div class="profil-img">
+    <img src="~/Images/profil-default.png" />
+</div>
+
+<div class="account-menu">
+    <ul>
+        <li id="Dashboard" class="account-nav-item">@Html.ActionLink("Tableau de bord", "Dashboard", "Account")</li>
+        <li id="MyRaces" class="account-nav-item">@Html.ActionLink("Mes courses", "MyRaces", "Account")</li>
+        <li id="Manage" class="account-nav-item">@Html.ActionLink("Mes informations personnelles", "Manage", "Account")</li>
+    </ul>
+</div>

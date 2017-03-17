@@ -18,7 +18,10 @@ namespace DAL.EntityFramework
         public int IdParticipant { get; set; }
         public int IdCourse { get; set; }
         public int IdSuiviInscription { get; set; }
+        public Nullable<int> NumClassement { get; set; }
+        public string Temps { get; set; }
     
+        public virtual RaceEntity Course { get; set; }
         public virtual ContributorEntity Participant { get; set; }
         public virtual SuiviInscription SuiviInscription { get; set; }
     }

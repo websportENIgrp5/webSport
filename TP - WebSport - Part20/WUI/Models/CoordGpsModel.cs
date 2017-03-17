@@ -20,7 +20,7 @@ namespace WUI.Models
         public double Longitude { get; set; }
 
         /// <summary>
-        /// Gets or sets the altitude in meters relative to sea level.
+        /// Gets or sets the altitude in meters relative to sea Difficulte.
         /// </summary>
         /// <value>The altitude.</value>
         public double Altitude { get; set; }

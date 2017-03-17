@@ -6,7 +6,7 @@ using System.Text;
 namespace BO
 {
     /// <summary>
-    /// Course
+    /// RaceEntity
     /// </summary>
     [Serializable]
     public class Race : IComparable<Race>
@@ -21,6 +21,11 @@ namespace BO
 
         public string Town { get; set; }
 
+        public int Distance { get; set; }
+
+        public int IdDifficulte { get; set; }
+
+        public virtual Difficulte Difficulte { get; set; }
 
         public virtual List<Competitor> Competitors { get; set; }
 

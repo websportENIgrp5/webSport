@@ -62,15 +62,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbHelper\DbFactory.cs" />
+    <Compile Include="DbInscription.cs" />
     <Compile Include="DbRace.cs" />
     <Compile Include="DbHelper\DbTools.cs" />
-    <Compile Include="EntityFramework\CategoriePoiEntity.cs">
+    <Compile Include="EntityFramework\CategorieCourse.cs">
+      <DependentUpon>WebSportModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\CategoriePoi.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\ContributorEntity.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\DifficulteEntity.cs">
+    <Compile Include="EntityFramework\Difficulte.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\GetRaceById_Result.cs">
@@ -78,6 +82,9 @@
     </Compile>
     <Compile Include="EntityFramework\Inscription.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\MaTable.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -94,19 +101,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\ParcoursEntity.cs">
+    <Compile Include="EntityFramework\Parcours.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\PersonEntity.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\PoiEntity.cs">
+    <Compile Include="EntityFramework\Poi.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\RaceEntity.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\SuiviInscription.cs">
+      <DependentUpon>WebSportModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\UserTable.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\WebSportModel.Context.cs">
@@ -164,12 +174,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EntityDeploy Include="EntityFramework\WebSportModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WebSportModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
     <EntityDeploy Include="EntityFramework\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -187,19 +191,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
-    </None>
-    <None Include="EntityFramework\WebSportModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WebSportModel.edmx</DependentUpon>
-      <LastGenOutput>WebSportModel.Context.cs</LastGenOutput>
-    </None>
-    <None Include="EntityFramework\WebSportModel.edmx.diagram">
-      <DependentUpon>WebSportModel.edmx</DependentUpon>
-    </None>
-    <None Include="EntityFramework\WebSportModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WebSportModel.edmx</DependentUpon>
-      <LastGenOutput>WebSportModel.cs</LastGenOutput>
     </None>
     <EntityDeploy Include="EntityFramework\WebsportPsModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

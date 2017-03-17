@@ -7,22 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-
-public partial class RaecEntity
+namespace DAL.EntityFramework
 {
-    public RaecEntity()
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class CategorieCourse
     {
-        this.Contributors = new HashSet<ContributorEntity>();
+        public CategorieCourse()
+        {
+            this.RaceEntity = new HashSet<RaceEntity>();
+        }
+    
+        public int Id { get; set; }
+        public string Libelle { get; set; }
+    
+        public virtual ICollection<RaceEntity> RaceEntity { get; set; }
     }
-
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public System.DateTime DateStart { get; set; }
-    public System.DateTime DateEnd { get; set; }
-    public string Town { get; set; }
-
-    public virtual ICollection<ContributorEntity> Contributors { get; set; }
 }
