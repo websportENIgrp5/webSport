@@ -40,11 +40,12 @@ namespace WUI.Models
         [Required(ErrorMessage = "La {0} est requise")]
         public int Distance { get; set; }
 
-        [Required(ErrorMessage = "Le {0} est requise")]
-        public int IdDifficulte { get; set; }
-
+        [Display(Name = "Niveau")]
+        [Required(ErrorMessage = "La {0} est requise")]
         public DifficulteModel Difficulte { get; set; }
 
+        [Display(Name = "Catégorie")]
+        [Required(ErrorMessage = "La {0} est requise")]
         public CategoryRaceModel CategoryRace { get; set; }
 
         public List<CompetitorModel> Competitors { get; set; }

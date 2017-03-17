@@ -50,6 +50,7 @@ namespace Repository
             }
         }
 
+        private DifficulteRepository _difficulteRepo;
         public DifficulteRepository DifficulteRepo
         {
             get
@@ -67,6 +68,17 @@ namespace Repository
                 if (_poiRepo == null)
                     _poiRepo = new PoiRepository(this.context);
                 return _poiRepo;
+            }
+        }
+
+        private CategoryRaceRepository _categoryRaceRepo;
+        public CategoryRaceRepository CategoryRaceRepo
+        {
+            get
+            {
+                if (_categoryRaceRepo == null)
+                    _categoryRaceRepo = new CategoryRaceRepository(this.context);
+                return _categoryRaceRepo;
             }
         }
 

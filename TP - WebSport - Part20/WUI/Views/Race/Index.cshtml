@@ -59,6 +59,7 @@
         @Html.DisplayNameFor(model => model.Distance)
     </div>
     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Niveau</div>
+    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Catégorie</div>
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">&nbsp;</div>
 </div>
 
@@ -82,6 +83,9 @@
             </div>
             <div class="col-xs-2 col-sm-2 col-lg-2">
                     @Html.DisplayFor(modelItem => item.Difficulte.Libelle)
+            </div>
+            <div class="col-xs-2 col-sm-2 col-lg-2">
+                @Html.DisplayFor(modelItem => item.CategoryRace.Title)
             </div>
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                 @Html.ActionLink("Voir le détail", "Details", new { id = item.Id }) |
