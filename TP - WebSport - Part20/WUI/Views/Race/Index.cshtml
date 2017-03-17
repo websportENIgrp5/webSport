@@ -49,15 +49,22 @@
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
         @Html.DisplayNameFor(model => model.Title)
     </div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        @Html.DisplayNameFor(model => model.Description)
-    </div>
     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
         @Html.DisplayNameFor(model => model.DateStart)
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
         @Html.DisplayNameFor(model => model.Town)
     </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        @Html.DisplayNameFor(model => model.Distance)
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        @Html.DisplayNameFor(model => model.IdDifficulte)
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        @Html.DisplayNameFor(model => model.Description)
+    </div>
+    
     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Nb compet.</div>
     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Nb organ.</div>
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">&nbsp;</div>
@@ -80,6 +87,12 @@
             </div>
             <div class="col-xs-2 col-sm-2 col-lg-2">
                 @Html.DisplayFor(modelItem => item.Town)
+            </div>
+            <div class="col-xs-2 col-sm-2 col-lg-2">
+                @Html.DisplayFor(modelItem => item.Distance)
+            </div>
+            <div class="col-xs-2 col-sm-2 col-lg-2">
+                @Html.DisplayFor(modelItem => item.IdDifficulte)
             </div>
             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                 @Html.DisplayTextFor(modelItem => item.Competitors.Count)

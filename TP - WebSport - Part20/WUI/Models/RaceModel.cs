@@ -26,7 +26,7 @@ namespace WUI.Models
         [Required(ErrorMessage = "La {0} est requise")]
         public string Description { get; set; }
 
-        [Display(Name = "Date de début")]
+        [Display(Name = "Date")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         // Par défaut, une date est requise car le type DateTime n'est pas "Nullable"
         public DateTime DateStart { get; set; }
@@ -34,6 +34,14 @@ namespace WUI.Models
         [Display(Name = "Ville")]
         [Required(ErrorMessage = "La {0} est requise")]
         public string Town { get; set; }
+
+        [Display(Name = "Distance")]
+        [Required(ErrorMessage = "La {0} est requise")]
+        public int Distance { get; set; }
+
+        [Display(Name = "Niveau")]
+        [Required(ErrorMessage = "Le {0} est requise")]
+        public int IdDifficulte { get; set; }
 
 
         public List<CompetitorModel> Competitors { get; set; }
