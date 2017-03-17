@@ -25,5 +25,6 @@ namespace DAL.EntityFramework
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<MaTable> MaTableJeu { get; set; }
     }
 }

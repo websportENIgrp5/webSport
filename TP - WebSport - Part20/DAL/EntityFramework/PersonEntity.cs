@@ -14,11 +14,6 @@ namespace DAL.EntityFramework
     
     public partial class PersonEntity
     {
-        public PersonEntity()
-        {
-            this.Contributors = new HashSet<ContributorEntity>();
-        }
-    
         public int Id { get; set; }
         public string Lastname { get; set; }
         public string Firstname { get; set; }
@@ -26,6 +21,6 @@ namespace DAL.EntityFramework
         public string Phone { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
     
-        public virtual ICollection<ContributorEntity> Contributors { get; set; }
+        public virtual ContributorEntity Contributors { get; set; }
     }
 }
