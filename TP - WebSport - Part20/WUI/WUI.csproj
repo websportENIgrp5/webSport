@@ -15,7 +15,7 @@
     <AssemblyName>WUI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -187,6 +187,7 @@
     <Compile Include="Models\CategoryPoiModel.cs" />
     <Compile Include="Models\CompetitorModel.cs" />
     <Compile Include="Models\CoordGpsModel.cs" />
+    <Compile Include="Models\DifficulteModel.cs" />
     <Compile Include="Models\DisplayConfigurationModel.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\OrganizerModel.cs" />
@@ -199,6 +200,7 @@
     <EmbeddedResource Include="App_Data\Xml\Race.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Content Include="Content\Account.css" />
     <Content Include="Content\Bootstrap\bootstrap-theme.css" />
     <Content Include="Content\Bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\Bootstrap\bootstrap.css" />
@@ -274,6 +276,48 @@
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\Bootstrap\npm.js" />
+    <Content Include="Scripts\Chart\chart.js" />
+    <Content Include="Scripts\Chart\charts\Chart.Bar.js" />
+    <Content Include="Scripts\Chart\charts\Chart.Bubble.js" />
+    <Content Include="Scripts\Chart\charts\Chart.Doughnut.js" />
+    <Content Include="Scripts\Chart\charts\Chart.Line.js" />
+    <Content Include="Scripts\Chart\charts\Chart.PolarArea.js" />
+    <Content Include="Scripts\Chart\charts\Chart.Radar.js" />
+    <Content Include="Scripts\Chart\charts\Chart.Scatter.js" />
+    <Content Include="Scripts\Chart\controllers\controller.bar.js" />
+    <Content Include="Scripts\Chart\controllers\controller.bubble.js" />
+    <Content Include="Scripts\Chart\controllers\controller.doughnut.js" />
+    <Content Include="Scripts\Chart\controllers\controller.line.js" />
+    <Content Include="Scripts\Chart\controllers\controller.polarArea.js" />
+    <Content Include="Scripts\Chart\controllers\controller.radar.js" />
+    <Content Include="Scripts\Chart\core\core.animation.js" />
+    <Content Include="Scripts\Chart\core\core.canvasHelpers.js" />
+    <Content Include="Scripts\Chart\core\core.controller.js" />
+    <Content Include="Scripts\Chart\core\core.datasetController.js" />
+    <Content Include="Scripts\Chart\core\core.element.js" />
+    <Content Include="Scripts\Chart\core\core.helpers.js" />
+    <Content Include="Scripts\Chart\core\core.interaction.js" />
+    <Content Include="Scripts\Chart\core\core.js" />
+    <Content Include="Scripts\Chart\core\core.layoutService.js" />
+    <Content Include="Scripts\Chart\core\core.legend.js" />
+    <Content Include="Scripts\Chart\core\core.plugin.js" />
+    <Content Include="Scripts\Chart\core\core.scale.js" />
+    <Content Include="Scripts\Chart\core\core.scaleService.js" />
+    <Content Include="Scripts\Chart\core\core.ticks.js" />
+    <Content Include="Scripts\Chart\core\core.title.js" />
+    <Content Include="Scripts\Chart\core\core.tooltip.js" />
+    <Content Include="Scripts\Chart\elements\element.arc.js" />
+    <Content Include="Scripts\Chart\elements\element.line.js" />
+    <Content Include="Scripts\Chart\elements\element.point.js" />
+    <Content Include="Scripts\Chart\elements\element.rectangle.js" />
+    <Content Include="Scripts\Chart\platforms\platform.dom.js" />
+    <Content Include="Scripts\Chart\platforms\platform.js" />
+    <Content Include="Scripts\Chart\scales\scale.category.js" />
+    <Content Include="Scripts\Chart\scales\scale.linear.js" />
+    <Content Include="Scripts\Chart\scales\scale.linearbase.js" />
+    <Content Include="Scripts\Chart\scales\scale.logarithmic.js" />
+    <Content Include="Scripts\Chart\scales\scale.radialLinear.js" />
+    <Content Include="Scripts\Chart\scales\scale.time.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="App_Data\Xml\Race.dtd" />
     <EmbeddedResource Include="App_Data\Xml\Race.xsd">
@@ -298,7 +342,8 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="Scripts\Race\Race.js" />
+    <Content Include="Scripts\Chart\Race\Race.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -354,6 +399,12 @@
     <Content Include="Views\DisplayConfiguration\Delete.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Shared\Page404.cshtml" />
+    <Content Include="Views\Account\_MenuPartial.cshtml" />
+    <Content Include="Views\Account\Dashboard.cshtml" />
+    <Content Include="Views\Account\Dashboard\_LastListRacePartial.cshtml" />
+    <Content Include="Views\Account\Dashboard\_StatsPartial.cshtml" />
+    <Content Include="Views\Account\MyRaces.cshtml" />
+    <Content Include="Views\Account\_MyRacesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Autres\" />

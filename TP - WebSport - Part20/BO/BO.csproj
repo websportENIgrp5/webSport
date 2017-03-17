@@ -44,6 +44,7 @@
     <Compile Include="Competitor.cs" />
     <Compile Include="DisplayConfiguration.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Inscription.cs" />
     <Compile Include="Organizer.cs" />
     <Compile Include="Personne.cs" />
     <Compile Include="Poi.cs" />

@@ -79,6 +79,8 @@ namespace WUI.Extensions
                 Description = bo.Description,
                 DateStart = bo.DateStart,
                 Town = bo.Town,
+                Distance = bo.Distance,
+                IdDifficulte = bo.IdDifficulte,
 
                 Organisers = withJoin && bo.Organisers != null ? bo.Organisers.Select(x => x.ToModel()).ToList() : null,
                 Competitors = withJoin && bo.Competitors != null ? bo.Competitors.Select(x => x.ToModel()).ToList() : null,
@@ -97,6 +99,8 @@ namespace WUI.Extensions
                 Description = model.Description,
                 DateStart = model.DateStart,
                 Town = model.Town,
+                Distance = model.Distance,
+                IdDifficulte = model.IdDifficulte
             };
         }
 

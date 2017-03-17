@@ -16,8 +16,8 @@ namespace DAL.EntityFramework
     {
         public RaceEntity()
         {
-            this.Contributors = new HashSet<ContributorEntity>();
-            this.Parcours = new HashSet<ParcoursEntity>();
+            this.Inscription = new HashSet<Inscription>();
+            this.Parcours = new HashSet<Parcours>();
         }
     
         public int Id { get; set; }
@@ -27,9 +27,13 @@ namespace DAL.EntityFramework
         public string Town { get; set; }
         public Nullable<int> IdDifficulte { get; set; }
         public Nullable<int> Distance { get; set; }
+        public Nullable<int> IdCategorieCourse { get; set; }
+        public Nullable<System.TimeSpan> HeureStart { get; set; }
+        public Nullable<System.TimeSpan> HeureEnd { get; set; }
     
-        public virtual ICollection<ContributorEntity> Contributors { get; set; }
-        public virtual DifficulteEntity Difficulte { get; set; }
-        public virtual ICollection<ParcoursEntity> Parcours { get; set; }
+        public virtual CategorieCourse CategorieCourse { get; set; }
+        public virtual Difficulte Difficulte { get; set; }
+        public virtual ICollection<Inscription> Inscription { get; set; }
+        public virtual ICollection<Parcours> Parcours { get; set; }
     }
 }

@@ -1,0 +1,99 @@
+﻿/*
+* Menu
+*--------------------------
+*/
+.profil-img {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+}
+.profil-img img {
+    width: 100%;
+    border-radius: 5px;
+}
+.account-menu {
+    width: 100%;
+}
+.account-menu ul {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+.account-menu li {
+    width: 100%;
+}
+.account-menu li.active {
+    background: #0277bd;
+}
+.account-menu li.active a {
+    color: #fff;
+}
+.account-menu a {
+    width: 100%;
+    padding: 10px;
+    display: block;
+}
+.account-menu a:hover {
+    background: none;
+    text-decoration: none;
+}
+
+/*
+* Dashboard
+*--------------------------
+*/
+.dashboard-races {
+    margin-top: 40px;
+}
+.dashboard-races .link {
+    text-align: right;
+}
+.dashboard-races .link a {
+    font-size: 13px;
+    text-decoration: underline;
+}
+.score {
+    /*width: 175px;*/
+    display: inline-block;
+    margin-right: 80px;
+    padding-left: 50px;
+    position: relative;
+}
+.score .score-img {
+    display: inline-block;
+    width: 45px;
+    float: left;
+    height: 50px;
+    position: absolute;
+    top: 2px;
+    left: 0;
+}
+.score .score-img img {
+    height: 100%;
+    width: auto;
+}
+.score-value {
+    display: block;
+    font-size: 24px;
+    text-align: center;
+}
+.score-label {
+    display: block;
+    text-align: center;
+    font-size: 11.5px;
+    line-height: 1;
+}
+.stats-chart {
+    background: #fff;
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 3px;
+}
+
+@media screen and (max-width: 1000px) {
+  .bloc {
+    display:block;
+    clear:both;
+  }
+}

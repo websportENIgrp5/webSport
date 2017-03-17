@@ -20,12 +20,12 @@ namespace DAL.EntityFramework
         }
     
         public int PersonId { get; set; }
-        public int RaceId { get; set; }
         public bool IsCompetitor { get; set; }
         public bool IsOrganiser { get; set; }
+        public Nullable<int> IdUser { get; set; }
     
-        public virtual RaceEntity Race { get; set; }
         public virtual PersonEntity Person { get; set; }
         public virtual ICollection<Inscription> Inscription { get; set; }
+        public virtual UserTable UserTable { get; set; }
     }
 }

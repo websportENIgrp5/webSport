@@ -5,11 +5,10 @@
 }
 
 body {
-    background-color: #fff;
-    border-top: solid 10px #000;
+    background-color: #0277bd !important;
     color: #333;
     font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-family: Verdana, Helvetica, Sans-Serif !important;
     margin: 0;
     padding: 0;
 }
@@ -25,10 +24,6 @@ a {
     a:link, a:visited,
     a:active, a:hover {
         color: #333;
-    }
-
-    a:hover {
-        background-color: #c7d1d6;
     }
 
 header, footer, hgroup,
@@ -90,6 +85,31 @@ h5, h6 {
         text-decoration: none;
     }
 
+/* buttons
+----------------------------------------------------------*/
+.button {
+    background: #0277bd;
+    border-radius: 3px;
+    padding: 6px 8px;
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    line-height: 1;
+}
+.button:hover {
+    background: #1565c0;
+    transition: background 0.2s;
+}
+.button a {
+    color: #fff;
+    font-size: 12px;
+    padding: 0;
+}
+.button a:hover {
+    background: none;
+    text-decoration: none;
+    color: #fff;
+}
 
 /* main layout
 ----------------------------------------------------------*/
@@ -105,17 +125,48 @@ h5, h6 {
 }
 
     .main-content {
-        background: url("../Images/accent.png") no-repeat;
         padding-left: 10px;
+        padding-right: 10px;
         padding-top: 30px;
     }
 
     .featured + .main-content {
-        background: url("../Images/heroAccent.png") no-repeat;
     }
 
 header .content-wrapper {
     padding-top: 20px; 
+}
+
+.two-columns-left {
+    width: 100%;
+    margin-top: 40px;
+}
+.two-columns-left:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.two-columns-left .column.left {
+    display: inline-block;
+    float: left;
+    width: 24%;
+    padding-right: 4%;
+}
+.two-columns-left .main-container {
+    display: inline-block;
+    width: 76%;
+}
+.two-columns-left .main-container h1 {
+    margin: 0;
+    font-size: 30px;
+    color: #464646;
+}
+.two-columns-left .main-container h2 {
+    color: #78265f;
+    color: #afb42b ;
+    font-size: 15.5px;
+    font-weight: 700;
+    margin-bottom: 15px;
 }
 
 footer {
@@ -124,7 +175,9 @@ footer {
     font-size: .8em;
     height: 100px;
 }
-
+.block {
+    margin-bottom: 30px;
+}
 
 /* site title
 ----------------------------------------------------------*/
@@ -141,7 +194,12 @@ footer {
     outline: none;
     text-decoration: none;
 }
-
+.undefined {
+    font-style: italic;
+    color: #8b8b8b;
+    line-height: 1;
+    font-size: 12px;
+}
 
 /* login
 ----------------------------------------------------------*/
@@ -150,14 +208,15 @@ footer {
     font-size: .85em;
     margin: 0 0 10px;
     text-align: right;
+    color: #fff;
 }
 
     #login a {
-        background-color: #d3dce0;
         margin-left: 10px;
         margin-right: 3px;
         padding: 2px 3px;
         text-decoration: none;
+        color: #fff;
     }
 
     #login a.username {
@@ -180,9 +239,9 @@ footer {
 /* menu
 ----------------------------------------------------------*/
 ul#menu {
-    font-size: 1.3em;
+    font-size: 15px;
     font-weight: 600;
-    margin: 0 0 5px;
+    margin: 20px 0 10px;
     padding: 0;
     text-align: right;
 }
@@ -195,13 +254,15 @@ ul#menu {
 
         ul#menu li a {
             background: none;
-            color: #999;
+            color: #fff;
             text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         ul#menu li a:hover {
-            color: #333;
+            background: #50a1d1;
             text-decoration: none;
+            transition: background 0.1s;
         }
 
 
@@ -534,11 +595,20 @@ table {
     border: 0 none;
 }
 
+thead tr:first-child th:first-child,
+thead tr:first-child th:last-child,
+tbody tr:last-child td:first-child,
+tbody tr:last-child td:last-child {
+    border-radius: 3px;
+}
+
 th {
-    font-size: 1.2em;
-    text-align: left;
-    border: none 0px;
+    font-size: 13px;
+    text-align: center !important;
+    border: none !important;
     padding-left: 0;
+    background: #f9f9f9;
+    vertical-align: middle !important;
 }
 
     th a {
@@ -551,6 +621,7 @@ th {
         font-weight: 600;
         text-decoration: none;
         padding: 0;
+
     }
 
     th a:hover {
@@ -577,15 +648,22 @@ th {
         content: '▼';
     }
 
-td {
+tbody td {
     padding: 0.25em 2em 0.25em 0em;
-    border: 0 none;
+    border-top: none !important;
+    border-bottom: 4px solid #f1f1f1;
+    background: #fff;
+    text-align: center;
+    font-size: 13px;
+    vertical-align: middle !important;
 }
 
 tr.pager td {
     padding: 0 0.25em 0 0;
 }
-
+tfoot td {
+    padding: 2px 0 0 !important;
+}
 
 /********************
 *   Mobile Styles   *

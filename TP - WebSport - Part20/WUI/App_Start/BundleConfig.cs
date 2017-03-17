@@ -64,6 +64,18 @@ namespace WUI
 
             bundles.Add(new StyleBundle("~/Content/Race/css")
                 .Include("~/Content/Race.css"));
+
+
+            bundles.Add(new StyleBundle("~/Content/Account/css")
+                .Include("~/Content/Account.css"));
+
+            // Librairie ChartJs
+            //bundles.Add(new ScriptBundle("~/bundles/chart/js").Include(
+            //    "~/Scripts/Chart/chart.js"
+            //    ));
+
+            bundles.Add(new ScriptBundle("~/bundles/Site/js")
+                .Include("~/Scripts/site.js"));
         }
     }
 }

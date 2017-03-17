@@ -55,6 +55,23 @@
             @Html.ValidationMessageFor(model => model.Town)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Distance)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Distance, new { @class = "form-control", size = "30" })
+            @Html.ValidationMessageFor(model => model.Distance)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdDifficulte)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.IdDifficulte, new { @class = "form-control", size = "30" })
+            @Html.ValidationMessageFor(model => model.IdDifficulte)
+            @Html.DropDownListFor(model => model.IdDifficulte, new SelectList(model.IdDifficulte, "", ""))
+        </div>
+
         <p>
             <input type="submit" value="Créer la course" />
         </p>
