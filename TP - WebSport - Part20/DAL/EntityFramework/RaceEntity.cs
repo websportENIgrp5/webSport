@@ -21,12 +21,12 @@ namespace DAL.EntityFramework
         }
     
         public int Id { get; set; }
-        public string Titre { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
         public System.DateTime DateStart { get; set; }
-        public string Ville { get; set; }
-        public int IdDifficulte { get; set; }
-        public int Distance { get; set; }
+        public string Town { get; set; }
+        public Nullable<int> IdDifficulte { get; set; }
+        public Nullable<int> Distance { get; set; }
         public Nullable<int> IdCategorieCourse { get; set; }
         public Nullable<System.TimeSpan> HeureStart { get; set; }
         public Nullable<System.TimeSpan> HeureEnd { get; set; }

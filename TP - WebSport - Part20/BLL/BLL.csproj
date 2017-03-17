@@ -43,6 +43,7 @@
     <Compile Include="MgtCompetitor.cs" />
     <Compile Include="MgtDifficulte.cs" />
     <Compile Include="MgtDisplayConfiguration.cs" />
+    <Compile Include="MgtInscription.cs" />
     <Compile Include="MgtRace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

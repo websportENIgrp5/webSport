@@ -27,17 +27,10 @@ namespace WUI.Models
         [Required(ErrorMessage = "La {0} est requise")]
         public string Description { get; set; }
 
-        [Display(Name = "Date de début")]
+        [Display(Name = "Date")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
-        [CompareDate("DateEnd", DateBefore = true)]
         // Par défaut, une date est requise car le type DateTime n'est pas "Nullable"
         public DateTime DateStart { get; set; }
-
-        [Display(Name = "Date de fin")]
-        [DataType(DataType.Text)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
-        [CompareDate("DateStart")]
-        public DateTime DateEnd { get; set; }
         
         [Display(Name = "Ville")]
         [Required(ErrorMessage = "La {0} est requise")]

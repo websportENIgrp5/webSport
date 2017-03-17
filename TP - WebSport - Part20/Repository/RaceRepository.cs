@@ -53,10 +53,10 @@ namespace Repository
         public void Update(Race element)
         {
             var raceToUpdate = this.GetByIdPrivate(element.Id);
-            raceToUpdate.Titre = element.Title;
+            raceToUpdate.Title = element.Title;
             raceToUpdate.Description = element.Description;
             raceToUpdate.DateStart = element.DateStart;
-            raceToUpdate.Ville = element.Town;
+            raceToUpdate.Town = element.Town;
             raceToUpdate.Distance = element.Distance;
             raceToUpdate.IdDifficulte = element.IdDifficulte;
             base.Update(raceToUpdate);

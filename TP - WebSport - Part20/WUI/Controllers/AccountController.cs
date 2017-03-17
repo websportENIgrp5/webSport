@@ -10,6 +10,8 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using WUI.Filters;
 using WUI.Models;
+using BLL;
+using WUI.Extensions;
 
 namespace WUI.Controllers
 {
@@ -120,6 +122,34 @@ namespace WUI.Controllers
             }
 
             return RedirectToAction("Manage", new { Message = message });
+        }
+
+        //
+        // GET: /Account/Dashboard
+
+        public ActionResult Dashboard()
+        {
+            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            ViewBag.ReturnUrl = Url.Action("Dashboard");
+            //int id = 0;
+            //var result = MgtInscription.GetInstance().GetRace(id).ToModel();
+            //if (result == null)
+            //{
+            //    return HttpNotFound();
+            //}
+
+            //return View(result);
+            return View();
+        }
+
+        //
+        // GET: /Account/MyRaces
+
+        public ActionResult MyRaces()
+        {
+            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            ViewBag.ReturnUrl = Url.Action("MyRaces");
+            return View();
         }
 
         //

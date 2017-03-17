@@ -15,12 +15,12 @@ namespace DAL.EntityFramework
     public partial class PersonEntity
     {
         public int Id { get; set; }
-        public string Nom { get; set; }
-        public string Prenom { get; set; }
-        public string Email { get; set; }
-        public string Telephone { get; set; }
-        public Nullable<System.DateTime> DateNaissance { get; set; }
+        public string Lastname { get; set; }
+        public string Firstname { get; set; }
+        public string Mail { get; set; }
+        public string Phone { get; set; }
+        public Nullable<System.DateTime> BirthDate { get; set; }
     
-        public virtual ContributorEntity ContributorEntity { get; set; }
+        public virtual ContributorEntity Contributors { get; set; }
     }
 }

@@ -27,14 +27,10 @@ namespace DAL.Extensions
             return new Race
             {
                 Id = bo.Id,
-                Title = bo.Titre,
+                Title = bo.Title,
                 Description = bo.Description,
                 DateStart = bo.DateStart,
-                Town = bo.Ville,
-                Distance = bo.Distance,
-                IdDifficulte = bo.IdDifficulte,
-                
-                Difficulte = withJoin && bo.Difficulte != null ? bo.Difficulte.ToBo() : null
+                Town = bo.Town
             };
         }
 
@@ -45,10 +41,10 @@ namespace DAL.Extensions
             return new RaceEntity
             {
                 Id = model.Id,
-                Titre = model.Title,
+                Title = model.Title,
                 Description = model.Description,
                 DateStart = model.DateStart,
-                Ville = model.Town,
+                Town = model.Town,
                 Distance = model.Distance,
                 IdDifficulte = model.IdDifficulte
             };
@@ -152,12 +148,12 @@ namespace DAL.Extensions
 
             return new Competitor
             {
-                Id = bo.PersonneId,
-                Nom = bo.Personne.Nom,
-                Prenom = bo.Personne.Prenom,
-                DateNaissance = bo.Personne.DateNaissance.HasValue ? bo.Personne.DateNaissance.Value : DateTime.MinValue,
-                Email = bo.Personne.Email,
-                Phone = bo.Personne.Telephone
+                Id = bo.PersonId,
+                Nom = bo.Person.Lastname,
+                Prenom = bo.Person.Firstname,
+                DateNaissance = bo.Person.BirthDate.HasValue ? bo.Person.BirthDate.Value : DateTime.MinValue,
+                Email = bo.Person.Mail,
+                Phone = bo.Person.Phone
             };
         }
 
@@ -178,12 +174,12 @@ namespace DAL.Extensions
 
             return new Organizer
             {
-                Id = bo.PersonneId,
-                Nom = bo.Personne.Nom,
-                Prenom = bo.Personne.Prenom,
-                DateNaissance = bo.Personne.DateNaissance.HasValue ? bo.Personne.DateNaissance.Value : DateTime.MinValue,
-                Email = bo.Personne.Email,
-                Phone = bo.Personne.Telephone
+                Id = bo.PersonId,
+                Nom = bo.Person.Lastname,
+                Prenom = bo.Person.Firstname,
+                DateNaissance = bo.Person.BirthDate.HasValue ? bo.Person.BirthDate.Value : DateTime.MinValue,
+                Email = bo.Person.Mail,
+                Phone = bo.Person.Phone
             };
         }
 

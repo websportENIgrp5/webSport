@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "_MyRacesPartial";
+}
+
+<table class="table races">
+    <thead>
+        <tr>
+            <th>Intitulé</th>
+            <th>Date</th>
+            <th>Ville</th>
+            <th>Distance</th>
+            <th>Temps personnel</th>
+            <th>Classement</th>
+            <th>Etat</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @* --- Exemple ligne course non effectuée ---*@
+        <tr>
+            @* TODO: Intitulé *@
+            <td><span>Les petites foulées</span></td>
+
+            @* TODO: Date *@
+            <td><span>18/03/2017</span></td>
+
+            @* TODO: Ville *@
+            <td><span>Nantes</span></td>
+
+            @* TODO: Distance *@
+            <td><span>10 km</span></td>
+
+            @* TODO: Temps personnel *@
+            <td><span class="undefined">Non déterminé</span></td>
+
+            @* TODO: Classement *@
+            <td><span class="undefined">Non déterminé</span></td>
+
+            @* TODO: Etat *@
+            <td><span>En cours de validation</span></td>
+
+            @* Bouton désinscription *@
+            <td>
+                @* TODO: Gérer la désinscription *@
+                <span class="button">
+                    @Html.ActionLink("Se désinscrire", "")
+                </span>
+            </td>
+        </tr>
+
+        @* --- Exemple ligne course effectuée ---*@
+        <tr>
+            @* Intitulé *@
+            <td><span>La campagne à vélo</span></td>
+
+            @* Date *@
+            <td><span>25/03/2017</span></td>
+
+            @* Ville *@
+            <td><span>Angers</span></td>
+
+            @* Distance *@
+            <td><span>20 km</span></td>
+
+            @* Temps personnel *@
+            <td><span>1:20:58 H</span></td>
+
+            @* Classement *@
+            <td><span>36 ème</span></td>
+
+            @* Etat *@
+            <td><span>Course effectuée</span></td>
+
+            @* Bouton désinscription *@
+            <td>&nbsp;</td>
+        </tr>
+    </tbody>
+</table>

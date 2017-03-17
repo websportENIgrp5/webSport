@@ -36,7 +36,6 @@ namespace DAL
         private const string NODE_TITLE = "title";
         private const string NODE_DESCRIPTION = "description";
         private const string NODE_DATESTART = "datestart";
-        private const string NODE_DATEEND = "dateend";
         private const string NODE_TOWN = "ville";
 
         private const string NODE_NOM = "nom";
@@ -171,7 +170,7 @@ namespace DAL
                 // Création de l'élément race (balise <race>)
                 XmlElement elementRace = documentXml.CreateElement(NODE_RACE);
 
-                // Création des propriétés de la race : Titre, Description, DateStart, DateEnd, Town
+                // Création des propriétés de la race : Titre, Description, DateStart, Town
                 // On met chaque élément dans l'élément <race>
                 XmlElement elementIdRace = documentXml.CreateElement(NODE_ID);
                 elementIdRace.InnerText = race.Id.ToString();

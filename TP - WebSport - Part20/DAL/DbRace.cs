@@ -62,7 +62,7 @@ namespace DAL
                     Titre = race.Title,
                     Description = race.Description,
                     DateStart = race.DateStart,
-                    Ville = race.Town,
+                    Town = race.Town,
                     Distance = race.Distance,
                     IdDifficulte = race.IdDifficulte
                 };
@@ -104,7 +104,6 @@ namespace DAL
             //    instance.CreerParametre(commandAdd, "@title", race.Title);
             //    instance.CreerParametre(commandAdd, "@description", race.Description);
             //    instance.CreerParametre(commandAdd, "@datestart", race.DateStart);
-            //    instance.CreerParametre(commandAdd, "@dateend", race.DateEnd);
             //    instance.CreerParametre(commandAdd, "@ville", race.Town);
             //    commandAdd.Transaction = transac;
             //    commandAdd.ExecuteNonQuery();
@@ -177,7 +176,7 @@ namespace DAL
                     initialRace.Titre = race.Title;
                     initialRace.Description = race.Description;
                     initialRace.DateStart = race.DateStart;
-                    initialRace.Ville = race.Town;
+                    initialRace.Town = race.Town;
                     initialRace.Distance = race.Distance;
                     initialRace.IdDifficulte = race.IdDifficulte;
                 }
