@@ -12,20 +12,16 @@ namespace DAL.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class ContributorEntity
+    public partial class CategoriePoi
     {
-        public ContributorEntity()
+        public CategoriePoi()
         {
-            this.Inscription = new HashSet<Inscription>();
+            this.Poi = new HashSet<Poi>();
         }
     
-        public int PersonId { get; set; }
-        public bool IsCompetitor { get; set; }
-        public bool IsOrganiser { get; set; }
-        public Nullable<int> IdUser { get; set; }
+        public int Id { get; set; }
+        public string Libelle { get; set; }
     
-        public virtual PersonEntity Person { get; set; }
-        public virtual ICollection<Inscription> Inscription { get; set; }
-        public virtual UserTable UserTable { get; set; }
+        public virtual ICollection<Poi> Poi { get; set; }
     }
 }
