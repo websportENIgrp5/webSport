@@ -14,38 +14,24 @@
     <legend>RaceModel</legend>
 
     <div class="display-label">
-        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Catégorie</div>
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CategoryRace.Libelle)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Title)
+        @Html.DisplayNameFor(model => model.Title)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Title)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Description)
+        @Html.DisplayNameFor(model => model.Description)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Description)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.DateStart)
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Catégorie</div>
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.DateStart)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Town)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Town)
+        @Html.DisplayFor(model => model.CategoryRace.Title)
     </div>
 
     <div class="display-label">
@@ -61,6 +47,21 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Difficulte.Libelle)
     </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Town)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Town)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.DateStart)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateStart)
+    </div>
+
 </fieldset>
 <p>
     @Html.ActionLink("Inscription", "Inscrire", new { id = Model.Id })

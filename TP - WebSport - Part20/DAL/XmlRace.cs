@@ -188,26 +188,26 @@ namespace DAL
                 elementTown.InnerText = race.Town;
                 elementRace.AppendChild(elementTown);
 
-                if (race.Competitors != null)
-                {
-                    // Création de l'élément competitor (qui est une personne)
-                    List<Personne> listPerson = race.Competitors.Select(x => (Personne)x).ToList();
-                    XmlElement elementRootCompet = PreparePersonXml(listPerson, NODE_COMPETITOR);
+                //if (race.Competitors != null)
+                //{
+                //    // Création de l'élément competitor (qui est une personne)
+                //    List<Personne> listPerson = race.Competitors.Select(x => (Personne)x).ToList();
+                //    XmlElement elementRootCompet = PreparePersonXml(listPerson, NODE_COMPETITOR);
 
-                    // On met l'élément <competitors> dans l'élément <race>
-                    elementRace.AppendChild(elementRootCompet);
-                }
+                //    // On met l'élément <competitors> dans l'élément <race>
+                //    elementRace.AppendChild(elementRootCompet);
+                //}
 
-                // Création des Organisers
-                if (race.Organisers != null)
-                {
-                    // Création de l'élément Organisateur (qui est une personne)
-                    var listPerson = race.Organisers.Select(x => (Personne)x).ToList();
-                    XmlElement elementRootOrgan = PreparePersonXml(listPerson, NODE_ORGANISER);
+                //// Création des Organisers
+                //if (race.Organisers != null)
+                //{
+                //    // Création de l'élément Organisateur (qui est une personne)
+                //    var listPerson = race.Organisers.Select(x => (Personne)x).ToList();
+                //    XmlElement elementRootOrgan = PreparePersonXml(listPerson, NODE_ORGANISER);
 
-                    // On met l'élément <organisers> dans l'élément <race>
-                    elementRace.AppendChild(elementRootOrgan);
-                }
+                //    // On met l'élément <organisers> dans l'élément <race>
+                //    elementRace.AppendChild(elementRootOrgan);
+                //}
 
                 // On ajoute l'élément <race> dans l'élément racine
                 elementRoot.AppendChild(elementRace);
@@ -240,8 +240,8 @@ namespace DAL
                     Description = elementRace[NODE_DESCRIPTION].InnerText,
                     DateStart = DateTime.Parse(elementRace[NODE_DATESTART].InnerText ?? string.Empty),
                     Town = elementRace[NODE_TOWN].InnerText,
-                    Competitors = new List<Competitor>(),
-                    Organisers = new List<Organizer>()
+                    //Competitors = new List<Competitor>(),
+                    //Organisers = new List<Organizer>()
                 };
 
                 // Récupération de chaque élément <competitor> si la balise <competitors> existe
@@ -259,7 +259,7 @@ namespace DAL
                             Phone = elementCompet[NODE_PHONE].InnerText,
                             DateNaissance = DateTime.Parse(elementCompet[NODE_DATENAISSANCE].InnerText)
                         };
-                        race.Competitors.Add(comp);
+                        //race.Competitors.Add(comp);
                     }
                 }
 
@@ -278,7 +278,7 @@ namespace DAL
                             Phone = elementOrgan[NODE_PHONE].InnerText,
                             DateNaissance = DateTime.Parse(elementOrgan[NODE_DATENAISSANCE].InnerText)
                         };
-                        race.Organisers.Add(org);
+                        //race.Organisers.Add(org);
                     }
                 }
 
@@ -346,49 +346,49 @@ namespace DAL
                     DateStart = new DateTime(2017, 4, 27, 21, 0, 0),
                     Town = "Nantes",
 
-                    Competitors = new List<Competitor>
-                    {
-                        new Competitor
-                        {
-                            Id = 1,
-                            Nom = "Dupond",
-                            Prenom = "Joel",
-                            DateNaissance = new DateTime(1990, 11, 12),
-                            Email = "dupond.joel@gmail.com",
-                            Phone = "0678790964"
-                        },
-                        new Competitor
-                        {
-                            Id = 2,
-                            Nom = "Hateur",
-                            Prenom = "Nordine",
-                            DateNaissance = new DateTime(1960, 8, 7),
-                            Email = "nordinehateur@gmail.com",
-                            Phone = "06787965464"
-                        },
-                        new Competitor
-                        {
-                            Id = 3,
-                            Nom = "Aubert",
-                            Prenom = "Jean-Louis",
-                            DateNaissance = new DateTime(1990, 11, 12),
-                            Email = "jlaubert@gmail.com",
-                            Phone = "06787948657"
-                        }
-                    },
-                    Organisers = new List<Organizer>
-                    {
-                        new Organizer
-                        {
-                            Id = 4,
-                            Nom = "Dupont",
-                            Prenom = "toto",
-                            DateNaissance = new DateTime(1957, 9, 25),
-                            Email = "toto@gmail.com",
-                            Phone = "0678154578"
-                        }
-                    },
-                    Pois = null
+                    //Competitors = new List<Competitor>
+                    //{
+                    //    new Competitor
+                    //    {
+                    //        Id = 1,
+                    //        Nom = "Dupond",
+                    //        Prenom = "Joel",
+                    //        DateNaissance = new DateTime(1990, 11, 12),
+                    //        Email = "dupond.joel@gmail.com",
+                    //        Phone = "0678790964"
+                    //    },
+                    //    new Competitor
+                    //    {
+                    //        Id = 2,
+                    //        Nom = "Hateur",
+                    //        Prenom = "Nordine",
+                    //        DateNaissance = new DateTime(1960, 8, 7),
+                    //        Email = "nordinehateur@gmail.com",
+                    //        Phone = "06787965464"
+                    //    },
+                    //    new Competitor
+                    //    {
+                    //        Id = 3,
+                    //        Nom = "Aubert",
+                    //        Prenom = "Jean-Louis",
+                    //        DateNaissance = new DateTime(1990, 11, 12),
+                    //        Email = "jlaubert@gmail.com",
+                    //        Phone = "06787948657"
+                    //    }
+                    //},
+                    //Organisers = new List<Organizer>
+                    //{
+                    //    new Organizer
+                    //    {
+                    //        Id = 4,
+                    //        Nom = "Dupont",
+                    //        Prenom = "toto",
+                    //        DateNaissance = new DateTime(1957, 9, 25),
+                    //        Email = "toto@gmail.com",
+                    //        Phone = "0678154578"
+                    //    }
+                    //},
+                    //Pois = null
                 },
                 new Race
                 {
@@ -398,40 +398,40 @@ namespace DAL
                     DateStart = new DateTime(2017, 4, 28, 9, 0, 0),
                     Town = "Paris",
 
-                    Competitors = new List<Competitor>
-                    {
-                        new Competitor
-                        {
-                            Id = 6,
-                            Nom = "Martin",
-                            Prenom = "Bernard",
-                            DateNaissance = new DateTime(1990, 11, 12),
-                            Email = "bebermart1@gmail.com",
-                            Phone = "0656320964"
-                        },
-                        new Competitor
-                        {
-                            Id = 7,
-                            Nom = "Rémy",
-                            Prenom = "Marie-Claire",
-                            DateNaissance = new DateTime(1973, 6, 4),
-                            Email = "mcremy@gmail.com",
-                            Phone = "0645102030"
-                        }
-                    },
-                    Organisers = new List<Organizer>
-                    {
-                        new Organizer
-                        {
-                            Id = 8,
-                            Nom = "Rolland",
-                            Prenom = "Johanna",
-                            DateNaissance = new DateTime(1987, 1, 3),
-                            Email = "johannarlnd@gmail.com",
-                            Phone = "0678541020"
-                        }
-                    },
-                    Pois = null
+                    //Competitors = new List<Competitor>
+                    //{
+                    //    new Competitor
+                    //    {
+                    //        Id = 6,
+                    //        Nom = "Martin",
+                    //        Prenom = "Bernard",
+                    //        DateNaissance = new DateTime(1990, 11, 12),
+                    //        Email = "bebermart1@gmail.com",
+                    //        Phone = "0656320964"
+                    //    },
+                    //    new Competitor
+                    //    {
+                    //        Id = 7,
+                    //        Nom = "Rémy",
+                    //        Prenom = "Marie-Claire",
+                    //        DateNaissance = new DateTime(1973, 6, 4),
+                    //        Email = "mcremy@gmail.com",
+                    //        Phone = "0645102030"
+                    //    }
+                    //},
+                    //Organisers = new List<Organizer>
+                    //{
+                    //    new Organizer
+                    //    {
+                    //        Id = 8,
+                    //        Nom = "Rolland",
+                    //        Prenom = "Johanna",
+                    //        DateNaissance = new DateTime(1987, 1, 3),
+                    //        Email = "johannarlnd@gmail.com",
+                    //        Phone = "0678541020"
+                    //    }
+                    //},
+                    //Pois = null
                 },
                 new Race
                 {
@@ -441,20 +441,20 @@ namespace DAL
                     DateStart = new DateTime(2017, 4, 28, 14, 0, 0),
                     Town = "Amiens",
 
-                    Competitors = null,
-                    Organisers = new List<Organizer>
-                    {
-                        new Organizer
-                        {
-                            Id = 6,
-                            Nom = "Lievremont",
-                            Prenom = "Marc",
-                            DateNaissance = new DateTime(1975, 12, 12),
-                            Email = "marcolievremont@gmail.com",
-                            Phone = "0678548596"
-                        }
-                    },
-                    Pois = null
+                    //Competitors = null,
+                    //Organisers = new List<Organizer>
+                    //{
+                    //    new Organizer
+                    //    {
+                    //        Id = 6,
+                    //        Nom = "Lievremont",
+                    //        Prenom = "Marc",
+                    //        DateNaissance = new DateTime(1975, 12, 12),
+                    //        Email = "marcolievremont@gmail.com",
+                    //        Phone = "0678548596"
+                    //    }
+                    //},
+                    //Pois = null
                 },
             };
 

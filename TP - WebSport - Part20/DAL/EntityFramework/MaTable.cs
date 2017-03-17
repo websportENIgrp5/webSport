@@ -7,19 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAL.EntityFramework
+using System;
+using System.Collections.Generic;
+
+public partial class MaTable
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class Parcours
-    {
-        public int Id { get; set; }
-        public int IdCourse{ get; set; }
-        public int IdPoi { get; set; }
-        public Nullable<int> NumOrdrePoi { get; set; }
-    
-        public virtual RaceEntity Course { get; set; }
-        public virtual Poi Poi { get; set; }
-    }
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string Prenom { get; set; }
 }

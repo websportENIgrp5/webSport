@@ -15,6 +15,6 @@ namespace WUI.Models
     {
         public string Title { get; set; }
 
-        public CategoryModel Category { get; set; }
+        public CategoryRaceModel Category { get; set; }
     }
 }

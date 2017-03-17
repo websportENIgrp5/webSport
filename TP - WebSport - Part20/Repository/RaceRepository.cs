@@ -59,6 +59,7 @@ namespace Repository
             raceToUpdate.Town = element.Town;
             raceToUpdate.Distance = element.Distance;
             raceToUpdate.IdDifficulte = element.IdDifficulte;
+            raceToUpdate.IdCategorieCourse = element.IdCategoryRace;
             base.Update(raceToUpdate);
         }
 

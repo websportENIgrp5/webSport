@@ -9,23 +9,34 @@ namespace WUI.Extensions
 {
     public static class Extensions
     {
-        #region Category
+        #region CategoryRace
 
-        public static List<CategoryModel> ToModels(this List<CategoryRace> bos)
+        public static List<CategoryRaceModel> ToModels(this List<CategoryRace> bos)
         {
             return bos != null
                 ? bos.Where(x => x != null).Select(x => x.ToModel()).ToList()
                 : null;
         }
 
-        public static CategoryModel ToModel(this CategoryRace bo)
+        public static CategoryRaceModel ToModel(this CategoryRace bo)
         {
             if (bo == null) return null;
 
-            return new CategoryModel
+            return new CategoryRaceModel
             {
                 Id = bo.Id,
                 Title = bo.Title
+            };
+        }
+
+        public static CategoryRace ToBo(this CategoryRaceModel model)
+        {
+            if (model == null) return null;
+
+            return new CategoryRace
+            {
+                Id = model.Id,
+                Title = model.Title
             };
         }
 
@@ -111,12 +122,9 @@ namespace WUI.Extensions
                 DateStart = bo.DateStart,
                 Town = bo.Town,
                 Distance = bo.Distance,
-                IdDifficulte = bo.IdDifficulte,
 
                 Difficulte = withJoin && bo.Difficulte != null ? bo.Difficulte.ToModel() : null,
-                Organisers = withJoin && bo.Organisers != null ? bo.Organisers.Select(x => x.ToModel()).ToList() : null,
-                Competitors = withJoin && bo.Competitors != null ? bo.Competitors.Select(x => x.ToModel()).ToList() : null,
-                //Pois = bo.Pois.Select(x => x.ToModel()).ToList(),
+                CategoryRace = withJoin && bo.CategoryRace != null ? bo.CategoryRace.ToModel() : null
             };
         }
 
@@ -132,7 +140,9 @@ namespace WUI.Extensions
                 DateStart = model.DateStart,
                 Town = model.Town,
                 Distance = model.Distance,
-                IdDifficulte = model.IdDifficulte
+
+                Difficulte = model.Difficulte.ToBo(),
+                CategoryRace = model.CategoryRace.ToBo()
             };
         }
 

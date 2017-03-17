@@ -58,6 +58,17 @@ namespace Repository
             }
         }
 
+        private CategoryRaceRepository _categoryRaceRepo;
+        public CategoryRaceRepository CategoryRaceRepo
+        {
+            get
+            {
+                if (_categoryRaceRepo == null)
+                    _categoryRaceRepo = new CategoryRaceRepository(this.context);
+                return _categoryRaceRepo;
+            }
+        }
+
         // Etc... on liste les repositories
 
         #endregion

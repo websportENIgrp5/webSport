@@ -30,7 +30,12 @@ namespace DAL.Extensions
                 Title = bo.Title,
                 Description = bo.Description,
                 DateStart = bo.DateStart,
-                Town = bo.Town
+                Town = bo.Town,
+                Distance = bo.Distance,
+                IdDifficulte = bo.IdDifficulte,
+
+                Difficulte = bo.Difficulte.ToBo(),
+                
             };
         }
 
@@ -46,7 +51,9 @@ namespace DAL.Extensions
                 DateStart = model.DateStart,
                 Town = model.Town,
                 Distance = model.Distance,
-                IdDifficulte = model.IdDifficulte
+                IdDifficulte = model.IdDifficulte,
+
+                Difficulte = model.ToDataEntity().Difficulte
             };
         }
 
@@ -130,6 +137,58 @@ namespace DAL.Extensions
         //        Libelle = entity.CLibelle,
         //    };
         //}
+
+        #endregion
+
+        #region CategoryRace
+
+        public static List<CategoryRace> ToBos(this List<CategorieCourse> bos, bool withJoin = false)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToBo(withJoin)).ToList()
+                : null;
+        }
+
+        public static CategoryRace ToBo(this CategorieCourse bo, bool withJoin = false)
+        {
+            if (bo == null) return null;
+
+            return new CategoryRace
+            {
+                Id = bo.Id,
+                Title = bo.Libelle
+            };
+        }
+
+        public static List<CategoryRace> ToCategoryRaceBos(this List<CategoryRace> bos)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToCategoryRaceBo()).ToList()
+                : null;
+        }
+
+        public static CategoryRace ToCategoryRaceBo(this CategoryRace bo)
+        {
+            if (bo == null) return null;
+
+            return new CategoryRace
+            {
+                Id = bo.Id,
+                Title = bo.Title
+            };
+        }
+
+        public static CategorieCourse ToDataEntity(this CategoryRace model)
+        {
+            if (model == null) return null;
+
+            return new CategorieCourse
+            {
+                Id = model.Id,
+                Libelle = model.Title
+
+            };
+        }
 
         #endregion
 

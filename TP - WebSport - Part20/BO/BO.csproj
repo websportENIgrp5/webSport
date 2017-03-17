@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Category.cs" />
+    <Compile Include="CategoryRace.cs" />
     <Compile Include="Competitor.cs" />
     <Compile Include="Difficulte.cs" />
     <Compile Include="DisplayConfiguration.cs" />

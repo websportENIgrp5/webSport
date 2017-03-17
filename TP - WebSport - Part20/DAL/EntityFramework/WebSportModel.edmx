@@ -59,11 +59,11 @@
             <PropertyRef Name="IdPoi" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdRaceEntity" Type="int" Nullable="false" />
+          <Property Name="IdCourse" Type="int" Nullable="false" />
           <Property Name="IdPoi" Type="int" Nullable="false" />
           <Property Name="NumOrdrePoi" Type="int" />
         </EntityType>
-        <EntityType Name="ContributorEntity">
+        <EntityType Name="Participant">
           <Key>
             <PropertyRef Name="PersonneId" />
           </Key>
@@ -132,12 +132,12 @@
         </Association>
         <Association Name="FK_RaceEntity_Difficulte">
           <End Role="Difficulte" Type="Self.Difficulte" Multiplicity="0..1" />
-          <End Role="RaceEntity" Type="Self.RaceEntity" Multiplicity="*" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Difficulte">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="RaceEntity">
+            <Dependent Role="Course">
               <PropertyRef Name="IdDifficulte" />
             </Dependent>
           </ReferentialConstraint>
@@ -246,7 +246,7 @@
             <End Role="CategorieCourse" EntitySet="CategorieCourse" />
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>
-          <AssociationSet Name="FK_Course_Difficulte" Association="Self.FK_Course_Difficulte">
+          <AssociationSet Name="FK_RaceEntity_Difficulte" Association="Self.FK_RaceEntity_Difficulte">
             <End Role="Difficulte" EntitySet="Difficulte" />
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>
