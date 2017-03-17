@@ -21,6 +21,7 @@ function initMap() {
 }
 
 $(function () {
+    blouge;
     var reponseServer;
     var xmlhttp = new XMLHttpRequest();
 
