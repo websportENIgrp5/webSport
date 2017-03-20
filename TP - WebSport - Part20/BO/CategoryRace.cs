@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    public class Category
+    public class CategoryRace
     {
         public int Id { get; set; }
 
@@ -24,11 +24,11 @@ namespace BO
         }
 
 
-        public Category()
+        public CategoryRace()
         {
         }
 
-        public Category(string title)
+        public CategoryRace(string title)
         {
             Title = title;
         }
@@ -36,10 +36,10 @@ namespace BO
 
         public override bool Equals(object obj)
         {
-            if (obj.GetType() == typeof(Category))
+            if (obj.GetType() == typeof(CategoryRace))
             {
-                return Id == ((Category)obj).Id
-                       && Title == ((Category)obj).Title;
+                return Id == ((CategoryRace)obj).Id
+                       && Title == ((CategoryRace)obj).Title;
             }
             else
             {

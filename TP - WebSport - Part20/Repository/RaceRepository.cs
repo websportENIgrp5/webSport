@@ -78,6 +78,10 @@ namespace Repository
             return Task.Run(() => base.GetAll().AsParallel().ToList().ToBos());
         }
 
+        public ICollection<Parcours> GetParcours(int idCourse)
+        {
+            return base.Where(course => course.Id == idCourse).Single().Parcours;
+        }
         #endregion
     }
 }

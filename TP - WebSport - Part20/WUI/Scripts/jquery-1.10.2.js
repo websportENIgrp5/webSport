@@ -2671,7 +2671,7 @@ function matcherFromTokens( tokens ) {
 		implicitRelative = leadingRelative || Expr.relative[" "],
 		i = leadingRelative ? 1 : 0,
 
-		// The foundational matcher ensures that elements are reachable from top-level context(s)
+		// The foundational matcher ensures that elements are reachable from top-Difficulte context(s)
 		matchContext = addCombinator( function( elem ) {
 			return elem === checkContext;
 		}, implicitRelative, true ),
@@ -3542,7 +3542,7 @@ jQuery.support = (function( support ) {
 
 		if ( typeof div.style.zoom !== core_strundefined ) {
 			// Support: IE<8
-			// Check if natively block-level elements act like inline-block
+			// Check if natively block-Difficulte elements act like inline-block
 			// elements when setting their display to 'inline' and giving
 			// them layout
 			div.innerHTML = "";
@@ -5406,7 +5406,7 @@ jQuery.Event = function( src, props ) {
 };
 
 // jQuery.Event is based on DOM3 Events as specified by the ECMAScript Language Binding
-// http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
+// http://www.w3.org/TR/2003/WD-DOM-Difficulte-3-Events-20030331/ecma-script-binding.html
 jQuery.Event.prototype = {
 	isDefaultPrevented: returnFalse,
 	isPropagationStopped: returnFalse,
@@ -6623,7 +6623,7 @@ jQuery.extend({
 						tmp.removeChild( tmp.firstChild );
 					}
 
-					// Remember the top-level container for proper cleanup
+					// Remember the top-Difficulte container for proper cleanup
 					tmp = safe.lastChild;
 				}
 			}
@@ -7361,7 +7361,7 @@ if ( !jQuery.support.opacity ) {
 				filter = currentStyle && currentStyle.filter || style.filter || "";
 
 			// IE has trouble with opacity if it does not have layout
-			// Force it by setting the zoom level
+			// Force it by setting the zoom Difficulte
 			style.zoom = 1;
 
 			// if setting opacity to 1, and no other filters exist - attempt to remove filter attribute #6652
@@ -9122,8 +9122,8 @@ function defaultPrefilter( elem, props, opts ) {
 		if ( jQuery.css( elem, "display" ) === "inline" &&
 				jQuery.css( elem, "float" ) === "none" ) {
 
-			// inline-level elements accept inline-block;
-			// block-level elements need to be inline with layout
+			// inline-Difficulte elements accept inline-block;
+			// block-Difficulte elements need to be inline with layout
 			if ( !jQuery.support.inlineBlockNeedsLayout || css_defaultDisplay( elem.nodeName ) === "inline" ) {
 				style.display = "inline-block";
 

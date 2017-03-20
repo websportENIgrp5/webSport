@@ -11,14 +11,14 @@ namespace WUI.Extensions
     {
         #region Category
 
-        public static List<CategoryModel> ToModels(this List<Category> bos)
+        public static List<CategoryModel> ToModels(this List<CategoryRace> bos)
         {
             return bos != null
                 ? bos.Where(x => x != null).Select(x => x.ToModel()).ToList()
                 : null;
         }
 
-        public static CategoryModel ToModel(this Category bo)
+        public static CategoryModel ToModel(this CategoryRace bo)
         {
             if (bo == null) return null;
 
@@ -59,6 +59,37 @@ namespace WUI.Extensions
 
         #endregion
 
+        #region Difficulte
+        public static List<DifficulteModel> ToModels(this List<Difficulte> bos)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToModel()).ToList()
+                : null;
+        }
+
+        public static DifficulteModel ToModel(this Difficulte bo)
+        {
+            if (bo == null) return null;
+
+            return new DifficulteModel
+            {
+                Id = bo.Id,
+                Libelle = bo.Libelle
+            };
+        }
+
+        public static Difficulte ToBo(this DifficulteModel model)
+        {
+            if (model == null) return null;
+
+            return new Difficulte
+            {
+                Id = model.Id,
+                Libelle = model.Libelle
+            };
+        }
+        #endregion
+
         #region Race
 
         public static List<RaceModel> ToModels(this List<Race> bos, bool withJoin = false)
@@ -82,6 +113,7 @@ namespace WUI.Extensions
                 Distance = bo.Distance,
                 IdDifficulte = bo.IdDifficulte,
 
+                Difficulte = withJoin && bo.Difficulte != null ? bo.Difficulte.ToModel() : null,
                 Organisers = withJoin && bo.Organisers != null ? bo.Organisers.Select(x => x.ToModel()).ToList() : null,
                 Competitors = withJoin && bo.Competitors != null ? bo.Competitors.Select(x => x.ToModel()).ToList() : null,
                 //Pois = bo.Pois.Select(x => x.ToModel()).ToList(),
@@ -134,7 +166,7 @@ namespace WUI.Extensions
 
         #endregion
 
-
+        #region Personne
         public static PersonneModel ToModel(this Personne bo)
         {
             if (bo == null) return null;
@@ -151,7 +183,9 @@ namespace WUI.Extensions
                 //DisplayConfigurations = bo.DisplayConfigurations.Select(x => x.ToModel()).ToList()
             };
         }
-
+        #endregion
+       
+        #region Organisateur
         public static OrganizerModel ToModel(this Organizer bo)
         {
             if (bo == null) return null;
@@ -167,7 +201,14 @@ namespace WUI.Extensions
                 DisplayConfigurations = bo.DisplayConfigurations.Select(x => x.ToModel()).ToList()
             };
         }
+        #endregion
 
+        #region Poi
+        /// <summary>
+        /// Permet de convertir un Bo Poi en Poi Model
+        /// </summary>
+        /// <param name="bo"></param>
+        /// <returns></returns>
         public static PoiModel ToModel(this Poi bo)
         {
             if (bo == null) return null;
@@ -175,21 +216,28 @@ namespace WUI.Extensions
             return new PoiModel
             {
                 Id = bo.Id,
-                GpsCoordinates = new CoordGpsModel
-                {
-                    Accuracy = bo.Accuracy,
-                    Altitude = bo.Altitude,
-                    AltitudeAccuracy = bo.AltitudeAccuracy,
-                    Latitude = bo.Latitude,
-                    Longitude = bo.Longitude
-                },
-                Category = bo.Category.ToModel(),
-                Heading = bo.Heading,
-                Speed = bo.Speed,
-                Timestamp = bo.Timestamp,
-                Title = bo.Title
+                Latitude = bo.Latitude,
+                Longitude = bo.Longitude,
+                Category = bo.idCategory,
+
             };
         }
+        
+
+        public static Poi toBo(this PoiModel model)
+        {
+            if (model == null) return null;
+
+            return new Poi()
+            {
+                Id = model.Id,
+                Latitude = model.Latitude,
+                Longitude = model.Longitude,
+                idCategory = model.Category,
+            };
+        }
+        #endregion
+
 
         public static UnitDistanceModel ToModel(this UnitDistance bo)
         {

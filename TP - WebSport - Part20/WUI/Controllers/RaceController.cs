@@ -34,6 +34,9 @@ namespace WUI.Controllers
         {
             List<BO.Race> result;
 
+            //var service = new MgtRace(DifficulteRace);
+            
+
             switch (sortType)
             {
                 case SortType.BY_TITLE:
@@ -120,6 +123,7 @@ namespace WUI.Controllers
         // si le token issu du cookie d'authentification a été bien été défini dans
         // la requête HTTP POST pour l'envoi du formulaire
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="organizator,administrator")]
         public ActionResult Create(RaceModel race)
         {
             try
@@ -219,6 +223,19 @@ namespace WUI.Controllers
             {
                 return View();
             }
+        }
+
+        /// <summary>
+        /// Methode appeler par ajax afin de recupéré les pois de la course
+        /// </summary>
+        /// <param name="idCourse"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult GetParcoursById(int idCourse)
+        {
+            MgtPoi pois = new MgtPoi();
+            return Json(pois.Convert(idCourse), JsonRequestBehavior.AllowGet);
         }
     }
 }

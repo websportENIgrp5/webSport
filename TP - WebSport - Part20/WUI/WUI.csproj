@@ -170,8 +170,9 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CategoryRaceController.cs" />
     <Compile Include="Controllers\CompetitorController.cs" />
+    <Compile Include="Controllers\DifficulteController.cs" />
     <Compile Include="Controllers\DisplayConfigurationController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -184,17 +185,17 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Attributes\CompareDateAttribute.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\CategoryPoiModel.cs" />
     <Compile Include="Models\CompetitorModel.cs" />
     <Compile Include="Models\CoordGpsModel.cs" />
-    <Compile Include="Models\DifficulteModel.cs" />
+    <Compile Include="Models\CategoryRaceModel.cs" />
+    <Compile Include="Models\LevelModel.cs" />
     <Compile Include="Models\DisplayConfigurationModel.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\InscriptionModel.cs" />
     <Compile Include="Models\OrganizerModel.cs" />
     <Compile Include="Models\PersonneModel.cs" />
     <Compile Include="Models\PoiModel.cs" />
-    <Compile Include="Models\PointModel.cs" />
-    <Compile Include="Models\PositionModel.cs" />
     <Compile Include="Models\RaceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -348,6 +349,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\Maps\map.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\Chart\Race\Race.js" />
     <Content Include="Scripts\site.js" />
@@ -391,7 +393,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Competitor\Index.cshtml" />
-    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\CategoryRace\Index.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Race\Index.cshtml" />
@@ -430,6 +432,9 @@
       <Project>{bf1f0d7f-70d5-4769-9bdb-715708fe9238}</Project>
       <Name>BO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

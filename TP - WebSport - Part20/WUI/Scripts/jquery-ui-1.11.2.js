@@ -436,7 +436,7 @@ $.widget = function( name, base, prototype ) {
 	// If this widget is being redefined then we need to find all widgets that
 	// are inheriting from it and redefine all of them so that they inherit from
 	// the new version of this widget. We're essentially trying to replace one
-	// level in the prototype chain.
+	// Difficulte in the prototype chain.
 	if ( existingConstructor ) {
 		$.each( existingConstructor._childConstructors, function( i, child ) {
 			var childPrototype = child.prototype;
@@ -2197,7 +2197,7 @@ var menu = $.widget( "ui.menu", {
 						// Redirect focus to the menu
 						this.element.trigger( "focus", [ true ] );
 
-						// If the active item is on the top level, let it stay active.
+						// If the active item is on the top Difficulte, let it stay active.
 						// Otherwise, blur the active item since it is no longer visible.
 						if ( this.active && this.active.parents( ".ui-menu" ).length === 1 ) {
 							clearTimeout( this.timer );

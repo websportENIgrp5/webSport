@@ -12,16 +12,19 @@ namespace DAL.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class CategoriePoi
+    public partial class PoiEntity
     {
-        public CategoriePoi()
+        public PoiEntity()
         {
-            this.Poi = new HashSet<PoiEntity>();
+            this.Parcours = new HashSet<Parcours>();
         }
     
         public int Id { get; set; }
-        public string Libelle { get; set; }
+        public int IdCategoriePoi { get; set; }
+        public string longitude { get; set; }
+        public string latitude { get; set; }
     
-        public virtual ICollection<PoiEntity> Poi { get; set; }
+        public virtual CategoriePoi CategoriePoi { get; set; }
+        public virtual ICollection<Parcours> Parcours { get; set; }
     }
 }

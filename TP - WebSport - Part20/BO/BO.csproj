@@ -40,16 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Category.cs" />
+    <Compile Include="CategoryRace.cs" />
     <Compile Include="Competitor.cs" />
+    <Compile Include="Difficulte.cs" />
     <Compile Include="DisplayConfiguration.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Inscription.cs" />
     <Compile Include="Organizer.cs" />
     <Compile Include="Personne.cs" />
     <Compile Include="Poi.cs" />
-    <Compile Include="Point.cs" />
-    <Compile Include="Position.cs" />
+    <Compile Include="PoiCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Race.cs" />
   </ItemGroup>
