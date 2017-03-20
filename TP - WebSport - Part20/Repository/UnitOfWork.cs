@@ -50,7 +50,6 @@ namespace Repository
             }
         }
 
-        private DifficulteRepository _difficulteRepo;
         public DifficulteRepository DifficulteRepo
         {
             get

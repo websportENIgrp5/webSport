@@ -64,7 +64,7 @@ namespace DAL
                         IdCourse = reader.GetInt32(reader.GetOrdinal("IdCourse")),
                         IdSuiviInscription = reader.GetInt32(reader.GetOrdinal("IdSuiviInscription")),
                         NumClassement = reader.GetInt32(reader.GetOrdinal("NumClassement")),
-                        Temps = reader.GetChar(reader.GetOrdinal("Temps")),
+                        Temps = reader.GetString(reader.GetOrdinal("Temps")),
                     };
                     list.Add(i);
                 }

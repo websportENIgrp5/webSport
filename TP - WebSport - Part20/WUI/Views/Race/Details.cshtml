@@ -9,7 +9,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzTP3POU1y-NMj2XQVp8EaF4duTdcgEq0&callback=initMap" async defer>
 </script>
     <script>
-        idCourse =@Model.Id
+        idCourse =@Model.Id;
     </script>
 }
 @section css {
@@ -32,22 +32,11 @@
     <p>@Html.ActionLink("S'inscrire", "Inscrire", new { id = Model.Id })</p>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Title)
         @Html.DisplayNameFor(model => model.Title) : @Html.DisplayFor(model => model.Title)
     </div>
 
     <div class="display-label">
-        @Html.DisplayFor(model => model.Inscriptions.Count) inscrits
-    </div>
-
-    <p>@Html.ActionLink("S'inscrire", "Inscrire", new { id = Model.Id })</p>
-
-    <div class="display-label">
         @Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)
-    </div>
-
-    <div class="display-label">
-        <div>Catégorie : @Html.DisplayFor(model => model.CategoryRace.Title)</div>
     </div>
 
     <div class="display-label">
@@ -66,15 +55,10 @@
         @Html.DisplayNameFor(model => model.DateStart) : @Html.DisplayFor(model => model.DateStart)
     </div>
 
-    <div class="display-label">Classement</div>
-    @foreach (var item in Model.Inscriptions)
-    {
-        if (new List<int?> { 1, 2, 3 }.Contains(item.NumClassement))
-        {
     <div class="display-label">
         Horaire : de @Html.DisplayFor(model => model.HeureStart) à @Html.DisplayFor(model => model.HeureEnd)
     </div>
-
+    
     <div class="display-label">Classement</div>
     @foreach (var item in Model.Inscriptions)
     {
@@ -82,7 +66,10 @@
         {
             <div class="display-label">
                 @Html.DisplayFor(model => item.User.Login)
-    </div>
+            </div>
+   
         }
     }
+
+    <div id="map"></div>
 </fieldset>
