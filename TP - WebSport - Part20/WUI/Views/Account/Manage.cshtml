@@ -16,6 +16,8 @@
 
         <p class="message-success">@ViewBag.StatusMessage</p>
 
+        @Html.Partial("_ChangeIdentityPartial")
+
         @if (ViewBag.HasLocalPassword)
         {
             @Html.Partial("_ChangePasswordPartial")
@@ -24,12 +26,5 @@
         {
             @Html.Partial("_SetPasswordPartial")
         }
-
-        <section id="externalLogins">
-            @Html.Action("RemoveExternalLogins")
-
-            <h3>Ajouter une connexion externe</h3>
-            @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
     </div>
 </div>

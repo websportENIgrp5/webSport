@@ -41,7 +41,7 @@ $(function () {
                 alert('There was an error 400');
             }
             else {
-                alert('something else other than 200 was returned');
+                alert(xmlhttp.status);
             }
         }
     };
