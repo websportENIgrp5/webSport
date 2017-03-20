@@ -27,7 +27,15 @@ $(function () {
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == XMLHttpRequest.DONE) {
             if (xmlhttp.status == 200) {
-                traceparcours(xmlhttp.responseText);
+                if (xmlhttp.responseText == "\"NoPar\"")
+                {
+                    document.getElementById("map").innerHTML = "<p>Aucun parcours defini pour cette course</p>";
+                }
+                else
+                {
+                    traceparcours(xmlhttp.responseText);
+                }
+                
             }
             else if (xmlhttp.status == 400) {
                 alert('There was an error 400');
@@ -39,7 +47,7 @@ $(function () {
     };
 
     var url = "http://localhost/WUI/Race/GetParcoursById?idCourse=" + idCourse;
-    xmlhttp.open("GET",url , true);
+    xmlhttp.open("GET", url , true);
     xmlhttp.send();
 
     
@@ -64,37 +72,31 @@ $(function () {
 
 function traceparcours(parcours) {
 
-             var test = parcours.split('"')[1];
-            var testarray = test.split(';');
-			for(var i=0; i<testarray.length; i++)
-			{
-				if(testarray[i] !="")
-				{
-				    console.log(testarray[i]);
-					var typecoord = testarray[i].split(':');
-					
-					var coordonnees = typecoord[1].split(',');
-					
-					if(typecoord[0] === "c")
-					{
-						createWayPoint(coordonnees[0], coordonnees[1]);
-					}
-					else if(typecoord[0] === "d")
-					{
-						createPoi(coordonnees[0], coordonnees[1], "dep");
-					}
-					else if(typecoord[0] === "a")
-					{
-						createPoi(coordonnees[0], coordonnees[1], "arr");
-					}
-					else if(typecoord[0] === "r")
-					{
-						createRavito(coordonnees[0], coordonnees[1]);
-					}
-				}
-			}
-			calculateAndDisplayRoute();
-}
+        var test = parcours.split('"')[1];
+        var testarray = test.split(';');
+        for (var i = 0; i < testarray.length; i++) {
+            if (testarray[i] != "") {
+                var typecoord = testarray[i].split(':');
+
+                var coordonnees = typecoord[1].split(',');
+
+                if (typecoord[0] === "c") {
+                    createWayPoint(coordonnees[0], coordonnees[1]);
+                }
+                else if (typecoord[0] === "d") {
+                    createPoi(coordonnees[0], coordonnees[1], "dep");
+                }
+                else if (typecoord[0] === "a") {
+                    createPoi(coordonnees[0], coordonnees[1], "arr");
+                }
+                else if (typecoord[0] === "r") {
+                    createRavito(coordonnees[0], coordonnees[1]);
+                }
+            }
+        }
+        calculateAndDisplayRoute();
+    }
+           
 function calculateAndDisplayRoute()
 {
 	directionsService.route({

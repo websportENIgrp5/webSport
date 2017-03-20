@@ -8,6 +8,10 @@ namespace Repository
     {
         private bool disposed;
         private WebSportEntities context;
+        private DifficulteRepository _difficulteRepo;
+        private GenericRepository<ContributorEntity> _contributorRepo;
+        private RaceRepository _raceRepo;
+        private PoiRepository _poiRepo;
 
         #region Constructors
 
@@ -25,7 +29,7 @@ namespace Repository
 
         #region Repositories
 
-        private RaceRepository _raceRepo;
+       
         public RaceRepository RaceRepo
         {
             get
@@ -36,7 +40,6 @@ namespace Repository
             }
         }
 
-        private GenericRepository<ContributorEntity> _contributorRepo;
         public GenericRepository<ContributorEntity> ContributorRepo
         {
             get
@@ -47,7 +50,6 @@ namespace Repository
             }
         }
 
-        private DifficulteRepository _difficulteRepo;
         public DifficulteRepository DifficulteRepo
         {
             get
@@ -55,6 +57,16 @@ namespace Repository
                 if (_difficulteRepo == null)
                     _difficulteRepo = new DifficulteRepository(this.context);
                 return _difficulteRepo;
+            }
+        }
+
+        public PoiRepository poiRepo
+        {
+            get
+            {
+                if (_poiRepo == null)
+                    _poiRepo = new PoiRepository(this.context);
+                return _poiRepo;
             }
         }
 

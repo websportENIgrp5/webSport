@@ -55,8 +55,6 @@
         <EntityType Name="Parcours">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="IdCourse" />
-            <PropertyRef Name="IdPoi" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdCourse" Type="int" Nullable="false" />
@@ -130,7 +128,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RaceEntity_Difficulte">
+        <Association Name="FK_Course_Difficulte">
           <End Role="Difficulte" Type="Self.Difficulte" Multiplicity="0..1" />
           <End Role="Course" Type="Self.Course" Multiplicity="*" />
           <ReferentialConstraint>
@@ -246,7 +244,7 @@
             <End Role="CategorieCourse" EntitySet="CategorieCourse" />
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>
-          <AssociationSet Name="FK_RaceEntity_Difficulte" Association="Self.FK_RaceEntity_Difficulte">
+          <AssociationSet Name="FK_Course_Difficulte" Association="Self.FK_Course_Difficulte">
             <End Role="Difficulte" EntitySet="Difficulte" />
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>
@@ -295,7 +293,6 @@
           <EntitySet Name="CategoriePoi" EntityType="BddLoginModel.CategoriePoi" />
           <EntitySet Name="Difficulte" EntityType="BddLoginModel.Difficulte" />
           <EntitySet Name="Inscription" EntityType="BddLoginModel.Inscription" />
-          <EntitySet Name="Parcours" EntityType="BddLoginModel.Parcours" />
           <EntitySet Name="Poi" EntityType="BddLoginModel.PoiEntity" />
           <EntitySet Name="SuiviInscription" EntityType="BddLoginModel.SuiviInscription" />
           <EntitySet Name="UserTable" EntityType="BddLoginModel.UserTable" />
@@ -315,10 +312,6 @@
             <End Role="RaceEntity" EntitySet="RaceEntities" />
             <End Role="Inscription" EntitySet="Inscription" />
           </AssociationSet>
-          <AssociationSet Name="FK_Parcours_Course" Association="BddLoginModel.FK_Parcours_Course">
-            <End Role="RaceEntity" EntitySet="RaceEntities" />
-            <End Role="Parcours" EntitySet="Parcours" />
-          </AssociationSet>
           <AssociationSet Name="FK_Inscription_Participant" Association="BddLoginModel.FK_Inscription_Participant">
             <End Role="ContributorEntity" EntitySet="ContributorEntities" />
             <End Role="Inscription" EntitySet="Inscription" />
@@ -327,13 +320,18 @@
             <End Role="SuiviInscription" EntitySet="SuiviInscription" />
             <End Role="Inscription" EntitySet="Inscription" />
           </AssociationSet>
-          <AssociationSet Name="FK_Parcours_Poi" Association="BddLoginModel.FK_Parcours_Poi">
-            <End Role="Poi" EntitySet="Poi" />
-            <End Role="Parcours" EntitySet="Parcours" />
-          </AssociationSet>
           <AssociationSet Name="FK_Participant_UserTable" Association="BddLoginModel.FK_Participant_UserTable">
             <End Role="UserTable" EntitySet="UserTable" />
             <End Role="ContributorEntity" EntitySet="ContributorEntities" />
+          </AssociationSet>
+          <EntitySet Name="Parcours" EntityType="BddLoginModel.Parcours" />
+          <AssociationSet Name="FK_Parcours_Course" Association="BddLoginModel.FK_Parcours_Course">
+            <End Role="RaceEntity" EntitySet="RaceEntities" />
+            <End Role="Parcours" EntitySet="Parcours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parcours_Poi" Association="BddLoginModel.FK_Parcours_Poi">
+            <End Role="PoiEntity" EntitySet="Poi" />
+            <End Role="Parcours" EntitySet="Parcours" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="RaceEntity">
@@ -429,19 +427,6 @@
           <NavigationProperty Name="Participant" Relationship="BddLoginModel.FK_Inscription_Participant" FromRole="Inscription" ToRole="ContributorEntity" />
           <NavigationProperty Name="SuiviInscription" Relationship="BddLoginModel.FK_Inscription_SuiviInscription" FromRole="Inscription" ToRole="SuiviInscription" />
         </EntityType>
-        <EntityType Name="Parcours">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="IdCourse" />
-            <PropertyRef Name="IdPoi" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdCourse" Type="Int32" Nullable="false" />
-          <Property Name="IdPoi" Type="Int32" Nullable="false" />
-          <Property Name="NumOrdrePoi" Type="Int32" />
-          <NavigationProperty Name="Course" Relationship="BddLoginModel.FK_Parcours_Course" FromRole="Parcours" ToRole="RaceEntity" />
-          <NavigationProperty Name="Poi" Relationship="BddLoginModel.FK_Parcours_Poi" FromRole="Parcours" ToRole="Poi" />
-        </EntityType>
         <EntityType Name="PoiEntity">
           <Key>
             <PropertyRef Name="Id" />
@@ -451,7 +436,7 @@
           <Property Name="longitude" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="latitude" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CategoriePoi" Relationship="BddLoginModel.FK_Poi_CategoriePoi" FromRole="Poi" ToRole="CategoriePoi" />
-          <NavigationProperty Name="Parcours" Relationship="BddLoginModel.FK_Parcours_Poi" FromRole="Poi" ToRole="Parcours" />
+          <NavigationProperty Name="Parcours" Relationship="BddLoginModel.FK_Parcours_Poi" FromRole="PoiEntity" ToRole="Parcours" />
         </EntityType>
         <EntityType Name="SuiviInscription">
           <Key>
@@ -517,18 +502,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Parcours_Course">
-          <End Type="BddLoginModel.RaceEntity" Role="RaceEntity" Multiplicity="1" />
-          <End Type="BddLoginModel.Parcours" Role="Parcours" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RaceEntity">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Parcours">
-              <PropertyRef Name="IdCourse" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Inscription_Participant">
           <End Type="BddLoginModel.ContributorEntity" Role="ContributorEntity" Multiplicity="1" />
           <End Type="BddLoginModel.Inscription" Role="Inscription" Multiplicity="*" />
@@ -553,18 +526,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Parcours_Poi">
-          <End Type="BddLoginModel.PoiEntity" Role="Poi" Multiplicity="1" />
-          <End Type="BddLoginModel.Parcours" Role="Parcours" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Poi">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Parcours">
-              <PropertyRef Name="IdPoi" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Participant_UserTable">
           <End Type="BddLoginModel.UserTable" Role="UserTable" Multiplicity="0..1" />
           <End Type="BddLoginModel.ContributorEntity" Role="ContributorEntity" Multiplicity="*" />
@@ -574,6 +535,41 @@
             </Principal>
             <Dependent Role="ContributorEntity">
               <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Parcours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCourse" Type="Int32" Nullable="false" />
+          <Property Name="IdPoi" Type="Int32" Nullable="false" />
+          <Property Name="NumOrdrePoi" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="BddLoginModel.FK_Parcours_Course" FromRole="Parcours" ToRole="RaceEntity" />
+          <NavigationProperty Name="Poi" Relationship="BddLoginModel.FK_Parcours_Poi" FromRole="Parcours" ToRole="PoiEntity" />
+        </EntityType>
+        <Association Name="FK_Parcours_Course">
+          <End Type="BddLoginModel.RaceEntity" Role="RaceEntity" Multiplicity="1" />
+          <End Type="BddLoginModel.Parcours" Role="Parcours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RaceEntity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parcours">
+              <PropertyRef Name="IdCourse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parcours_Poi">
+          <End Type="BddLoginModel.PoiEntity" Role="PoiEntity" Multiplicity="1" />
+          <End Type="BddLoginModel.Parcours" Role="Parcours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PoiEntity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parcours">
+              <PropertyRef Name="IdPoi" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -657,16 +653,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Parcours">
-            <EntityTypeMapping TypeName="BddLoginModel.Parcours">
-              <MappingFragment StoreEntitySet="Parcours">
-                <ScalarProperty Name="NumOrdrePoi" ColumnName="NumOrdrePoi" />
-                <ScalarProperty Name="IdPoi" ColumnName="IdPoi" />
-                <ScalarProperty Name="IdCourse" ColumnName="IdCourse" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Poi">
             <EntityTypeMapping TypeName="BddLoginModel.PoiEntity">
               <MappingFragment StoreEntitySet="Poi">
@@ -689,6 +675,16 @@
             <EntityTypeMapping TypeName="BddLoginModel.UserTable">
               <MappingFragment StoreEntitySet="UserTable">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parcours">
+            <EntityTypeMapping TypeName="BddLoginModel.Parcours">
+              <MappingFragment StoreEntitySet="Parcours">
+                <ScalarProperty Name="NumOrdrePoi" ColumnName="NumOrdrePoi" />
+                <ScalarProperty Name="IdPoi" ColumnName="IdPoi" />
+                <ScalarProperty Name="IdCourse" ColumnName="IdCourse" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

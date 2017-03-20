@@ -243,5 +243,23 @@ namespace DAL.Extensions
         }
 
         #endregion
+
+        #region Poi
+        //public static List<Poi> toBos(this List<PoiEntity> pois)
+        //{
+        //    return pois != null
+        //       ? pois.Where(x => x != null).Select(x => x.ToOrganiserBo()).ToList()
+        //       : null;
+        //}
+
+        //public static Poi toBo(this PoiEntity poi)
+        //{
+        //    return new Poi()
+        //    {
+        //        Id = poi.Id
+        //    }
+        //}
+        
+            #endregion
     }
 }
