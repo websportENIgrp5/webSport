@@ -115,7 +115,16 @@ h5, h6 {
 ----------------------------------------------------------*/
 .content-wrapper {
     margin: 0 auto;
-    max-width: 960px;
+    max-width: 1100px;
+    padding: 0 20px;
+}
+
+.moblie-menu-button, .mobile-menu {display: none;}
+
+.content-wrapper:after {
+    content: '';
+    display: table;
+    clear: both;
 }
 
 #body {
@@ -125,8 +134,6 @@ h5, h6 {
 }
 
     .main-content {
-        padding-left: 10px;
-        padding-right: 10px;
         padding-top: 30px;
     }
 
@@ -134,7 +141,7 @@ h5, h6 {
     }
 
 header .content-wrapper {
-    padding-top: 20px; 
+    padding-top: 10px; 
 }
 
 .two-columns-left {
@@ -182,15 +189,17 @@ footer {
 /* site title
 ----------------------------------------------------------*/
 .site-title {
-    color: #c8c8c8;
-    font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
-    font-size: 2.3em;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 35px;
     margin: 0;
+    font-style: italic;
+    line-height: 55px;
 }
 
 .site-title a, .site-title a:hover, .site-title a:active {
     background: none;
-    color: #c8c8c8;
+    color: #fff;
     outline: none;
     text-decoration: none;
 }
@@ -205,7 +214,7 @@ footer {
 ----------------------------------------------------------*/
 #login {
     display: block;
-    font-size: .85em;
+    font-size: 11.5px;
     margin: 0 0 10px;
     text-align: right;
     color: #fff;
@@ -213,8 +222,7 @@ footer {
 
     #login a {
         margin-left: 10px;
-        margin-right: 3px;
-        padding: 2px 3px;
+        padding: 2px 0 2px 3px;
         text-decoration: none;
         color: #fff;
     }
@@ -224,6 +232,7 @@ footer {
         margin: 0;
         padding: 0;
         text-decoration: underline;
+        font-weight: 700;
     }
 
     #login ul {
@@ -241,7 +250,7 @@ footer {
 ul#menu {
     font-size: 15px;
     font-weight: 600;
-    margin: 20px 0 10px;
+    margin: 15px 0 15px;
     padding: 0;
     text-align: right;
 }
@@ -649,7 +658,7 @@ th {
     }
 
 tbody td {
-    padding: 0.25em 2em 0.25em 0em;
+    padding: 10px 15px !important;
     border-top: none !important;
     border-bottom: 4px solid #f1f1f1;
     background: #fff;
@@ -672,19 +681,19 @@ tfoot td {
 
     /* header
     ----------------------------------------------------------*/
-    header .float-left,
+    /*header .float-left,
     header .float-right {
         float: none;
-    }
+    }*/
 
     /* logo */
-    header .site-title {
-        margin: 10px;
+    /*header .site-title {
+        margin: 0 0 10px 0;
         text-align: center;
-    }
+    }*/
 
     /* login */
-    #login {
+    /*#login {
         font-size: .85em;
         margin: 0 0 12px;
         text-align: center;
@@ -704,19 +713,18 @@ tfoot td {
 
         #login a {
             background: none;
-            color: #999;
             font-weight: 600;
             margin: 2px;
             padding: 0;
         }
 
         #login a:hover {
-            color: #333;
-        }
+            text-decoration: none;
+        }*/
 
     /* menu */
-    nav {
-        margin-bottom: 5px;
+    /*nav {
+        margin-bottom: 15px;
     }
 
     ul#menu {
@@ -727,8 +735,8 @@ tfoot td {
 
         ul#menu li {
             margin: 0;
-            padding: 0;
-        }
+            padding: 0 10px;
+        }*/
 
 
     /* main layout
@@ -738,10 +746,10 @@ tfoot td {
         background-position: 10px 0;
     }
 
-    .content-wrapper {
+    /*.content-wrapper {
         padding-right: 10px;
         padding-left: 10px;
-    }
+    }*/
 
     .featured .content-wrapper {
         padding: 10px;
@@ -837,4 +845,120 @@ tfoot td {
 /* Bootstrap complement */
 .row-bold {
     font-weight: bold;
+}
+
+@media only screen and (max-width: 1000px) {
+    .two-columns-left .column.left, .two-columns-left .main-container {
+        float: none;
+        display: block;
+        width: 100%;
+    }
+
+    .two-columns-left {
+        margin-top: 0;
+    }
+
+    .two-columns-left .column.left {
+        padding-right: 0;
+    }
+
+    .two-columns-left .main-container {
+        margin-top: 30px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    header {
+        position: relative;
+        height: 55px;
+    }
+
+    header .float-left {
+        width: 100%;
+    }
+    .site-title {
+        text-align: center;
+    }
+
+    ul#menu {margin: 0;}
+
+    header .content-wrapper {
+        padding: 0;
+    }
+
+    .site-title {
+        font-size: 25px;
+    }
+
+    .nav-menu {
+        margin: 0;
+        position: absolute;
+        top: 55px;
+        left: 0;
+        width: 100%;
+        background: #026097;
+        padding: 0 ;
+        display: none;
+        z-index: 1;
+    }
+    #login {display: none;}
+
+    .moblie-menu-button {
+        background-image: url('../images/menu-btn.png');
+        background-repeat: no-repeat;
+        background-size: 100%;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        display: block;
+    }
+
+    nav #menu li, nav ul li {
+        display: block;
+        float: none;
+        text-align: left;
+        padding: 0;
+    }
+
+    nav #menu li:hover, nav ul li:hover {
+        background: #01507e;
+        transition: background 0.2s;
+        cursor: pointer;
+    }
+
+    nav #menu li a, nav ul li a {
+        font-size: 12px;
+        width: 100%;
+        height: 100%;
+        padding: 12px 10px;
+        display: block;
+    }
+
+    nav #menu li a:hover, nav ul li a:hover {
+        background: none;
+    }
+    .mobile-menu {
+        display: block;
+    }
+
+    .mobile-menu ul {
+        padding: 0;
+        list-style-type: none;
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        margin: 0;
+    }
+    .mobile-menu ul a {
+        color: #fff;
+        font-weight: 700;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .mobile-menu ul a:hover {
+        text-decoration: none;
+    }
 }

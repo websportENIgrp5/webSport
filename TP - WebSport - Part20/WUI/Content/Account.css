@@ -11,6 +11,7 @@
     width: 100%;
     border-radius: 5px;
 }
+.account-menu-responsive {display: none;}
 .account-menu {
     width: 100%;
 }
@@ -53,12 +54,31 @@
     font-size: 13px;
     text-decoration: underline;
 }
+.race-main-column {
+    width: 25%;
+    text-align: left;
+}
+.race-main-column span:first-child {
+    font-size: 13px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 5px;
+}
+td .mobile {
+    display: none;
+}
+.button.unsubscribe a {
+    content: '';
+    display: block;
+}
 .score {
     /*width: 175px;*/
     display: inline-block;
-    margin-right: 80px;
     padding-left: 50px;
     position: relative;
+}
+.score:first-child {
+    margin-right: 70px;
 }
 .score .score-img {
     display: inline-block;
@@ -91,9 +111,126 @@
     border-radius: 3px;
 }
 
+/*
+* Responsive
+*--------------------------
+*/
 @media screen and (max-width: 1000px) {
-  .bloc {
-    display:block;
-    clear:both;
-  }
+    .bloc {
+        display:block;
+        clear:both;
+    }
+    .profil-img {
+        display: none;
+    }
+    .account-menu-responsive {display: block;}
+    .account-menu-responsive {
+        width: 100%;
+        background: #fff;
+        padding: 10px;
+        border: 1px solid #ccc;
+        position: relative;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+    .account-menu-responsive:after {
+        width: 15px;
+        height: 15px;
+        display: block;
+        content: '';
+        background-image: url('../../images/arrow-down.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        cursor: pointer;
+    }
+    .account-menu ul {
+        background: #fff;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-top: none;
+        display: none;
+    }
+    .account-menu ul li:hover {
+        background: #0277bd;
+    }
+    .account-menu ul li:hover a {
+        color: #fff;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    td .mobile.distance {
+        display: block;
+    }
+    th.distance, td.distance {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 670px) {
+.race-main-column {
+    width: 40%;
+}
+    td .mobile.etat {
+        display: block;
+    }
+    th.etat, td.etat {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .table.races thead {display: none;}
+    .mobile-table-content {display: none;}
+    .race-main-column {
+        width: 100%;
+    }
+    td .mobile.time,
+    td .mobile.classement,
+    td .mobile.unsubscribe {
+        display: block;
+    }
+    th.time, td.time, 
+    th.classement, td.classement,
+    th.unsubscribe, td.unsubscribe {
+        display: none;
+    }
+    .mobile-table-content {
+        padding-top: 10px;
+    }
+    .mobile.unsubscribe {
+        margin-top: 15px;
+        width: 150px;
+    }
+    .mobile.unsubscribe .button {
+        padding: 12px 20px;
+    }
+    .table-title .title {
+        cursor: pointer;
+    }
+}
+
+
+
+@media screen and (max-width: 440px) {
+    .scores {
+        text-align: center;
+        width: 100%;
+    }
+    .score {
+        display: block;
+        float: none;
+        width: 180px;
+        margin: 0 auto;
+    }
+    .score:first-child {
+        margin-right: auto;
+        margin-bottom: 20px;
+    }
+    .stats-chart {
+        margin-top: 30px;
+    }
 }

@@ -23,5 +23,9 @@ namespace BLL
         //private Comparison<Inscription> _delegueTrier;
         private UnitOfWork _uow { get; set; }
 
+        public List<Inscription> getStatsByCategory()
+        {
+            return DbInscription.GetInstance().getStatsByCategory(1, 1);
+        }
     }
 }

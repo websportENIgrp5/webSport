@@ -188,6 +188,7 @@
     <Compile Include="Models\CoordGpsModel.cs" />
     <Compile Include="Models\DisplayConfigurationModel.cs" />
     <Compile Include="Models\Enums.cs" />
+    <Compile Include="Models\InscriptionModel.cs" />
     <Compile Include="Models\OrganizerModel.cs" />
     <Compile Include="Models\PersonneModel.cs" />
     <Compile Include="Models\PoiModel.cs" />
@@ -273,6 +274,11 @@
     <Content Include="Content\Bootstrap\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Bootstrap\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Bootstrap\glyphicons-halflings-regular.woff2" />
+    <Content Include="Images\arrow-down.png" />
+    <Content Include="Images\menu-btn.png" />
+    <Content Include="Images\miles.jpg" />
+    <Content Include="Images\profil-default.png" />
+    <Content Include="Images\score.jpg" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\Bootstrap\npm.js" />

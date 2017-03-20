@@ -1,8 +1,33 @@
-﻿<nav>
+﻿<nav class="nav-menu">
     <ul id="menu">
         <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
         <li>@Html.ActionLink("Catégories", "Index", "Category")</li>
         <li>@Html.ActionLink("Compétiteurs", "Index", "Competitor")</li>
         <li>@Html.ActionLink("Courses", "Index", "Race")</li>
     </ul>
+
+    <div class="mobile-menu">
+        @if (Request.IsAuthenticated)
+        {
+            <ul>
+                <li>
+                    @Html.ActionLink("Mon compte", "Dashboard", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })
+                </li>
+                <li>
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a>
+                    }
+                </li>
+            </ul>
+        }
+        else {
+            <ul>
+                <li>@Html.ActionLink("S'inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li>@Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            </ul>
+        }
+    </div>
+
 </nav>

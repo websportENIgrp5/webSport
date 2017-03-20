@@ -131,14 +131,15 @@ namespace WUI.Controllers
         {
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Dashboard");
-            //int id = 0;
-            //var result = MgtInscription.GetInstance().GetRace(id).ToModel();
+
+            //var result = MgtInscription.GetInstance().getStatsByCategory();
             //if (result == null)
             //{
             //    return HttpNotFound();
             //}
 
             //return View(result);
+
             return View();
         }
 

@@ -12,7 +12,7 @@ namespace WUI.Controllers
         {
             ViewBag.Message = "Modifiez ce modèle pour dynamiser votre application ASP.NET MVC.";
 
-            return View();
+            return RedirectToAction("Index", "Race", new { area = "" });
         }
 
         public ActionResult About()
