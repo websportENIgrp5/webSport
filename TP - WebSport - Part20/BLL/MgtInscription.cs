@@ -18,10 +18,17 @@ namespace BLL
             return _instance;
         }
 
-        private List<Inscription> _listRace;
+        private List<Inscription> _listInscription;
 
         //private Comparison<Inscription> _delegueTrier;
         private UnitOfWork _uow { get; set; }
+
+        public MgtInscription()
+        {
+            // Récupération des données via la DAL (informations stockées dans une base de données SQL)
+            _uow = new UnitOfWork();
+            //_listInscription = this._uow.RaceRepo.GetAllItems();
+        }
 
     }
 }

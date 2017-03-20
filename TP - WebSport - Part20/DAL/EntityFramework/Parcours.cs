@@ -15,7 +15,7 @@ namespace DAL.EntityFramework
     public partial class Parcours
     {
         public int Id { get; set; }
-        public int IdCourse{ get; set; }
+        public int IdCourse { get; set; }
         public int IdPoi { get; set; }
         public Nullable<int> NumOrdrePoi { get; set; }
     
