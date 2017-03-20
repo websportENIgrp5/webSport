@@ -1,4 +1,5 @@
 ﻿using BO;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +10,36 @@ namespace BLL
 {
     public class MgtCategoryRace
     {
-        public List<CategoryRace> GetCategory()
-        {
-            // TODO : Aller chercher ces informations en BDD via la DAL
-            var result = new List<CategoryRace>
-            {
-                new CategoryRace { Id = 1, Title = "RaceEntity à pied" },
-                new CategoryRace { Id = 2, Title = "Gym" },
-                new CategoryRace { Id = 3, Title = "Fitness" },
-                new CategoryRace { Id = 4, Title = "Cyclisme" }
-            };
+        #region Singleton
 
-            return result;
+        private static MgtCategoryRace _instance;
+        public static MgtCategoryRace GetInstance()
+        {
+            if (_instance == null)
+                _instance = new MgtCategoryRace();
+            return _instance;
         }
 
-        // CREATE
+        #endregion
 
-        // UPDATE
+        #region Propriétés
 
-        // DELETE
+        private List<CategoryRace> _listCategoryRace;
+
+        private UnitOfWork _uow { get; set; }
+
+        #endregion
+
+        #region Constructeur
+
+        public MgtCategoryRace()
+        {
+
+            // Récupération des données via la DAL (informations stockées dans une base de données SQL)
+            _uow = new UnitOfWork();
+            _listCategoryRace = _uow.CategoryRaceRepo.GetAllItems();
+        }
+
+        #endregion
     }
 }

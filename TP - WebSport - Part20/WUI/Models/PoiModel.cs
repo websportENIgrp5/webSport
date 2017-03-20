@@ -60,7 +60,7 @@ namespace WUI.Models
             set { category = new CategoryPoiModel(value); }
         }
         public string CategoryName
-        {
+    {
             get { return category.Name; }
         }
         #endregion

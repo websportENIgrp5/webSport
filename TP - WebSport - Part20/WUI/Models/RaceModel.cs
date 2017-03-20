@@ -28,7 +28,7 @@ namespace WUI.Models
         public string Description { get; set; }
 
         [Display(Name = "Date")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         // Par défaut, une date est requise car le type DateTime n'est pas "Nullable"
         public DateTime DateStart { get; set; }
         
@@ -40,16 +40,23 @@ namespace WUI.Models
         [Required(ErrorMessage = "La {0} est requise")]
         public int Distance { get; set; }
 
-        [Required(ErrorMessage = "Le {0} est requise")]
-        public int IdDifficulte { get; set; }
+        [Display(Name = "Heure de départ prévue")]
+        [Required(ErrorMessage = "L'{0} est requise")]
+        public Nullable<TimeSpan> HeureStart { get; set; }
 
+        [Display(Name = "Heure de d'arrivée prévue")]
+        [Required(ErrorMessage = "L'{0} est requise")]
+        public Nullable<TimeSpan> HeureEnd { get; set; }
+
+        [Display(Name = "Niveau")]
+        [Required(ErrorMessage = "La {0} est requise")]
         public DifficulteModel Difficulte { get; set; }
 
+        [Display(Name = "Catégorie")]
+        [Required(ErrorMessage = "La {0} est requise")]
         public CategoryRaceModel CategoryRace { get; set; }
 
-        public List<CompetitorModel> Competitors { get; set; }
-
-        public List<OrganizerModel> Organisers { get; set; }
+        public List<InscriptionModel> Inscriptions { get; set; }
 
         public List<PoiModel> Pois { get; set; }
 
