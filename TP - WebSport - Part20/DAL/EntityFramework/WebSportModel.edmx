@@ -244,7 +244,7 @@
             <End Role="CategorieCourse" EntitySet="CategorieCourse" />
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>
-          <AssociationSet Name="FK_RaceEntity_Difficulte" Association="Self.FK_RaceEntity_Difficulte">
+          <AssociationSet Name="FK_Course_Difficulte" Association="Self.FK_Course_Difficulte">
             <End Role="Difficulte" EntitySet="Difficulte" />
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>

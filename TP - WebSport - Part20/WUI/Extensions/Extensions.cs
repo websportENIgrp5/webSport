@@ -122,9 +122,14 @@ namespace WUI.Extensions
                 DateStart = bo.DateStart,
                 Town = bo.Town,
                 Distance = bo.Distance,
+                HeureStart = bo.HeureStart,
+                HeureEnd = bo.HeureEnd,
 
-                Difficulte = withJoin && bo.Difficulte != null ? bo.Difficulte.ToModel() : null,
-                CategoryRace = withJoin && bo.CategoryRace != null ? bo.CategoryRace.ToModel() : null
+                Difficulte = bo.Difficulte != null ? bo.Difficulte.ToModel() : null,
+                CategoryRace = bo.CategoryRace != null ? bo.CategoryRace.ToModel() : null,
+                Inscriptions = bo.Inscriptions != null ? bo.Inscriptions.Where(i => i.IdCourse == bo.Id).Select(i => i.ToModel()).ToList() : null,
+                // Sélection des inscriptions des 3 premiers compétiteurs au classement de la course
+                //Users = bo.Inscriptions != null ?  bo.Inscriptions.Where(i => new List<int?>(){ 1, 2 , 3 }.Contains(i.NumClassement)).Select(i => i.ToModel()).ToList() : null
             };
         }
 
@@ -140,6 +145,8 @@ namespace WUI.Extensions
                 DateStart = model.DateStart,
                 Town = model.Town,
                 Distance = model.Distance,
+                HeureStart = model.HeureEnd,
+                HeureEnd = model.HeureEnd,
 
                 Difficulte = model.Difficulte.ToBo(),
                 CategoryRace = model.CategoryRace.ToBo()
@@ -188,14 +195,54 @@ namespace WUI.Extensions
                 Prenom = bo.Prenom,
                 DateNaissance = bo.DateNaissance,
                 Email = bo.Email,
-                Phone = bo.Phone,
+                Phone = bo.Phone
 
                 //DisplayConfigurations = bo.DisplayConfigurations.Select(x => x.ToModel()).ToList()
             };
         }
+
+        #region Inscription
+
+        public static List<InscriptionModel> ToModels(this List<Inscription> bos)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToModel()).ToList()
+                : null;
+        }
+
+        public static InscriptionModel ToModel(this BO.Inscription bo)
+        {
+            if (bo == null) return null;
+
+            return new InscriptionModel
+            {
+                Id = bo.Id,
+                IdCourse = bo.IdCourse,
+                IdParticipant = bo.IdParticipant,
+                IdSuiviInscription = bo.IdSuiviInscription,
+                NumClassement = bo.NumClassement,
+                Temps = bo.Temps,
+                User = bo.User.ToModel()
+            };
+        }
+
         #endregion
-       
-        #region Organisateur
+
+        #region User
+
+        public static UserModel ToModel(this User bo)
+        {
+            if (bo == null) return null;
+
+            return new UserModel
+            {
+                Id = bo.Id,
+                Login = bo.Login
+            };
+        }
+
+        #endregion
+
         public static OrganizerModel ToModel(this Organizer bo)
         {
             if (bo == null) return null;
@@ -239,7 +286,7 @@ namespace WUI.Extensions
             if (model == null) return null;
 
             return new Poi()
-            {
+                {
                 Id = model.Id,
                 Latitude = model.Latitude,
                 Longitude = model.Longitude,

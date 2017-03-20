@@ -32,10 +32,14 @@ namespace DAL.Extensions
                 DateStart = bo.DateStart,
                 Town = bo.Town,
                 Distance = bo.Distance,
+                HeureStart = bo.HeureStart,
+                HeureEnd = bo.HeureEnd,
                 IdDifficulte = bo.IdDifficulte,
+                IdCategoryRace = bo.IdCategorieCourse,
 
-                Difficulte = bo.Difficulte.ToBo(),
-                
+                Difficulte = bo.Difficulte != null ? bo.Difficulte.ToBo() : null,
+                CategoryRace = bo.CategorieCourse != null ? bo.CategorieCourse.ToBo() : null,
+                Inscriptions = bo.Inscription != null ? bo.Inscription.Where(x => x.IdCourse == bo.Id).Select(x => x.ToInscriptionBo()).ToList() : null,
             };
         }
 
@@ -192,6 +196,48 @@ namespace DAL.Extensions
 
         #endregion
 
+        #region Inscription
+
+        public static List<BO.Inscription> ToInscriptionBos(this List<EntityFramework.Inscription> bos)
+        {
+            return bos != null
+                ? bos.Where(x => x != null).Select(x => x.ToInscriptionBo()).ToList()
+                : null;
+        }
+
+        public static BO.Inscription ToInscriptionBo(this EntityFramework.Inscription bo)
+        {
+            if (bo == null) return null;
+
+            return new BO.Inscription
+            {
+                Id = bo.Id,
+                IdCourse = bo.IdCourse,
+                IdParticipant = bo.IdParticipant,
+                IdSuiviInscription = bo.IdSuiviInscription,
+                NumClassement = bo.NumClassement,
+                Temps = bo.Temps,
+                Participant = bo.Participant.ToCompetitorBo()
+            };
+        }
+
+        #endregion
+
+        #region User
+
+        public static UserTable ToDataEntity(this User model)
+        {
+            if (model == null) return null;
+
+            return new UserTable
+            {
+                Id = model.Id,
+                Name = model.Login
+            };
+        }
+
+        #endregion
+
         #region Competitor
 
         public static List<Competitor> ToCompetitorBos(this List<ContributorEntity> bos)
@@ -212,7 +258,18 @@ namespace DAL.Extensions
                 Prenom = bo.Person.Firstname,
                 DateNaissance = bo.Person.BirthDate.HasValue ? bo.Person.BirthDate.Value : DateTime.MinValue,
                 Email = bo.Person.Mail,
-                Phone = bo.Person.Phone
+                Phone = bo.Person.Phone,
+                //User = bo.
+            };
+        }
+
+        public static ContributorEntity ToDataEntity(this Competitor model)
+        {
+            if (model == null) return null;
+
+            return new ContributorEntity
+            {
+                UserTable = model.User.ToDataEntity()
             };
         }
 

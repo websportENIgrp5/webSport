@@ -18,7 +18,7 @@ namespace BLL
             return _instance;
         }
 
-        private List<Inscription> _listRace;
+        private List<Inscription> _listInscription;
 
         //private Comparison<Inscription> _delegueTrier;
         private UnitOfWork _uow { get; set; }

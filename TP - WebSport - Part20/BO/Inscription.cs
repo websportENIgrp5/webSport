@@ -17,8 +17,12 @@ namespace BO
 
         public int IdSuiviInscription { get; set; }
 
-        public int NumClassement { get; set; }
+        public int? NumClassement { get; set; }
 
-        public char Temps { get; set; }
+        public String Temps { get; set; }
+
+        public User User { get; set; }
+
+        public Competitor Participant { get; set; }
     }
 }
