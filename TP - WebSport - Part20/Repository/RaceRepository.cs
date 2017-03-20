@@ -57,6 +57,8 @@ namespace Repository
             raceToUpdate.Description = element.Description;
             raceToUpdate.DateStart = element.DateStart;
             raceToUpdate.Town = element.Town;
+            raceToUpdate.Distance = element.Distance;
+            raceToUpdate.IdDifficulte = element.IdDifficulte;
             base.Update(raceToUpdate);
         }
 

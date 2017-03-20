@@ -30,6 +30,19 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.DateStart)
     </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateEnd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateEnd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Distance)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdDifficulte)
+    </div>
 </fieldset>
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()

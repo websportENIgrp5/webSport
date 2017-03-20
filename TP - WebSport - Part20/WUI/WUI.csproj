@@ -15,7 +15,7 @@
     <AssemblyName>WUI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -186,6 +186,7 @@
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\CompetitorModel.cs" />
     <Compile Include="Models\CoordGpsModel.cs" />
+    <Compile Include="Models\DifficulteModel.cs" />
     <Compile Include="Models\DisplayConfigurationModel.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\InscriptionModel.cs" />

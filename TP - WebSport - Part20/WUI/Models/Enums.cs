@@ -18,4 +18,10 @@ namespace WUI.Models
         BY_TITLE,
         BY_TOWN
     }
+
+    public enum Difficulte
+    {
+
+    }
+        
 }

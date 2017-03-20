@@ -45,6 +45,8 @@ namespace DAL.Extensions
                 Description = model.Description,
                 DateStart = model.DateStart,
                 Town = model.Town,
+                Distance = model.Distance,
+                IdDifficulte = model.IdDifficulte
             };
         }
 
@@ -59,7 +61,9 @@ namespace DAL.Extensions
                 Title = entity.CTitre,
                 Description = entity.CDescription,
                 DateStart = entity.CDateStart,
-                Town = entity.CVille
+                Town = entity.CVille,
+                Distance = entity.Distance,
+                IdDifficulte = entity.IdDifficulte
             };
         }
 
