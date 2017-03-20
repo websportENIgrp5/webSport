@@ -22,11 +22,14 @@
     <legend>RaceModel</legend>
 
     <div class="display-label">
-        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Catégorie</div>
+        @Html.DisplayNameFor(model => model.Title) : @Html.DisplayFor(model => model.Title)
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CategoryRace.Libelle)
+
+    <div class="display-label">
+        @Html.DisplayFor(model => model.Inscriptions.Count) inscrits
     </div>
+
+    <p>@Html.ActionLink("S'inscrire", "Inscrire", new { id = Model.Id })</p>
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.Title)
@@ -63,6 +66,11 @@
         @Html.DisplayNameFor(model => model.DateStart) : @Html.DisplayFor(model => model.DateStart)
     </div>
 
+    <div class="display-label">Classement</div>
+    @foreach (var item in Model.Inscriptions)
+    {
+        if (new List<int?> { 1, 2, 3 }.Contains(item.NumClassement))
+        {
     <div class="display-label">
         Horaire : de @Html.DisplayFor(model => model.HeureStart) à @Html.DisplayFor(model => model.HeureEnd)
     </div>
