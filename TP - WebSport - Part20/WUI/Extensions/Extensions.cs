@@ -296,7 +296,28 @@ namespace WUI.Extensions
         }
         #endregion
 
+        #region InscriRaceSuivi
 
+        public static List<RaceDisplayModel> ToModels(this List<InscriRaceSuivi> bo)
+        {
+            return bo != null
+                ? bo.Where(x => x != null).Select(x => x.ToModel()).ToList()
+                : null;
+        }
+        public static RaceDisplayModel ToModel(this InscriRaceSuivi bo)
+        {
+            return new RaceDisplayModel
+            {
+                Title = bo.Title,
+                City = bo.City,
+                Classement = bo.Classement,
+                Time = bo.Time,
+                Date = bo.Date,
+                Distance = bo.Distance,
+                State = bo.State,
+            };
+        }
+        #endregion
         public static UnitDistanceModel ToModel(this UnitDistance bo)
         {
             UnitDistanceModel result;

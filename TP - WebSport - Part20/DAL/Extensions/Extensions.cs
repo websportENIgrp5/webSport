@@ -320,7 +320,9 @@ namespace DAL.Extensions
             de.IdCourse = bo.IdCourse;
             de.IdParticipant = bo.IdParticipant;
             de.IdSuiviInscription = bo.IdSuiviInscription;
-            de.Temps = bo.Temps.ToString();
+            if(bo.Temps != null )
+                de.Temps = bo.Temps.ToString();
+            if(bo.NumClassement !=null)
             de.NumClassement = bo.NumClassement;
 
             return de;
