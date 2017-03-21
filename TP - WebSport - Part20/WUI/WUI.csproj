@@ -412,10 +412,9 @@
     <Content Include="Views\Shared\Page404.cshtml" />
     <Content Include="Views\Account\_MenuPartial.cshtml" />
     <Content Include="Views\Account\Dashboard.cshtml" />
-    <Content Include="Views\Account\Dashboard\_LastListRacePartial.cshtml" />
+    <Content Include="Views\Account\Dashboard\_ListRacePartial.cshtml" />
     <Content Include="Views\Account\Dashboard\_StatsPartial.cshtml" />
     <Content Include="Views\Account\MyRaces.cshtml" />
-    <Content Include="Views\Account\_MyRacesPartial.cshtml" />
     <Content Include="Views\Inscription\Inscrire.cshtml" />
     <Content Include="Views\Inscription\ConfirmInscription.cshtml" />
   </ItemGroup>

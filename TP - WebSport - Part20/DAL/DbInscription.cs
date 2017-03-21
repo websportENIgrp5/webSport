@@ -82,21 +82,19 @@ namespace DAL
         {
             List<InscriRaceSuivi> racesInscri = null;
 
-            using (DbTools instance = new DbTools())
-            {
-                using (DbCommand command = instance.CreerRequete(RQT_GET_INSCRI_BY_ID))
-                {
-                    //Ajout du parametre idParticipant
-                    instance.CreerParametre(command, "@idParticipant", idParticipant);
+            //Récuperation de la connexion et création de la commande
+            DbTools instance = new DbTools();
+            DbCommand command = instance.CreerRequete(RQT_GET_INSCRI_BY_ID);
 
-                    using (DbDataReader reader = command.ExecuteReader())
-                    {
-                        racesInscri = BuildListInscriRaceSuivi(reader);
-                    }
-                }
+            //Ajout du parametre idParticipant
+            instance.CreerParametre(command, "@idParticipant", idParticipant);
+
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                racesInscri = BuildListInscriRaceSuivi(reader);
             }
 
-           return racesInscri;
+            return racesInscri;
         }
 
         /// <summary>
@@ -120,7 +118,7 @@ namespace DAL
                 //Champs qui peuvent etre nuls
                 try
                 {
-                    inscriSuiviRace.Time = reader.GetDateTime(reader.GetOrdinal("Temps"));
+                    inscriSuiviRace.Time = reader.GetString(reader.GetOrdinal("Temps"));
                 }
                 catch (System.Data.SqlTypes.SqlNullValueException)
                 { }

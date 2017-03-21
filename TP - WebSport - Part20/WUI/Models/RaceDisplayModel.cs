@@ -13,7 +13,7 @@ namespace WUI.Models
 
         public string City { get; set; }
 
-        public DateTime? Time { get; set; }
+        public string Time { get; set; }
 
         public int? Classement { get; set; }
 
