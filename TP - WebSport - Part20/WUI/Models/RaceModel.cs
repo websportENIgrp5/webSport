@@ -41,10 +41,12 @@ namespace WUI.Models
         public int Distance { get; set; }
 
         [Display(Name = "Heure de départ prévue")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "L'{0} est requise")]
         public Nullable<TimeSpan> HeureStart { get; set; }
 
         [Display(Name = "Heure de d'arrivée prévue")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "L'{0} est requise")]
         public Nullable<TimeSpan> HeureEnd { get; set; }
 
