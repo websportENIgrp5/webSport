@@ -72,6 +72,17 @@ namespace Repository
             }
         }
 
+        private CategoryRaceRepository _categoryRaceRepo;
+        public CategoryRaceRepository CategoryRaceRepo
+        {
+            get
+            {
+                if (_categoryRaceRepo == null)
+                    _categoryRaceRepo = new CategoryRaceRepository(this.context);
+                return _categoryRaceRepo;
+            }
+        }
+
         public UserRepository UserRepo
         {
             get

@@ -10,28 +10,30 @@ namespace BO
     {
         public int Id { get; set; }
 
-        private string _title;
-        public string Title
-        {
-            get
-            {
-                return _title;
-            }
-            set
-            {
-                _title = value;
-            }
-        }
+        public string Title { get; set; }
+
+        //private string _title;
+        //public string Title
+        //{
+        //    get
+        //    {
+        //        return _title;
+        //    }
+        //    set
+        //    {
+        //        _title = value;
+        //    }
+        //}
 
 
-        public CategoryRace()
-        {
-        }
+        //public CategoryRace()
+        //{
+        //}
 
-        public CategoryRace(string title)
-        {
-            Title = title;
-        }
+        //public CategoryRace(string title)
+        //{
+        //    Title = title;
+        //}
 
 
         public override bool Equals(object obj)

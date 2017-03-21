@@ -8,11 +8,19 @@ namespace BO
 {
     [Serializable]
     public class Competitor : Personne, IComparable<Competitor>, IDisposable
-    {
+    { 
+        public int IdPerson { get; set; }
+
+        public int IdUser { get; set; }
+
+        public bool IsCompetitor { get; set; }
+
+        public bool IsOrganizer { get; set; }
+
         public Race Race { get; set; }
 
-
-
+        public User User { get; set; }
+    
         public int CompareTo(Competitor other)
         {
             if (other == null)

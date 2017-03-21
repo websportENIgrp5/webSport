@@ -1,31 +1,32 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace WUI.Models
 {
+    /// <summary>
+    /// Inscription d'un compétiteur à une course
+    /// </summary>
     public class InscriptionModel
     {
-        [Display(Name = "Id")]
         public int Id { get; set; }
 
-        [Display(Name = "IdParticipant")]
-        public int IdParticipant { get; set; }
-
-        [Display(Name = "IdCourse")]
-        //[Required(ErrorMessage = "La {0} est requise")]
         public int IdCourse { get; set; }
 
-        [Display(Name = "idSuiviInscription")]
-        public int idSuiviInscription { get; set; }
+        public int IdParticipant { get; set; }
 
-        [Display(Name = "NumClassement")]
-        public int NumClassement { get; set; }
+        public int IdSuiviInscription { get; set; }
 
-        [Display(Name = "Temps")]
-        public char Temps { get; set; }
+        public int? NumClassement { get; set; }
+
+        public UserModel User { get; set; }
+
+        public List<OrganizerModel> Organisers { get; set; }
+
+        public String Temps { get; set; }
     }
 }

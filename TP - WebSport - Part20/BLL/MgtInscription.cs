@@ -24,11 +24,11 @@ namespace BLL
         public static MgtInscription Instance
         {
             get
-            {
-                if (_instance == null)
-                    _instance = new MgtInscription();
-                return _instance;
-            }
+        {
+            if (_instance == null)
+                _instance = new MgtInscription();
+            return _instance;
+        }
         }
         #endregion
 

@@ -185,17 +185,17 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Attributes\CompareDateAttribute.cs" />
-    <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\CategoryRaceModel.cs" />
     <Compile Include="Models\CategoryPoiModel.cs" />
     <Compile Include="Models\CompetitorModel.cs" />
     <Compile Include="Models\CoordGpsModel.cs" />
-    <Compile Include="Models\CategoryRaceModel.cs" />
-    <Compile Include="Models\LevelModel.cs" />
+    <Compile Include="Models\DifficulteModel.cs" />
     <Compile Include="Models\DisplayConfigurationModel.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\InscriptionModel.cs" />
     <Compile Include="Models\OrganizerModel.cs" />
     <Compile Include="Models\PersonneModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\PoiModel.cs" />
     <Compile Include="Models\RaceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

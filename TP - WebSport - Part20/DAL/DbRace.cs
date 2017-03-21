@@ -240,7 +240,8 @@ namespace DAL
                         IdDifficulte = reader.GetInt32(reader.GetOrdinal("CIdDifficulte")),
                         IdCategoryRace = reader.GetInt32(reader.GetOrdinal("CIdCategorieCourse")),
                         Difficulte = new BO.Difficulte(),
-                        CategoryRace = new CategoryRace()
+                        CategoryRace = new CategoryRace(),
+                        Competitors = new List<Competitor>()
                     };
                     list.Add(r);
                 }
@@ -288,7 +289,7 @@ namespace DAL
                         DateNaissance = reader.GetDateTime(reader.GetOrdinal("PDateNaissance")),
                         Race = r
                     };
-                    
+                    r.Competitors.Add(c);
                 }
 
                 if (isOrganiser)
