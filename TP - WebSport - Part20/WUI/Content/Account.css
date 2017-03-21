@@ -54,23 +54,6 @@
     font-size: 13px;
     text-decoration: underline;
 }
-.race-main-column {
-    width: 25%;
-    text-align: left;
-}
-.race-main-column span:first-child {
-    font-size: 13px;
-    font-weight: 700;
-    display: block;
-    margin-bottom: 5px;
-}
-td .mobile {
-    display: none;
-}
-.button.unsubscribe a {
-    content: '';
-    display: block;
-}
 .score {
     /*width: 175px;*/
     display: inline-block;
@@ -112,6 +95,28 @@ td .mobile {
 }
 
 /*
+* Races
+*--------------------------
+*/
+.race-main-column {
+    width: 25%;
+    text-align: left !important;
+}
+.race-main-column span:first-child {
+    font-size: 13px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 5px;
+}
+td .mobile {
+    display: none;
+}
+.button.unsubscribe a {
+    content: '';
+    display: block;
+}
+
+/*
 * Responsive
 *--------------------------
 */
@@ -146,6 +151,9 @@ td .mobile {
         right: 15px;
         cursor: pointer;
     }
+    .active .account-menu-responsive:after {
+        background-image: url('../../images/arrow-up.png');
+    }
     .account-menu ul {
         background: #fff;
         margin-bottom: 20px;
@@ -161,28 +169,40 @@ td .mobile {
     }
 }
 
-@media screen and (max-width: 768px) {
-    td .mobile.distance {
+@media screen and (max-width: 900px) {
+    .races.list td .mobile.date {
         display: block;
     }
-    th.distance, td.distance {
+    .races.list th.date, .races.list td.date {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .races.list td .mobile.town {
+        display: block;
+    }
+    .races.list th.town, .races.list td.town {
+        display: none;
+    }
+    .races.account td .mobile.distance {
+        display: block;
+    }
+    .races.account th.distance, .races.account td.distance {
         display: none;
     }
 }
 
 @media screen and (max-width: 670px) {
-.race-main-column {
-    width: 40%;
-}
+    .race-main-column {
+        width: 40%;
+    }
     td .mobile.etat {
         display: block;
     }
     th.etat, td.etat {
         display: none;
     }
-}
-
-@media screen and (max-width: 670px) {
     .table.races thead {display: none;}
     .mobile-table-content {display: none;}
     .race-main-column {
@@ -190,30 +210,59 @@ td .mobile {
     }
     td .mobile.time,
     td .mobile.classement,
-    td .mobile.unsubscribe {
+    td .mobile.unsubscribe,
+    .races.list td .mobile.distance,
+    .races.list td .mobile.niveau,
+    .races.list td .mobile.category,
+    .races.list td .mobile.details {
         display: block;
     }
     th.time, td.time, 
     th.classement, td.classement,
-    th.unsubscribe, td.unsubscribe {
+    th.unsubscribe, td.unsubscribe,
+    .races.list th.distance, .races.list td.distance,
+    .races.list th.niveau, .races.list td.niveau,
+    .races.list th.category, .races.list td.category,
+    .races.list th.details, .races.list td.details {
         display: none;
     }
     .mobile-table-content {
-        padding-top: 10px;
+        padding: 10px 15px;
     }
-    .mobile.unsubscribe {
+    .mobile.unsubscribe,
+    .mobile.details {
         margin-top: 15px;
         width: 150px;
     }
-    .mobile.unsubscribe .button {
+    .mobile.unsubscribe .button,
+    .mobile.details .button {
         padding: 12px 20px;
+    }
+    .table-title {
+        padding: 0 !important;
     }
     .table-title .title {
         cursor: pointer;
+        padding: 10px 15px;
+        position: relative;
+    }
+    .table-title .title:after {
+        width: 15px;
+        height: 15px;
+        display: block;
+        content: '';
+        background-image: url('../../images/arrow-down.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        cursor: pointer;
+    }
+    .td-active.table-title .title:after {
+        background-image: url('../../images/arrow-up.png');
     }
 }
-
-
 
 @media screen and (max-width: 440px) {
     .scores {

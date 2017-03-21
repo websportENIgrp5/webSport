@@ -415,6 +415,7 @@
     <Content Include="Views\Account\MyRaces.cshtml" />
     <Content Include="Views\Account\_MyRacesPartial.cshtml" />
     <Content Include="Views\Account\_ChangeIdentityPartial.cshtml" />
+    <Content Include="Views\Race\_DetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Autres\" />

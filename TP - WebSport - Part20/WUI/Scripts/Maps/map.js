@@ -14,7 +14,7 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), myOption);
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer({
-	  suppressMarkers : true,
+	  suppressMarkers : false,
 	  map:map,
   });
 	
