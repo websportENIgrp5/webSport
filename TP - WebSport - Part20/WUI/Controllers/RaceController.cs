@@ -237,5 +237,6 @@ namespace WUI.Controllers
             MgtPoi pois = new MgtPoi();
             return Json(pois.Convert(idCourse), JsonRequestBehavior.AllowGet);
         }
+
     }
 }

@@ -12,7 +12,7 @@ namespace DAL.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Inscription
+    public partial class InscriptionEntity
     {
         public int Id { get; set; }
         public int IdParticipant { get; set; }

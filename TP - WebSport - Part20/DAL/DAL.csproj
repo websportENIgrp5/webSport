@@ -80,7 +80,7 @@
     <Compile Include="EntityFramework\GetRaceById_Result.cs">
       <DependentUpon>WebsportPsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\Inscription.cs">
+    <Compile Include="EntityFramework\InscriptionEntity.cs">
       <DependentUpon>WebSportModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\MaTable.cs">

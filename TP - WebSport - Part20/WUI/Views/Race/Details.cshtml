@@ -76,6 +76,12 @@
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Inscription", "Inscrire", new { id = Model.Id })
+    @Html.ActionLink(
+    "Inscrition",
+    "Inscrire",
+    "Inscription",
+    new { id = Model.Id},
+    null
+    )
 </p>
 
