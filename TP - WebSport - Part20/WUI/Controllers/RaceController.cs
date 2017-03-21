@@ -30,30 +30,44 @@ namespace WUI.Controllers
         // GET: /Race/
         // Tous les utilisateurs peuvent visionnés la liste
         [AllowAnonymous]
-        public ActionResult Index(SortType sortType = SortType.DEFAULT)
+        public ActionResult Index(String sortType)
         {
             List<BO.Race> result;
 
-            //var service = new MgtRace(DifficulteRace);
-            
-
             switch (sortType)
             {
-                case SortType.BY_TITLE:
+                case "BY_TITLE":
                     // On passe le delegate en paramètres
                     var service = new MgtRace(TrierParTitre);
                     result = service.SortByTitle();
                     break;
-
-                case SortType.BY_TOWN:
+                case "BY_DATE":
+                    // On passe l'expression lambda en paramètres
+                    result = serviceRace.SortByDateStart();
+                    break;
+                case "BY_TOWN":
                     // On passe l'expression lambda en paramètres
                     result = serviceRace.SortByTown((BO.Race r1, BO.Race r2) =>
                     {
                         return r1.Town.CompareTo(r2.Town);
                     });
                     break;
+                case "BY_LEVEL":
+                    // On passe l'expression lambda en paramètres
+                    result = serviceRace.SortByLevel((BO.Race r1, BO.Race r2) =>
+                    {
+                        return r1.Difficulte.Libelle.CompareTo(r2.Difficulte.Libelle);
+                    });
+                    break;
+                case "BY_CATEGORYRACE":
+                    // On passe l'expression lambda en paramètres
+                    result = serviceRace.SortByCategoryRace((BO.Race r1, BO.Race r2) =>
+                    {
+                        return r1.CategoryRace.Title.CompareTo(r2.CategoryRace.Title);
+                    });
+                    break;
 
-                case SortType.DEFAULT:
+                case "DEFAULT":
                 default:
                     result = serviceRace.SortByDateStart();
                     break;

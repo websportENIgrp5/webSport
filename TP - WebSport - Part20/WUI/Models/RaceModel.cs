@@ -41,10 +41,12 @@ namespace WUI.Models
         public int Distance { get; set; }
 
         [Display(Name = "Heure de départ prévue")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "L'{0} est requise")]
         public Nullable<TimeSpan> HeureStart { get; set; }
 
         [Display(Name = "Heure de d'arrivée prévue")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "L'{0} est requise")]
         public Nullable<TimeSpan> HeureEnd { get; set; }
 
@@ -59,6 +61,27 @@ namespace WUI.Models
         public List<InscriptionModel> Inscriptions { get; set; }
 
         public List<PoiModel> Pois { get; set; }
+
+
+        //private readonly List<DifficulteModel> _difficultes;
+
+        //[Display(Name = "Niveaux")]
+        //public int SelectedDifficulteId { get; set; }
+
+        //public IEnumerable<SelectListItem> Difficultes
+        //{
+        //    //get
+        //    //{
+        //    //    var allDifficultes = _difficultes.Select(d => new SelectListItem
+        //    //    {
+        //    //        Value = d.Id.ToString(),
+        //    //        Text = d.Libelle
+        //    //    });
+        //    //    return allDifficultes;
+        //    //}
+
+        //    get { return new SelectList(_difficultes, "Id", "Libelle"); }
+        //}
 
     }
 }
