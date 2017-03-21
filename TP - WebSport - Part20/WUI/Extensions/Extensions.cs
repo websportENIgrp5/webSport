@@ -63,7 +63,7 @@ namespace WUI.Extensions
                 DateNaissance = bo.DateNaissance,
                 Email = bo.Email,
                 Phone = bo.Phone,
-                Race = bo.Race.ToModel(),
+                User = bo.User.ToModel(),
                 DisplayConfigurations = bo.DisplayConfigurations.Select(x => x.ToModel()).ToList()
             };
         }
@@ -127,9 +127,7 @@ namespace WUI.Extensions
 
                 Difficulte = bo.Difficulte != null ? bo.Difficulte.ToModel() : null,
                 CategoryRace = bo.CategoryRace != null ? bo.CategoryRace.ToModel() : null,
-                Inscriptions = bo.Inscriptions != null ? bo.Inscriptions.Where(i => i.IdCourse == bo.Id).Select(i => i.ToModel()).ToList() : null,
-                // Sélection des inscriptions des 3 premiers compétiteurs au classement de la course
-                //Users = bo.Inscriptions != null ?  bo.Inscriptions.Where(i => new List<int?>(){ 1, 2 , 3 }.Contains(i.NumClassement)).Select(i => i.ToModel()).ToList() : null
+                Inscriptions = bo.Inscriptions != null ? bo.Inscriptions.Where(i => i.IdCourse == bo.Id).Select(i => i.ToModel()).ToList() : null
             };
         }
 
@@ -201,6 +199,8 @@ namespace WUI.Extensions
             };
         }
 
+        #endregion
+
         #region Inscription
 
         public static List<InscriptionModel> ToModels(this List<Inscription> bos)
@@ -222,7 +222,7 @@ namespace WUI.Extensions
                 IdSuiviInscription = bo.IdSuiviInscription,
                 NumClassement = bo.NumClassement,
                 Temps = bo.Temps,
-                User = bo.User.ToModel()
+                Competitor = bo.Competitor.ToModel()
             };
         }
 
@@ -243,6 +243,7 @@ namespace WUI.Extensions
 
         #endregion
 
+        #region Organizer
         public static OrganizerModel ToModel(this Organizer bo)
         {
             if (bo == null) return null;

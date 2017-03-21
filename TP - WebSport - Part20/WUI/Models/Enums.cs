@@ -16,7 +16,11 @@ namespace WUI.Models
     {
         DEFAULT, // Tri par date de début
         BY_TITLE,
-        BY_TOWN
+        BY_DATE,
+        BY_TOWN,
+        BY_LEVEL,
+        BY_CATEGORYRACE
+
     }
         
 }

@@ -22,10 +22,6 @@
     <legend>RaceModel</legend>
 
     <div class="display-label">
-        @Html.DisplayNameFor(model => model.Title) : @Html.DisplayFor(model => model.Title)
-    </div>
-
-    <div class="display-label">
         @Html.DisplayFor(model => model.Inscriptions.Count) inscrits
     </div>
 
@@ -37,6 +33,10 @@
 
     <div class="display-label">
         @Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+        Catégorie : @Html.DisplayFor(model => model.CategoryRace.Title)
     </div>
 
     <div class="display-label">
@@ -58,19 +58,19 @@
     <div class="display-label">
         Horaire : de @Html.DisplayFor(model => model.HeureStart) à @Html.DisplayFor(model => model.HeureEnd)
     </div>
-
+    
     <div class="display-label">Classement</div>
     @foreach (var item in Model.Inscriptions)
     {
         if (new List<int?> { 1, 2, 3 }.Contains(item.NumClassement))
         {
-    <div class="display-label">
-                @Html.DisplayFor(model => item.User.Login)
-    </div>
-    
+            <div class="display-label">
+                @Html.DisplayFor(model => item.Competitor.User.Login) : @Html.DisplayFor(model => item.NumClassement)
+            </div>
+   
         }
     }
-    
+
     <div id="map"></div>
 </fieldset>
 <p>

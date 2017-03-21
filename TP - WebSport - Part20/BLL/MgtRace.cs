@@ -200,6 +200,26 @@ namespace BLL
             return _listRace;
         }
 
+        public List<Race> SortByLevel(Func<Race, Race, int> func)
+        {
+            // Tri de ma liste avec une expression lambda
+            // REMARQUE  : on utilise le delegate proposé par le framework
+            // .NET "Comparison<T>" lequel sait interprêter une "Func"
+            _listRace.Sort(new Comparison<Race>(func));
+
+            return _listRace;
+        }
+
+        public List<Race> SortByCategoryRace(Func<Race, Race, int> func)
+        {
+            // Tri de ma liste avec une expression lambda
+            // REMARQUE  : on utilise le delegate proposé par le framework
+            // .NET "Comparison<T>" lequel sait interprêter une "Func"
+            _listRace.Sort(new Comparison<Race>(func));
+
+            return _listRace;
+        }
+
         #endregion
     }
 }

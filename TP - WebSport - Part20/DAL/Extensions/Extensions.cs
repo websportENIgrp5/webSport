@@ -218,7 +218,7 @@ namespace DAL.Extensions
                 IdSuiviInscription = bo.IdSuiviInscription,
                 NumClassement = bo.NumClassement,
                 Temps = bo.Temps,
-                Participant = bo.Participant.ToCompetitorBo()
+                Competitor = bo.Participant.ToCompetitorBo()
             };
         }
 
@@ -226,14 +226,14 @@ namespace DAL.Extensions
 
         #region User
 
-        public static UserTable ToDataEntity(this User model)
+        public static User ToDataEntity(this UserTable model)
         {
             if (model == null) return null;
 
-            return new UserTable
+            return new User
             {
                 Id = model.Id,
-                Name = model.Login
+                Login = model.Name
             };
         }
 
@@ -260,17 +260,7 @@ namespace DAL.Extensions
                 DateNaissance = bo.Person.BirthDate.HasValue ? bo.Person.BirthDate.Value : DateTime.MinValue,
                 Email = bo.Person.Mail,
                 Phone = bo.Person.Phone,
-                //User = bo.
-            };
-        }
-
-        public static ContributorEntity ToDataEntity(this Competitor model)
-        {
-            if (model == null) return null;
-
-            return new ContributorEntity
-            {
-                UserTable = model.User.ToDataEntity()
+                User = bo.UserTable.ToDataEntity()
             };
         }
 

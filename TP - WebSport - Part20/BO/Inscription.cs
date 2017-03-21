@@ -23,6 +23,6 @@ namespace BO
 
         public User User { get; set; }
 
-        public Competitor Participant { get; set; }
+        public Competitor Competitor { get; set; }
     }
 }
