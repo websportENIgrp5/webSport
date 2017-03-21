@@ -8,6 +8,6 @@ namespace WUI.Models
 {
     public class CompetitorModel : PersonneModel
     {
-        public RaceModel Race { get; set; }
+        public UserModel User { get; set; }
     }
 }

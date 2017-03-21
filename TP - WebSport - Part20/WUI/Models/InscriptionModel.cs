@@ -23,7 +23,7 @@ namespace WUI.Models
 
         public int? NumClassement { get; set; }
 
-        public UserModel User { get; set; }
+        public CompetitorModel Competitor { get; set; }
 
         public List<OrganizerModel> Organisers { get; set; }
 
