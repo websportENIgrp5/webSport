@@ -46,6 +46,7 @@
     <Compile Include="DisplayConfiguration.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Inscription.cs" />
+    <Compile Include="InscriRaceSuivi.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Organizer.cs" />
     <Compile Include="Personne.cs" />
