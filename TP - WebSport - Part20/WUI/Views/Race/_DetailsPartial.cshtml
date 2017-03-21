@@ -1,0 +1,45 @@
+﻿@model WUI.Models.RaceModel
+@{
+    ViewBag.Title = "_DetailsPartial";
+}
+
+<h1 class="mobile-title">@Html.DisplayFor(model => model.Title)</h1>
+
+<div class="suscription">
+    <div>
+        <span class="suscribers">@Html.DisplayFor(model => model.Inscriptions.Count)</span> inscrits
+    </div>
+
+    <span class="button unsubscribe">
+        @Html.ActionLink("S'inscrire", "Inscrire", new { id = Model.Id })
+    </span>
+</div>
+
+<table class="details-races-infos">
+    <tbody>
+        <tr>
+            <td>Catégorie :</td>
+            <td>@Html.DisplayFor(model => model.CategoryRace.Title)</td>
+        </tr>
+        <tr>
+            <td>Distance :</td>
+            <td>@Html.DisplayFor(model => model.Distance)</td>
+        </tr>
+        <tr>
+            <td>Niveau :</td>
+            <td>@Html.DisplayFor(model => model.Difficulte.Libelle)</td>
+        </tr>
+        <tr>
+            <td>Ville :</td>
+            <td>@Html.DisplayFor(model => model.Town)</td>
+        </tr>
+        <tr>
+            <td>Date :</td>
+            <td>@Html.DisplayFor(model => model.DateStart)</td>
+        </tr>
+        <tr>
+            <td>Horaire :</td>
+            <td>de @Html.DisplayFor(model => model.HeureStart) à @Html.DisplayFor(model => model.HeureEnd)</td>
+        </tr>
+    </tbody>
+</table>

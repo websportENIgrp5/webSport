@@ -1,9 +1,79 @@
-﻿.form-design {
-    margin: 0 auto;
+﻿/*
+* Détails course
+*--------------------------
+*/
+.mobile-title {display: none;}
+.description {
+    margin-top: 70px;
+}
+.map {
+    margin-top: 40px;
+}
+#map {
+    height: 500px;
+	width: 100%;
+}
+.suscription {
+    width: 100%;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+}
+.suscribers {
+    display: inline-block;
+    padding-left: 35px;
+    font-size: 30px;
+    position: relative;
+    font-weight: 400;
+    margin-right: 2px;
+}
+.suscribers:before {
+    display: inline-block;
+    float: left;
+    content: '';
+    width: 22px;
+    height: 22px;
+    background-image: url('../../images/suscribers.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 12px;
+    left: 0;
+}
+.suscription .unsubscribe {
+    margin-top: 10px;
+}
+.suscription .unsubscribe a {
+    padding: 15px 40px;
+}
+.details-races-infos {
+    width: 100%;
+    margin-top: 30px;
+}
+.details-races-infos td {
+    text-align: left;
+}
+.details-races-infos td:first-child {
     width: 40%;
 }
-#map 
-{
-        height: 300px;
-		width:300px;
+
+/*
+* Responsive
+*--------------------------
+*/
+@media screen and (max-width: 1000px) {
+    .mobile-title {display: block;}
+    .details-race-title {display: none;}
+    .description {margin-top: 30px;}
+    .map > div {padding: 10px 40px;}
+}
+
+@media screen and (max-width: 768px) {
+    #map {height: 400px;}
+    .map > div {padding: 10px 30px;}
+}
+
+@media screen and (max-width: 500px) {
+    #map {height: 300px;}
+    .map > div {padding: 10px 20px;}
 }

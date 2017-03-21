@@ -14,7 +14,7 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), myOption);
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer({
-	  suppressMarkers : true,
+	  suppressMarkers : false,
 	  map:map,
   });
 	
@@ -41,7 +41,7 @@ $(function () {
                 alert('There was an error 400');
             }
             else {
-                alert('something else other than 200 was returned');
+                alert(xmlhttp.status);
             }
         }
     };

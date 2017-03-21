@@ -1,0 +1,19 @@
+﻿@model WUI.Models.LocalPasswordModel
+
+<h2>Modifier Mes informations personnelles</h2>
+
+@using (Html.BeginForm("Manage", "Account"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Formulaire de modification de l'identité</legend>
+
+        <ol>
+            <li>
+                <p>TODO: Formulaire du login, nom et prénom</p>
+            </li>
+        </ol>
+    </fieldset>
+}
