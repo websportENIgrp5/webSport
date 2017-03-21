@@ -199,14 +199,14 @@ namespace DAL.Extensions
 
         #region Inscription
 
-        public static List<BO.Inscription> ToInscriptionBos(this List<EntityFramework.Inscription> bos)
+        public static List<Inscription> ToInscriptionBos(this List<InscriptionEntity> bos)
         {
             return bos != null
                 ? bos.Where(x => x != null).Select(x => x.ToInscriptionBo()).ToList()
                 : null;
         }
 
-        public static BO.Inscription ToInscriptionBo(this EntityFramework.Inscription bo)
+        public static Inscription ToInscriptionBo(this InscriptionEntity bo)
         {
             if (bo == null) return null;
 

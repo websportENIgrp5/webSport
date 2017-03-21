@@ -140,6 +140,43 @@ namespace WUI.Controllers
 
             //return View(result);
 
+            List<RaceDisplayModel> races = new List<RaceDisplayModel>()
+            {
+                new RaceDisplayModel
+                {
+                    Title = "Les petites foulées",
+                    City = "Nantes",
+                    Distance = 10,
+                    State ="En cours de validation",
+                    Time = null,
+                    Classement = null,
+                    Date = new DateTime(2017, 03, 21)
+                },
+
+                new RaceDisplayModel
+                {
+                    Title = "Marathon Nantes",
+                    City = "Nantes",
+                    Distance = 42,
+                    State ="En cours de validation",
+                    Time = null,
+                    Classement = null,
+                    Date = new DateTime(2017, 7, 14)
+                },
+
+                new RaceDisplayModel
+                {
+                    Title = "Les foulées du tram",
+                    City = "Nantes",
+                    Distance = 15,
+                    State ="En cours de validation",
+                    Time = null,
+                    Classement = null,
+                    Date = new DateTime(2017, 12, 25)
+                },
+            };
+
+            TempData.Add("Races", races);
             return View();
         }
 

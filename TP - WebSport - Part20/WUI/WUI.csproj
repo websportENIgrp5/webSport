@@ -195,6 +195,7 @@
     <Compile Include="Models\InscriptionModel.cs" />
     <Compile Include="Models\OrganizerModel.cs" />
     <Compile Include="Models\PersonneModel.cs" />
+    <Compile Include="Models\RaceDisplayModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\PoiModel.cs" />
     <Compile Include="Models\RaceModel.cs" />

@@ -19,6 +19,7 @@ namespace WUI.Controllers
             serviceRace = MgtRace.GetInstance();
         }
 
+        [Authorize]
         public ActionResult Inscrire(int id)
         {
             var result = MgtRace.GetInstance().GetRace(id).ToModel();
