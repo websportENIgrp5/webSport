@@ -19,7 +19,7 @@ namespace DAL.EntityFramework
         public int IdPoi { get; set; }
         public Nullable<int> NumOrdrePoi { get; set; }
     
-        public virtual RaceEntity Course { get; set; }
         public virtual PoiEntity Poi { get; set; }
+        public virtual RaceEntity Course { get; set; }
     }
 }

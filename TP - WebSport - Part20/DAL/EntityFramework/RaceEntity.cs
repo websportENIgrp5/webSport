@@ -16,8 +16,8 @@ namespace DAL.EntityFramework
     {
         public RaceEntity()
         {
-            this.Inscription = new HashSet<InscriptionEntity>();
             this.Parcours = new HashSet<Parcours>();
+            this.Inscription = new HashSet<InscriptionEntity>();
         }
     
         public int Id { get; set; }
@@ -34,7 +34,7 @@ namespace DAL.EntityFramework
     
         public virtual CategorieCourse CategorieCourse { get; set; }
         public virtual Difficulte Difficulte { get; set; }
-        public virtual ICollection<InscriptionEntity> Inscription { get; set; }
         public virtual ICollection<Parcours> Parcours { get; set; }
+        public virtual ICollection<InscriptionEntity> Inscription { get; set; }
     }
 }

@@ -44,12 +44,31 @@
                     <div class="mobile time">
                         <strong>Temps personnel : </strong>
                         @* TODO: Temps *@
-                        <span class="undefined">Non déterminé</span>
+                        <span class="undefined">
+                            @if (race.Classement == null)
+                            {
+                                <text>Non Determinée</text>
+                            }
+                            else
+                            {
+                                <text>@race.Time.Value</text>
+                            }
+                        </span>
                     </div>
                     <div class="mobile classement">
                         <strong>Classement : </strong>
-                        @* TODO: Classement *@
-                        <span class="undefined">Non déterminé</span>
+                        <span class="undefined">
+                       
+                             @if (race.Classement == null)
+                             {
+                                 <text>Non Determinée</text>
+                                }
+                                else
+                                {
+                                 <text>@race.Classement</text>
+                             }
+                              
+                        </span>
                     </div>
                     <div class="mobile etat">
                         <strong>Etat : </strong>
@@ -67,10 +86,24 @@
             <td class="distance"><span>@race.Distance km</span></td>
 
             @* TODO: Temps personnel *@
-            <td class="time"><span class="undefined">Non déterminé</span></td>
+            <td class="time"><span class="undefined">@if (race.Classement == null)
+            {
+                <text>Non Determinée</text>
+            }
+            else
+            {
+                <text>@race.Time.Value.Hours:@race.Time.Value.Minutes:@race.Time.Value.Seconds</text>
+}</span></td>
 
-            @* TODO: Classement *@
-            <td class="classement"><span class="undefined">Non déterminé</span></td>
+            <td class="classement"><span class="undefined">@if (race.Classement == null)
+            {
+                <text>Non Determinée</text>
+            }
+            else
+            {
+                <text>@race.Classement</text>
+            }
+</span></td>
 
             <td class="etat"><span>@race.State</span></td>
 

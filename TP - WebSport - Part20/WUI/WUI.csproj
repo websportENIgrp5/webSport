@@ -179,6 +179,7 @@
     <Compile Include="Controllers\InscriptionController.cs" />
     <Compile Include="Controllers\RaceController.cs" />
     <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Filters\InitDbUserModule.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

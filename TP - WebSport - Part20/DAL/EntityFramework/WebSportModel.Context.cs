@@ -25,16 +25,16 @@ namespace DAL.EntityFramework
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<RaceEntity> RaceEntities { get; set; }
         public DbSet<ContributorEntity> ContributorEntities { get; set; }
         public DbSet<PersonEntity> PersonEntities { get; set; }
         public DbSet<CategorieCourse> CategorieCourse { get; set; }
         public DbSet<CategoriePoi> CategoriePoi { get; set; }
         public DbSet<Difficulte> Difficulte { get; set; }
-        public DbSet<InscriptionEntity> Inscription { get; set; }
         public DbSet<PoiEntity> Poi { get; set; }
         public DbSet<SuiviInscription> SuiviInscription { get; set; }
         public DbSet<UserTable> UserTable { get; set; }
         public DbSet<Parcours> Parcours { get; set; }
+        public DbSet<RaceEntity> RaceEntities { get; set; }
+        public DbSet<InscriptionEntity> Inscription { get; set; }
     }
 }

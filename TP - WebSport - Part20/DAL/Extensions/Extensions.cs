@@ -236,7 +236,7 @@ namespace DAL.Extensions
         {
             if (bo == null) return null;
 
-            return new BO.Inscription
+            return new Inscription
             {
                 Id = bo.Id,
                 IdCourse = bo.IdCourse,

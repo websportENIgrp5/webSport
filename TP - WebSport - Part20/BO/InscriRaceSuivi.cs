@@ -14,7 +14,7 @@ namespace BO
 
         public string City { get; set; }
 
-        public TimeSpan Time { get; set; }
+        public Nullable<TimeSpan> Time { get; set; }
 
         public int? Classement { get; set; }
 
