@@ -4,12 +4,14 @@
     ViewBag.Title = "Se connecter";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title</h1>
-</hgroup>
+
 
 <section id="loginForm">
-<h2>Utilisez un compte local pour vous connecter.</h2>
+    <hgroup class="title">
+        <h1>@ViewBag.Title</h1>
+    </hgroup>
+    <h2>Utilisez un compte local pour vous connecter.</h2>
+
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -32,12 +34,12 @@
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
             </li>
         </ol>
-        <span class="button login">
-            <a><input type="submit" value="Se connecter" /></a>
-        </span>
+        <div class="button login">
+            <div><input type="submit" value="Se connecter" /></div>
+        </div>
     </fieldset>
-    <p>
-        @Html.ActionLink("Register", "Register") si vous n’avez pas de compte.
+    <p class="subscription-link">
+        @Html.ActionLink("S'inscrire", "Register") si vous n’avez pas de compte.
     </p>
 }
 </section>
