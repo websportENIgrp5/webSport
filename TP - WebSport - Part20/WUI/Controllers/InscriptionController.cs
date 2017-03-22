@@ -35,7 +35,9 @@ namespace WUI.Controllers
         {
             MgtInscription inscriptionManager = MgtInscription.Instance;
             inscriptionManager.WriteInscription(idCourse, loginUser);
-            return View();
+
+            var result = MgtRace.GetInstance().GetRace(idCourse).ToModel();
+            return View(result);
         }
     }
 }
