@@ -318,9 +318,7 @@ ul#menu {
         }
 
         ul#menu li a:hover {
-            background: #50a1d1;
             text-decoration: none;
-            transition: background 0.1s;
         }
 
 
@@ -448,10 +446,13 @@ aside {
 }
 
 /* login page */
-#loginForm {
-    border-right: solid 2px #c8c8c8;
-    float: left;
+#loginForm, .loginForm {
     width: 55%;
+    margin: 50px auto;
+}
+#loginForm h2, .loginForm h2 {
+    margin-bottom: 20px;
+    margin-top: 30px;
 }
 
     #loginForm .validation-error {
@@ -511,6 +512,16 @@ aside {
 .contact iframe {
     border: 1px solid #333;
     margin: 5px 0 0 10px;
+}
+
+#RememberMe {vertical-align: middle;}
+
+.subscription-link {
+    margin-top: 5px;
+}
+.subscription-link a {
+    text-decoration: underline;
+    
 }
 
 /* forms */
@@ -955,7 +966,7 @@ tfoot td {
         z-index: 1;
     }
     #login {display: none;}
-
+    #loginForm, .loginForm {margin-top: 0px;}
     .moblie-menu-button {
         background-image: url('../images/menu-btn.png');
         background-repeat: no-repeat;
@@ -1016,9 +1027,20 @@ tfoot td {
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 545px) {
     .change-password .button {
         width: 100%;
         margin-top: 0;
+    }
+    .login.button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    #login-form, .loginForm {
+        width: 100%;
+    }
+    input[type=text],
+    input[type=password] {
+        width: 100% !important;
     }
 }
