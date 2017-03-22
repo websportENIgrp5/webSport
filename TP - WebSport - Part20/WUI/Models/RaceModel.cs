@@ -63,7 +63,7 @@ namespace WUI.Models
         public List<PoiModel> Pois { get; set; }
 
 
-        //private readonly List<DifficulteModel> _difficultes;
+        //public List<DifficulteModel> _difficultes { get; set; }
 
         //[Display(Name = "Niveaux")]
         //public int SelectedDifficulteId { get; set; }

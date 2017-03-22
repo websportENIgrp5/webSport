@@ -16,7 +16,7 @@ namespace DAL.Extensions
         public static List<Race> ToBos(this List<RaceEntity> bos, bool withJoin = false)
         {
             return bos != null
-                ? bos.Where(x => x != null).Select(x => x.ToBo(withJoin)).ToList()
+                ? bos.Where(x => x != null && x.DateStart >= DateTime.Today).Select(x => x.ToBo(withJoin)).ToList()
                 : null;
         }
 
@@ -42,6 +42,30 @@ namespace DAL.Extensions
                 Inscriptions = bo.Inscription != null ? bo.Inscription.Where(x => x.IdCourse == bo.Id).Select(x => x.ToInscriptionBo()).ToList() : null,
             };
         }
+
+        public static Race ToBoId(this RaceEntity bo, bool withJoin = false)
+        {
+            if (bo == null) return null;
+
+            return new Race
+            {
+                Id = bo.Id,
+                Title = bo.Title,
+                Description = bo.Description,
+                DateStart = bo.DateStart,
+                Town = bo.Town,
+                Distance = bo.Distance,
+                HeureStart = bo.HeureStart,
+                HeureEnd = bo.HeureEnd,
+                IdDifficulte = bo.IdDifficulte,
+                IdCategoryRace = bo.IdCategorieCourse,
+
+                Difficulte = bo.Difficulte != null ? bo.Difficulte.ToBo() : null,
+                CategoryRace = bo.CategorieCourse != null ? bo.CategorieCourse.ToBo() : null,
+                Inscriptions = bo.Inscription != null ? bo.Inscription.Where(x => x.IdCourse == bo.Id).Select(x => x.ToInscriptionBo()).ToList() : null,
+            };
+        }
+
 
         public static RaceEntity ToDataEntity(this Race model)
         {

@@ -47,6 +47,11 @@
 
 </nav>
 
+<p>
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    @Html.ActionLink("Créer une nouvelle course", "Create")
+</p>
+
 <div class="row row-bold">
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
         @Html.DisplayNameFor(model => model.Title)
@@ -81,7 +86,7 @@
                 @Html.DisplayFor(modelItem => item.Town)
             </div>
             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                @Html.DisplayFor(modelItem => item.Distance)
+                @Html.DisplayFor(modelItem => item.Distance) Km
             </div>
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                     @Html.DisplayFor(modelItem => item.Difficulte.Libelle)
