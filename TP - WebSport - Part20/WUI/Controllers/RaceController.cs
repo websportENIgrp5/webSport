@@ -112,6 +112,7 @@ namespace WUI.Controllers
 
         //
         // GET: /Race/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {
             var result = MgtRace.GetInstance().GetRace(id).ToModel();
@@ -155,7 +156,7 @@ namespace WUI.Controllers
                 }
                 else
                 {
-                    return View();
+                        return View(); 
                 }
 
             }
@@ -253,5 +254,6 @@ namespace WUI.Controllers
             MgtPoi pois = new MgtPoi();
             return Json(pois.Convert(idCourse), JsonRequestBehavior.AllowGet);
         }
+
     }
 }

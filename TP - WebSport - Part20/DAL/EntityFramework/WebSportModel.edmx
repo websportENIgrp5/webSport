@@ -292,7 +292,7 @@
           <EntitySet Name="CategorieCourse" EntityType="BddLoginModel.CategorieCourse" />
           <EntitySet Name="CategoriePoi" EntityType="BddLoginModel.CategoriePoi" />
           <EntitySet Name="Difficulte" EntityType="BddLoginModel.Difficulte" />
-          <EntitySet Name="Inscription" EntityType="BddLoginModel.Inscription" />
+          <EntitySet Name="Inscription" EntityType="BddLoginModel.InscriptionEntity" />
           <EntitySet Name="Poi" EntityType="BddLoginModel.PoiEntity" />
           <EntitySet Name="SuiviInscription" EntityType="BddLoginModel.SuiviInscription" />
           <EntitySet Name="UserTable" EntityType="BddLoginModel.UserTable" />
@@ -413,7 +413,7 @@
           <Property Name="Libelle" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Course" Relationship="BddLoginModel.FK_Course_Difficulte" FromRole="Difficulte" ToRole="RaceEntity" />
         </EntityType>
-        <EntityType Name="Inscription">
+        <EntityType Name="InscriptionEntity">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -492,7 +492,7 @@
         </Association>
         <Association Name="FK_Inscription_Course">
           <End Type="BddLoginModel.RaceEntity" Role="RaceEntity" Multiplicity="1" />
-          <End Type="BddLoginModel.Inscription" Role="Inscription" Multiplicity="*" />
+          <End Type="BddLoginModel.InscriptionEntity" Role="Inscription" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RaceEntity">
               <PropertyRef Name="Id" />
@@ -504,7 +504,7 @@
         </Association>
         <Association Name="FK_Inscription_Participant">
           <End Type="BddLoginModel.ContributorEntity" Role="ContributorEntity" Multiplicity="1" />
-          <End Type="BddLoginModel.Inscription" Role="Inscription" Multiplicity="*" />
+          <End Type="BddLoginModel.InscriptionEntity" Role="Inscription" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ContributorEntity">
               <PropertyRef Name="PersonId" />
@@ -516,7 +516,7 @@
         </Association>
         <Association Name="FK_Inscription_SuiviInscription">
           <End Type="BddLoginModel.SuiviInscription" Role="SuiviInscription" Multiplicity="1" />
-          <End Type="BddLoginModel.Inscription" Role="Inscription" Multiplicity="*" />
+          <End Type="BddLoginModel.InscriptionEntity" Role="Inscription" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SuiviInscription">
               <PropertyRef Name="Id" />
@@ -642,7 +642,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inscription">
-            <EntityTypeMapping TypeName="BddLoginModel.Inscription">
+            <EntityTypeMapping TypeName="BddLoginModel.InscriptionEntity">
               <MappingFragment StoreEntitySet="Inscription">
                 <ScalarProperty Name="Temps" ColumnName="Temps" />
                 <ScalarProperty Name="NumClassement" ColumnName="NumClassement" />

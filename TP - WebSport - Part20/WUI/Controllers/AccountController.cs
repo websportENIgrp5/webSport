@@ -129,6 +129,7 @@ namespace WUI.Controllers
 
         public ActionResult Dashboard()
         {
+            
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Dashboard");
 
@@ -140,6 +141,11 @@ namespace WUI.Controllers
 
             //return View(result);
 
+            MgtAccount serviceAccount = new MgtAccount();
+            List<RaceDisplayModel> races=  serviceAccount.GetLast3InscriByUserName(User.Identity.Name).ToModels();
+
+        
+            TempData.Add("Races", races);
             return View();
         }
 
@@ -150,6 +156,11 @@ namespace WUI.Controllers
         {
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("MyRaces");
+
+            MgtAccount serviceAccount = new MgtAccount();
+            List<RaceDisplayModel> races = serviceAccount.GetInscriByUserName(User.Identity.Name).ToModels();
+
+            TempData.Add("Races", races);
             return View();
         }
 

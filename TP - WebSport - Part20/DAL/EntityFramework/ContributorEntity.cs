@@ -16,7 +16,7 @@ namespace DAL.EntityFramework
     {
         public ContributorEntity()
         {
-            this.Inscription = new HashSet<Inscription>();
+            this.Inscription = new HashSet<InscriptionEntity>();
         }
     
         public int PersonId { get; set; }
@@ -25,7 +25,7 @@ namespace DAL.EntityFramework
         public Nullable<int> IdUser { get; set; }
     
         public virtual PersonEntity Person { get; set; }
-        public virtual ICollection<Inscription> Inscription { get; set; }
+        public virtual ICollection<InscriptionEntity> Inscription { get; set; }
         public virtual UserTable UserTable { get; set; }
     }
 }

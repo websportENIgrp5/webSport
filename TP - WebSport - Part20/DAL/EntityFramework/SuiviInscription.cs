@@ -16,12 +16,12 @@ namespace DAL.EntityFramework
     {
         public SuiviInscription()
         {
-            this.Inscription = new HashSet<Inscription>();
+            this.Inscription = new HashSet<InscriptionEntity>();
         }
     
         public int Id { get; set; }
         public string Libelle { get; set; }
     
-        public virtual ICollection<Inscription> Inscription { get; set; }
+        public virtual ICollection<InscriptionEntity> Inscription { get; set; }
     }
 }

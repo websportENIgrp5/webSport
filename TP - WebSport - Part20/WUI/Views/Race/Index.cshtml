@@ -7,9 +7,11 @@
 
 @section css {
     @Styles.Render("~/Content/Race/css")
+    @Styles.Render("~/Content/Account/css")
 }
 
-<h2>Liste des courses</h2>
+<div class="one-column">
+    <h1>Liste des courses</h1>
 
 <nav class="navbar navbar-default">
     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-filter" aria-expanded="false">
@@ -47,60 +49,83 @@
 
 </nav>
 
-<p>
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-    @Html.ActionLink("Créer une nouvelle course", "Create")
-</p>
+    <p>
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        @Html.ActionLink("Créer une nouvelle course", "Create")
+    </p>
 
-<div class="row row-bold">
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        @Html.DisplayNameFor(model => model.Title)
-    </div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        @Html.DisplayNameFor(model => model.DateStart)
-    </div>
-    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-        @Html.DisplayNameFor(model => model.Town)
-    </div>
-    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-        @Html.DisplayNameFor(model => model.Distance)
-    </div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Niveau</div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Catégorie</div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">&nbsp;</div>
-</div>
+    <table class="table races list">
+        <thead>
+            <tr>
+                <th class="race-main-column">@Html.DisplayNameFor(model => model.Title)</th>
+                <th class="date">@Html.DisplayNameFor(model => model.DateStart)</th>
+                <th class="town">@Html.DisplayNameFor(model => model.Town)</th>
+                <th class="distance">@Html.DisplayNameFor(model => model.Distance)</th>
+                <th class="niveau">Niveau</th>
+                <th class="category">Catégorie</th>
+                <th class="details">&nbsp;</th>
+            </tr>
+        </thead>
 
-
+        <tbody>
 @if (Model != null)
 {
     foreach (var item in Model)
     {
-        <div class="row">
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                @Html.DisplayFor(modelItem => item.Title)
+                    <tr>
+                        <td class="race-main-column table-title">
+                            <span class="title">@Html.DisplayFor(modelItem => item.Title)</span>
+                            <div class="mobile-table-content">
+                                @*Date*@
+                                <div class="mobile date">
+                                    <strong>@Html.DisplayNameFor(model => model.DateStart) : </strong>
+                                    <span>@Html.DisplayFor(modelItem => item.DateStart)</span>
             </div>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                @Html.DisplayFor(modelItem => item.DateStart)
+                                @*Town*@
+                                <div class="mobile town">
+                                    <strong>@Html.DisplayNameFor(model => model.Town) : </strong>
+                                    <span>@Html.DisplayFor(modelItem => item.Town)</span>
             </div>
-            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                @Html.DisplayFor(modelItem => item.Town)
+                                @*Distance*@
+                                <div class="mobile distance">
+                                    <strong>@Html.DisplayNameFor(model => model.Distance) : </strong>
+                                    <span>@Html.DisplayFor(modelItem => item.Distance)</span>
             </div>
-            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                @Html.DisplayFor(modelItem => item.Distance) Km
+                                @*Niveau*@
+                                <div class="mobile niveau">
+                                    <strong>Niveau : </strong>
+                                    <span>@Html.DisplayFor(modelItem => item.Difficulte.Libelle)</span>
             </div>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                    @Html.DisplayFor(modelItem => item.Difficulte.Libelle)
+                                @*Category*@
+                                <div class="mobile category">
+                                    <strong>Catégorie : </strong>
+                                    <span>@Html.DisplayFor(modelItem => item.CategoryRace.Title)</span>
             </div>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                @Html.DisplayFor(modelItem => item.CategoryRace.Title)
-            </div>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                @*Details*@
+                                <div class="mobile details">
+                                    <span class="button unsubscribe">
                 @Html.ActionLink("Voir le détail", "Details", new { id = item.Id }) 
+                                    </span>
             </div>
         </div>
+                        </td>
+
+                        <td class="date">@Html.DisplayFor(modelItem => item.DateStart)</td>
+                        <td class="town">@Html.DisplayFor(modelItem => item.Town)</td>
+                        <td class="distance">@Html.DisplayFor(modelItem => item.Distance)</td>
+                        <td class="niveau">@Html.DisplayFor(modelItem => item.Difficulte.Libelle)</td>
+                        <td class="category">@Html.DisplayFor(modelItem => item.CategoryRace.Title)</td>
+                        <td class="details">
+                            <span class="button unsubscribe">
+                                @Html.ActionLink("Voir le détail", "Details", new { id = item.Id })
+                            </span>
+                        </td>
+                    </tr>
     }
 }
-
+        </tbody>
+    </table>
+</div>
 
 @section scripts {
     @Scripts.Render("~/bundles/Race/js")

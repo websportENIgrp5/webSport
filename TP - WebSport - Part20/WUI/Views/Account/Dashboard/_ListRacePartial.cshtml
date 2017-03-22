@@ -1,8 +1,10 @@
 ﻿@{
-    ViewBag.Title = "_MyRacesPartial";
+    ViewBag.Title = "_LastListRacePartial";
 }
 
-<table class="table races">
+<h2>Mes dernières courses</h2>
+
+<table class="table races account">
     <thead>
         <tr>
             <th class="race-main-column">Course</th>
@@ -16,29 +18,32 @@
 
     <tbody>
         @* --- Exemple ligne course non effectuée ---*@
+       
+    @{
+        List<WUI.Models.RaceDisplayModel> races = (List<WUI.Models.RaceDisplayModel>)TempData["Races"];
+
+        foreach (WUI.Models.RaceDisplayModel race in races)
+        {
         <tr>
             <td class="race-main-column table-title">
-                @* TODO: Intitulé *@
-                <span class="title">Les petites foulées</span>
+
+                <span class="title">@race.Title</span>
                 <div class="mobile-table-content">
                     <div>
                         <strong>Date : </strong>
-                        @* TODO: Date *@
-                        <span>18/03/2017</span>
+                        <span>@race.Date.Day/@race.Date.Month/@race.Date.Year</span>
                     </div>
                     <div>
                         <strong>Ville : </strong>
-                        @* TODO: Ville *@
-                        <span>Nantes</span>
+                        <span>@race.City</span>
                     </div>
                     <div class="mobile distance">
                         <strong>Distance : </strong>
-                        @* TODO: Distance *@
-                        <span>10 km</span>
+                        <span>@race.Distance km</span>
                     </div>
                     <div class="mobile time">
                         <strong>Temps personnel : </strong>
-                        @* TODO: Temps personnel *@
+                        @* TODO: Temps *@
                         <span class="undefined">Non déterminé</span>
                     </div>
                     <div class="mobile classement">
@@ -48,8 +53,7 @@
                     </div>
                     <div class="mobile etat">
                         <strong>Etat : </strong>
-                        @* TODO: Etat *@
-                        <span>En cours de validation</span>
+                        <span>@race.State</span>
                     </div>
                     <div class="mobile unsubscribe">
                         @* TODO: Gérer la désinscription *@
@@ -60,8 +64,7 @@
                 </div>
             </td>
 
-            @* TODO: Distance *@
-            <td class="distance"><span>10 km</span></td>
+            <td class="distance"><span>@race.Distance km</span></td>
 
             @* TODO: Temps personnel *@
             <td class="time"><span class="undefined">Non déterminé</span></td>
@@ -69,8 +72,7 @@
             @* TODO: Classement *@
             <td class="classement"><span class="undefined">Non déterminé</span></td>
 
-            @* TODO: Etat *@
-            <td class="etat"><span>En cours de validation</span></td>
+            <td class="etat"><span>@race.State</span></td>
 
             @* Bouton désinscription *@
             <td class="unsubscribe">
@@ -80,5 +82,19 @@
                 </span>
             </td>
         </tr>
+        }
+
+    }
+           
     </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="8" class="link">
+                <span>
+                    @Html.ActionLink("Voir toutes mes courses", "MyRaces")
+                </span>
+            </td>
+        </tr>
+    </tfoot>
 </table>

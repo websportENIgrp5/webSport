@@ -1,0 +1,22 @@
+﻿@model WUI.Models.RaceModel
+
+@{
+    ViewBag.Title = "Inscrire";
+}
+
+<h2>Inscription à la course "@Html.DisplayFor(model=> model.Title)"</h2>
+
+
+<div class="button return">
+    @Html.ActionLink("retour", "Details", new { id = Model.Id })
+</div>
+<div class="button confirm">
+    @Html.ActionLink(
+    "Valider l'inscription",
+    "ConfirmInscription",
+    "Inscription",
+    new { idCourse = Model.Id, loginUser = User.Identity.Name },
+    null
+    )
+</div>
+

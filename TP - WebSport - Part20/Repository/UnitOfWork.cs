@@ -12,6 +12,8 @@ namespace Repository
         private GenericRepository<ContributorEntity> _contributorRepo;
         private RaceRepository _raceRepo;
         private PoiRepository _poiRepo;
+        private UserRepository _userRepo;
+        private InscriptionRepo _inscriRepo;
 
         #region Constructors
 
@@ -80,6 +82,29 @@ namespace Repository
                 return _categoryRaceRepo;
             }
         }
+
+        public UserRepository UserRepo
+        {
+            get
+            {
+                if(_userRepo == null)
+                    _userRepo = new UserRepository(this.context);
+                return _userRepo;
+            }
+        }
+
+        public InscriptionRepo InscriptionRepo
+        {
+            get
+            {
+                if (_inscriRepo == null)
+                {
+                    _inscriRepo = new InscriptionRepo(this.context);
+                }
+                return _inscriRepo;
+            }
+        }
+
 
         // Etc... on liste les repositories
 

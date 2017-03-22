@@ -20,30 +20,31 @@ var responsiveSelect = $('.account-menu-responsive');
 var accountMenuNav = $('.account-menu-nav');
 
 if ($('#' + url_parts[3]) && $(window).width() > 1001) {
-        $('.account-nav-item').removeClass('active');
-        $('#' + url_parts[3]).addClass('active');
+    $('.account-nav-item').removeClass('active');
+    $('#' + url_parts[3]).addClass('active');
 }
-else {
-    responsiveSelect.text($('#' + url_parts[3]).text());
 
-    responsiveSelect.click(function () {
-        if (accountMenuNav.hasClass('active')) {
-            accountMenuNav.slideUp();
-            accountMenuNav.removeClass('active');
-        }
-        else {
-            accountMenuNav.slideDown();
-            accountMenuNav.addClass('active');
-        }
-    });
-}
+responsiveSelect.text($('#' + url_parts[3]).text());
+
+responsiveSelect.click(function () {
+    if (accountMenuNav.parent().hasClass('active')) {
+        accountMenuNav.slideUp();
+        accountMenuNav.parent().removeClass('active');
+    }
+    else {
+        accountMenuNav.slideDown();
+        accountMenuNav.parent().addClass('active');
+    }
+});
 
 $(window).resize(function () {
     if ($('#' + url_parts[3]) && ($(window).width() < 1001)) {
-        $('.account-nav-item').removeClass('active');
+        accountMenuNav.css('display', 'none');
+        $('.account-nav-item').parent().removeClass('active');
         responsiveSelect.text(url_parts[3]);
     }
     else {
+        accountMenuNav.css('display', 'block');
         $('.account-nav-item').removeClass('active');
         $('#' + url_parts[3]).addClass('active');
     }
@@ -56,16 +57,16 @@ tableTitle.click(function () {
     var tableContent = $(this).find('.mobile-table-content');
 
     if ($(window).width() <= 670) {
-        if (!tableContent.hasClass('td-active')) {
+        if (!tableContent.parent().hasClass('td-active')) {
             $('.mobile-table-content').slideUp();
-            $('.mobile-table-content').removeClass('td-active');
+            $('.mobile-table-content').parent().removeClass('td-active');
 
             tableContent.slideDown();
-            tableContent.addClass('td-active');
+            tableContent.parent().addClass('td-active');
         }
         else {
             $('.mobile-table-content').slideUp();
-            $('.mobile-table-content').removeClass('td-active');
+            $('.mobile-table-content').parent().removeClass('td-active');
         }
     }
 

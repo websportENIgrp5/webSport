@@ -15,7 +15,7 @@
     <AssemblyName>WUI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -176,6 +176,7 @@
     <Compile Include="Controllers\DisplayConfigurationController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InscriptionController.cs" />
     <Compile Include="Controllers\RaceController.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Models\InscriptionModel.cs" />
     <Compile Include="Models\OrganizerModel.cs" />
     <Compile Include="Models\PersonneModel.cs" />
+    <Compile Include="Models\RaceDisplayModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\PoiModel.cs" />
     <Compile Include="Models\RaceModel.cs" />
@@ -410,10 +412,13 @@
     <Content Include="Views\Shared\Page404.cshtml" />
     <Content Include="Views\Account\_MenuPartial.cshtml" />
     <Content Include="Views\Account\Dashboard.cshtml" />
-    <Content Include="Views\Account\Dashboard\_LastListRacePartial.cshtml" />
+    <Content Include="Views\Account\Dashboard\_ListRacePartial.cshtml" />
     <Content Include="Views\Account\Dashboard\_StatsPartial.cshtml" />
     <Content Include="Views\Account\MyRaces.cshtml" />
-    <Content Include="Views\Account\_MyRacesPartial.cshtml" />
+    <Content Include="Views\Inscription\Inscrire.cshtml" />
+    <Content Include="Views\Inscription\ConfirmInscription.cshtml" />
+    <Content Include="Views\Account\_ChangeIdentityPartial.cshtml" />
+    <Content Include="Views\Race\_DetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Autres\" />

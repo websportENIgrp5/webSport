@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
+
 namespace DAL.Extensions
 {
     public static class Extensions
@@ -222,14 +223,14 @@ namespace DAL.Extensions
 
         #region Inscription
 
-        public static List<BO.Inscription> ToInscriptionBos(this List<EntityFramework.Inscription> bos)
+        public static List<Inscription> ToInscriptionBos(this List<InscriptionEntity> bos)
         {
             return bos != null
                 ? bos.Where(x => x != null).Select(x => x.ToInscriptionBo()).ToList()
                 : null;
         }
 
-        public static BO.Inscription ToInscriptionBo(this EntityFramework.Inscription bo)
+        public static Inscription ToInscriptionBo(this InscriptionEntity bo)
         {
             if (bo == null) return null;
 
@@ -287,6 +288,7 @@ namespace DAL.Extensions
             };
         }
 
+
         #endregion
 
         #region Organizer
@@ -330,7 +332,25 @@ namespace DAL.Extensions
         //        Id = poi.Id
         //    }
         //}
-        
-            #endregion
+
+        #endregion
+
+        #region Inscription
+
+        public static InscriptionEntity ToDataEntity(this Inscription bo)
+        {
+            
+            InscriptionEntity de = new InscriptionEntity();
+            de.IdCourse = bo.IdCourse;
+            de.IdParticipant = bo.IdParticipant;
+            de.IdSuiviInscription = bo.IdSuiviInscription;
+            if(bo.Temps != null )
+                de.Temps = bo.Temps.ToString();
+            if(bo.NumClassement !=null)
+            de.NumClassement = bo.NumClassement;
+
+            return de;
+        }
+        #endregion
     }
 }
