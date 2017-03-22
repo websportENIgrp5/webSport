@@ -1,13 +1,20 @@
 ﻿@{
     ViewBag.Title = "Confirmation Inscription";
 }
+@section css {
+    @Styles.Render("~/Content/Race/css")
+}
 
-<h1>Féliciations !</h1>
+<div class="one-column">
+    <h1>Féliciations !</h1>
 
-<p> Votre demande d'inscription a bien été prise en compte.</p>
+    <div class="inscription-details">
+        <p> Votre demande d'inscription a bien été prise en compte.</p>
 
-<p>Pour rappel, afin de la valider :</p>
+        <p>Pour rappel, afin de la valider :</p>
 
-<p>---- TODO: afficher règlement ----</p>
+        <p>---- TODO: afficher règlement ----</p>
 
-<p>Pour consulter vos inscriptions ou vous désinscrire, rendez-vous dans votre espace personnel.</p>
+        <p>Pour consulter vos inscriptions ou vous désinscrire, rendez-vous dans votre espace personnel.</p>
+    </div>
+</div>

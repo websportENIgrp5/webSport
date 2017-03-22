@@ -58,6 +58,24 @@
 }
 
 /*
+* Inscription
+*--------------------------
+*/
+.actions {
+    float: right;
+    margin-top: 70px;
+}
+.actions .button a {
+    padding: 15px 20px;
+}
+.inscription-details {
+    margin-top: 30px;
+}
+.inscription-details p {
+   margin-bottom: 20px;
+}
+
+/*
 * Responsive
 *--------------------------
 */
@@ -71,21 +89,22 @@
 @media screen and (max-width: 768px) {
     #map {height: 400px;}
     .map > div {padding: 10px 30px;}
+    .actions {
+        margin-top: 20px;
+    }
 }
 
 @media screen and (max-width: 500px) {
     #map {height: 300px;}
     .map > div {padding: 10px 20px;}
-}
-
-/*
-* Inscription
-*--------------------------
-*/
-.actions {
-    float: right;
-    margin-top: 70px;
-}
-.actions .button a {
-    padding: 15px 20px;
+    .actions {
+        width: 100%;
+    }
+    .actions .button {
+        display: block;
+        width: 100%;
+    }
+    .actions .button:first-child {
+        margin-bottom: 10px;
+    }
 }
