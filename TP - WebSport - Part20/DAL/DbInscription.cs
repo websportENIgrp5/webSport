@@ -118,7 +118,7 @@ namespace DAL
                 //Champs qui peuvent etre nuls
                 try
                 {
-                    inscriSuiviRace.Time = reader.GetString(reader.GetOrdinal("Temps"));
+                   // inscriSuiviRace.Time = (TimeSpan)reader.GetValue(reader.GetOrdinal("Temps"));
                 }
                 catch (System.Data.SqlTypes.SqlNullValueException)
                 { }
@@ -167,7 +167,7 @@ namespace DAL
                         IdCourse = reader.GetInt32(reader.GetOrdinal("IdCourse")),
                         IdSuiviInscription = reader.GetInt32(reader.GetOrdinal("IdSuiviInscription")),
                         NumClassement = reader.GetInt32(reader.GetOrdinal("NumClassement")),
-                        Temps = reader.GetString(reader.GetOrdinal("Temps")),
+                        Temps = (TimeSpan)reader.GetValue(reader.GetOrdinal("Temps")),
                     };
                     list.Add(i);
                 }

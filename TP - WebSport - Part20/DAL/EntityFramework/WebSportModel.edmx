@@ -25,7 +25,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Titre" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
           <Property Name="DateStart" Type="datetime" Nullable="false" />
           <Property Name="Ville" Type="varchar" MaxLength="100" />
           <Property Name="IdDifficulte" Type="int" />
@@ -33,6 +33,7 @@
           <Property Name="IdCategorieCourse" Type="int" />
           <Property Name="HeureStart" Type="time" Precision="7" />
           <Property Name="HeureEnd" Type="time" Precision="7" />
+          <Property Name="Reglement" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="Difficulte">
           <Key>
@@ -50,7 +51,7 @@
           <Property Name="IdCourse" Type="int" Nullable="false" />
           <Property Name="IdSuiviInscription" Type="int" Nullable="false" />
           <Property Name="NumClassement" Type="int" />
-          <Property Name="Temps" Type="char" MaxLength="15" />
+          <Property Name="Temps" Type="time" Precision="7" />
         </EntityType>
         <EntityType Name="Parcours">
           <Key>
@@ -340,7 +341,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
           <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Town" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="IdDifficulte" Type="Int32" />
@@ -352,6 +353,7 @@
           <NavigationProperty Name="Difficulte" Relationship="BddLoginModel.FK_Course_Difficulte" FromRole="RaceEntity" ToRole="Difficulte" />
           <NavigationProperty Name="Inscription" Relationship="BddLoginModel.FK_Inscription_Course" FromRole="RaceEntity" ToRole="Inscription" />
           <NavigationProperty Name="Parcours" Relationship="BddLoginModel.FK_Parcours_Course" FromRole="RaceEntity" ToRole="Parcours" />
+          <Property Name="Reglement" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ContributorEntity">
           <Key>
@@ -422,7 +424,7 @@
           <Property Name="IdCourse" Type="Int32" Nullable="false" />
           <Property Name="IdSuiviInscription" Type="Int32" Nullable="false" />
           <Property Name="NumClassement" Type="Int32" />
-          <Property Name="Temps" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Temps" Type="Time" Nullable="true" />
           <NavigationProperty Name="Course" Relationship="BddLoginModel.FK_Inscription_Course" FromRole="Inscription" ToRole="RaceEntity" />
           <NavigationProperty Name="Participant" Relationship="BddLoginModel.FK_Inscription_Participant" FromRole="Inscription" ToRole="ContributorEntity" />
           <NavigationProperty Name="SuiviInscription" Relationship="BddLoginModel.FK_Inscription_SuiviInscription" FromRole="Inscription" ToRole="SuiviInscription" />
@@ -582,6 +584,7 @@
           <EntitySetMapping Name="RaceEntities">
             <EntityTypeMapping TypeName="BddLoginModel.RaceEntity">
               <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="Reglement" ColumnName="Reglement" />
                 <ScalarProperty Name="HeureEnd" ColumnName="HeureEnd" />
                 <ScalarProperty Name="HeureStart" ColumnName="HeureStart" />
                 <ScalarProperty Name="IdCategorieCourse" ColumnName="IdCategorieCourse" />

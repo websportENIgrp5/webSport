@@ -1,6 +1,11 @@
-﻿@{
+﻿@model WUI.Models.RaceModel
+@{
     ViewBag.Title = "Confirmation Inscription";
 }
+
+<div>
+    @Html.DisplayFor(model => model.Reglement)
+</div>
 
 <h2>Féliciations !</h2>
 
@@ -9,3 +14,4 @@
 <p>Afin de la valider merci de faire parvenir un cheque de .. euros à : </p>
 
 <p>Pour consulter vos inscriptions ou vous désinscrire, rendez-vous dans votre espace personnel.</p>
+

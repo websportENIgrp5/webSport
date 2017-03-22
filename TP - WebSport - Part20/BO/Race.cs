@@ -21,15 +21,18 @@ namespace BO
 
         public string Town { get; set; }
 
-        public int Distance { get; set; }
+        public int? Distance { get; set; }
 
-        public int IdDifficulte { get; set; }
+        public int? IdDifficulte { get; set; }
 
-        public int IdCategoryRace { get; set; }
+        public int? IdCategoryRace { get; set; }
 
         public Nullable<System.TimeSpan> HeureStart { get; set; }
 
         public Nullable<System.TimeSpan> HeureEnd { get; set; }
+
+        public String Reglement { get; set; }
+
 
         public virtual Difficulte Difficulte { get; set; }
 

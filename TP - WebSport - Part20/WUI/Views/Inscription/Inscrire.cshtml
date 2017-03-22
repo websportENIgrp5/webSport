@@ -6,6 +6,9 @@
 
 <h2>Inscription à la course "@Html.DisplayFor(model=> model.Title)"</h2>
 
+<div>
+    @Html.DisplayFor(model => model.Reglement)
+</div>
 
 <div class="button return">
     @Html.ActionLink("retour", "Details", new { id = Model.Id })

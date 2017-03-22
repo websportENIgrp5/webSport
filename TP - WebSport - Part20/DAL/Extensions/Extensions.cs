@@ -35,6 +35,7 @@ namespace DAL.Extensions
                 Distance = bo.Distance,
                 HeureStart = bo.HeureStart,
                 HeureEnd = bo.HeureEnd,
+                Reglement = bo.Reglement,
                 IdDifficulte = bo.IdDifficulte,
                 IdCategoryRace = bo.IdCategorieCourse,
 
@@ -58,6 +59,7 @@ namespace DAL.Extensions
                 Distance = bo.Distance,
                 HeureStart = bo.HeureStart,
                 HeureEnd = bo.HeureEnd,
+                Reglement = bo.Reglement,
                 IdDifficulte = bo.IdDifficulte,
                 IdCategoryRace = bo.IdCategorieCourse,
 
@@ -345,7 +347,7 @@ namespace DAL.Extensions
             de.IdParticipant = bo.IdParticipant;
             de.IdSuiviInscription = bo.IdSuiviInscription;
             if(bo.Temps != null )
-                de.Temps = bo.Temps.ToString();
+                de.Temps = bo.Temps;
             if(bo.NumClassement !=null)
             de.NumClassement = bo.NumClassement;
 

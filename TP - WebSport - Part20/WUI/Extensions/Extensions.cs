@@ -124,6 +124,7 @@ namespace WUI.Extensions
                 Distance = bo.Distance,
                 HeureStart = bo.HeureStart,
                 HeureEnd = bo.HeureEnd,
+                Reglement = bo.Reglement,
 
                 Difficulte = bo.Difficulte != null ? bo.Difficulte.ToModel() : null,
                 CategoryRace = bo.CategoryRace != null ? bo.CategoryRace.ToModel() : null,
@@ -145,6 +146,7 @@ namespace WUI.Extensions
                 Distance = model.Distance,
                 HeureStart = model.HeureEnd,
                 HeureEnd = model.HeureEnd,
+                Reglement = model.Reglement,
 
                 Difficulte = model.Difficulte.ToBo(),
                 CategoryRace = model.CategoryRace.ToBo()
