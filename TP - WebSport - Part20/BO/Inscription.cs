@@ -19,7 +19,7 @@ namespace BO
 
         public int? NumClassement { get; set; }
 
-        public String Temps { get; set; }
+        public Nullable<TimeSpan> Temps { get; set; }
 
         public User User { get; set; }
 

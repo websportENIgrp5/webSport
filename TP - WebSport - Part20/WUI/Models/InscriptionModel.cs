@@ -27,6 +27,6 @@ namespace WUI.Models
 
         public List<OrganizerModel> Organisers { get; set; }
 
-        public String Temps { get; set; }
+        public Nullable<TimeSpan> Temps { get; set; }
     }
 }
