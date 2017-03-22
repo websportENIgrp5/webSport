@@ -75,61 +75,6 @@ namespace DAL
                 retour = newRace.Id;
             }
 
-            // Utilisation de transactions avec Entity Framework
-            //using (var contextBis = new WebSportEntities())
-            //{
-            //    using (var transac = contextBis.Database.Connection.BeginTransaction())
-            //    {
-            //        try
-            //        {
-            //             DO QUERY
-
-            //            contextBis.SaveChanges();
-            //            transac.Commit();
-            //        }
-            //        catch (Exception)
-            //        {
-            //            transac.Rollback();
-            //        }
-            //    }
-            //}
-
-            // Si on utilise ADO.NET en direct, on utiliserait le code ci-dessous
-            //try
-            //{
-            //    var instance = new DbTools();
-
-            //    // Préparation d'une transaction
-            //    var transac = instance.CreerTransaction();
-
-            //    // Exécution de la requête d'ajout + on l'inclut dans la transaction
-            //    var commandAdd = instance.CreerRequete(RQT_ADD_RACE);
-            //    instance.CreerParametre(commandAdd, "@title", race.Title);
-            //    instance.CreerParametre(commandAdd, "@description", race.Description);
-            //    instance.CreerParametre(commandAdd, "@datestart", race.DateStart);
-            //    instance.CreerParametre(commandAdd, "@ville", race.Town);
-            //    commandAdd.Transaction = transac;
-            //    commandAdd.ExecuteNonQuery();
-
-            //    // Exécution de la requête de recupération du dernier id ajouté + on l'inclut dans la transaction
-            //    var commandSelect = instance.CreerRequete(RQT_GET_LAST_ADDED);
-            //    commandSelect.Transaction = transac;
-
-            //    retour = Convert.ToInt32(commandSelect.ExecuteScalar());
-            //    if (retour > 0)
-            //    {
-            //        transac.Commit();
-            //    }
-            //    else
-            //    {
-            //        transac.Rollback();
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    retour = 0;
-            //}
-
             return retour;
         }
 
@@ -142,13 +87,6 @@ namespace DAL
             {
                 return context.RaceEntities.ToList().Select(x => x.ToBo()).ToList();
             }
-
-            // Si on utilise ADO.NET en direct, on utiliserait le code ci-dessous
-            //var instance = new DbTools();
-            //var command = instance.CreerRequete(RQT_GET_RACE);
-
-            //DbDataReader reader = command.ExecuteReader();
-            //return this.BuildRaceList(reader);
         }
 
         public Race GetRace(int id)
@@ -158,14 +96,6 @@ namespace DAL
             {
                 return context.GetRaceById(id).First().ToBo();
             }
-
-            // Si on utilise ADO.NET en direct, on utiliserait le code ci-dessous
-            //var instance = new DbTools();
-            //var command = instance.CreerProcedureStockee(RQT_GET_RACE_PS);
-            //instance.CreerParametre(command, "@id", id, ParameterDirection.Input, DbType.Int32);
-
-            //DbDataReader reader = command.ExecuteReader();
-            //return this.BuildRace(reader);
         }
 
         public bool UpdateRace(Race race)

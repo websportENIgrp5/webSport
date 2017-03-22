@@ -82,21 +82,19 @@ namespace DAL
         {
             List<InscriRaceSuivi> racesInscri = null;
 
-            using (DbTools instance = new DbTools())
-            {
-                using (DbCommand command = instance.CreerRequete(RQT_GET_INSCRI_BY_ID))
-                {
-                    //Ajout du parametre idParticipant
-                    instance.CreerParametre(command, "@idParticipant", idParticipant);
+            //Récuperation de la connexion et création de la commande
+            DbTools instance = new DbTools();
+            DbCommand command = instance.CreerRequete(RQT_GET_INSCRI_BY_ID);
 
-                    using (DbDataReader reader = command.ExecuteReader())
-                    {
-                        racesInscri = BuildListInscriRaceSuivi(reader);
-                    }
-                }
+            //Ajout du parametre idParticipant
+            instance.CreerParametre(command, "@idParticipant", idParticipant);
+
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                racesInscri = BuildListInscriRaceSuivi(reader);
             }
 
-           return racesInscri;
+            return racesInscri;
         }
 
         /// <summary>
@@ -117,19 +115,20 @@ namespace DAL
                 inscriSuiviRace.City = reader.GetString(reader.GetOrdinal("Ville"));
                 inscriSuiviRace.Date = reader.GetDateTime(reader.GetOrdinal("DateStart"));
 
+                var test = reader.GetValue(reader.GetOrdinal("Temps"));
                 //Champs qui peuvent etre nuls
-                try
+                if (test != DBNull.Value)
                 {
-                    inscriSuiviRace.Time = reader.GetDateTime(reader.GetOrdinal("Temps"));
+                    inscriSuiviRace.Time = DateTimeToTimeSpan(DateTime.ParseExact(test.ToString(), "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture));
                 }
-                catch (System.Data.SqlTypes.SqlNullValueException)
-                { }
 
-                try
+
+                var classement = reader.GetValue(reader.GetOrdinal("NumClassement"));
+                if (classement != DBNull.Value)
                 {
-                    inscriSuiviRace.Classement = reader.GetInt32(reader.GetOrdinal("NumClassement"));
+                    inscriSuiviRace.Classement = (Int32)classement;
                 }
-                catch (System.Data.SqlTypes.SqlNullValueException) { }
+
 
                 list.Add(inscriSuiviRace);
             }
@@ -169,7 +168,7 @@ namespace DAL
                         IdCourse = reader.GetInt32(reader.GetOrdinal("IdCourse")),
                         IdSuiviInscription = reader.GetInt32(reader.GetOrdinal("IdSuiviInscription")),
                         NumClassement = reader.GetInt32(reader.GetOrdinal("NumClassement")),
-                        Temps = reader.GetString(reader.GetOrdinal("Temps")),
+                        Temps = DateTimeToTimeSpan(reader.GetDateTime(reader.GetOrdinal("Temps"))),
                     };
                     list.Add(i);
                 }
@@ -182,6 +181,13 @@ namespace DAL
             return list;
         }
 
+        private TimeSpan DateTimeToTimeSpan(DateTime temps)
+        {
+
+            TimeSpan elapsedTime = new TimeSpan(temps.Ticks);
+            return elapsedTime;
+
+        }
         //private BO.Inscription BuildInscription(DbDataReader reader)
         //{
         //    // On lit la première ligne

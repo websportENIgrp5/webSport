@@ -210,7 +210,7 @@ namespace DAL.Extensions
         {
             if (bo == null) return null;
 
-            return new BO.Inscription
+            return new Inscription
             {
                 Id = bo.Id,
                 IdCourse = bo.IdCourse,
@@ -321,7 +321,7 @@ namespace DAL.Extensions
             de.IdParticipant = bo.IdParticipant;
             de.IdSuiviInscription = bo.IdSuiviInscription;
             if(bo.Temps != null )
-                de.Temps = bo.Temps.ToString();
+                de.Temps = bo.Temps;
             if(bo.NumClassement !=null)
             de.NumClassement = bo.NumClassement;
 

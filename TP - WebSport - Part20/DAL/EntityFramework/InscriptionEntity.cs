@@ -19,7 +19,7 @@ namespace DAL.EntityFramework
         public int IdCourse { get; set; }
         public int IdSuiviInscription { get; set; }
         public Nullable<int> NumClassement { get; set; }
-        public string Temps { get; set; }
+        public Nullable<System.TimeSpan>  Temps { get; set; }
     
         public virtual RaceEntity Course { get; set; }
         public virtual ContributorEntity Participant { get; set; }

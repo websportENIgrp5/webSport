@@ -27,5 +27,14 @@ namespace BLL
             DbInscription dbInscription = new DbInscription();
             return dbInscription.GetLast3Race(idParticipant);
         }
+
+        public List<InscriRaceSuivi> GetInscriByUserName(string name)
+        {
+            int idUser = _uow.UserRepo.GetIdByName(name);
+            int idParticipant = _uow.ContributorRepo.Where(x => x.IdUser == idUser).Single().PersonId;
+
+            DbInscription dbInscription = new DbInscription();
+            return dbInscription.GetInscriByIdParticipant(idParticipant);
+        }
     }
 }

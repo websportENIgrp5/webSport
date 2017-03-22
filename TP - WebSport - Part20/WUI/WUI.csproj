@@ -179,6 +179,7 @@
     <Compile Include="Controllers\InscriptionController.cs" />
     <Compile Include="Controllers\RaceController.cs" />
     <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Filters\InitDbUserModule.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -412,10 +413,9 @@
     <Content Include="Views\Shared\Page404.cshtml" />
     <Content Include="Views\Account\_MenuPartial.cshtml" />
     <Content Include="Views\Account\Dashboard.cshtml" />
-    <Content Include="Views\Account\Dashboard\_LastListRacePartial.cshtml" />
+    <Content Include="Views\Account\Dashboard\_ListRacePartial.cshtml" />
     <Content Include="Views\Account\Dashboard\_StatsPartial.cshtml" />
     <Content Include="Views\Account\MyRaces.cshtml" />
-    <Content Include="Views\Account\_MyRacesPartial.cshtml" />
     <Content Include="Views\Inscription\Inscrire.cshtml" />
     <Content Include="Views\Inscription\ConfirmInscription.cshtml" />
     <Content Include="Views\Account\_ChangeIdentityPartial.cshtml" />
