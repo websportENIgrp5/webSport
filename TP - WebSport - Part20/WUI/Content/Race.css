@@ -77,3 +77,15 @@
     #map {height: 300px;}
     .map > div {padding: 10px 20px;}
 }
+
+/*
+* Inscription
+*--------------------------
+*/
+.actions {
+    float: right;
+    margin-top: 70px;
+}
+.actions .button a {
+    padding: 15px 20px;
+}

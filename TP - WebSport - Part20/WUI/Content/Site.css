@@ -107,8 +107,11 @@ h5, h6 {
 .button a {
     color: #fff;
     font-size: 12px;
-    padding: 8px 10px;
+    padding: 6px 10px;
     display: block;
+}
+.button div {
+    padding: 6px 10px !important;
 }
 .button a:hover {
     background: none;
@@ -235,7 +238,7 @@ footer {
     background: none;
     color: #fff;
     outline: none;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 .undefined {
     font-style: italic;
@@ -278,6 +281,18 @@ footer {
         list-style: none;
     }
 
+    .change-password .button {
+        float: right;
+        margin-top: 20px;
+    }
+
+    .login.button {
+        float: right;
+    }
+
+#loginForm, #socialLoginForm {
+    margin-top: 30px;
+}
 
 /* menu
 ----------------------------------------------------------*/
@@ -515,7 +530,7 @@ fieldset {
     }
 
         fieldset ol li {
-            padding-bottom: 5px;
+            padding-bottom: 10px;
         }
 
 label {
@@ -524,6 +539,7 @@ label {
     font-weight: 600;
     width: 250px;
     padding-right: 20px;
+    vertical-align: middle;
 }
 
 label.checkbox {
@@ -997,5 +1013,12 @@ tfoot td {
     }
     .mobile-menu ul a:hover {
         text-decoration: none;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .change-password .button {
+        width: 100%;
+        margin-top: 0;
     }
 }

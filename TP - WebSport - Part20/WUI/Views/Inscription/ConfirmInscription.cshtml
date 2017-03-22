@@ -3,15 +3,12 @@
     ViewBag.Title = "Confirmation Inscription";
 }
 
-<div>
-    @Html.DisplayFor(model => model.Reglement)
-</div>
+<h1>Féliciations !</h1>
 
-<h2>Féliciations !</h2>
+<p> Votre demande d'inscription a bien été prise en compte.</p>
 
-<p> Votre inscription a bien été prise en compte.</p>
+<p>Pour rappel, afin de la valider :</p>
 
-<p>Afin de la valider merci de faire parvenir un cheque de .. euros à : </p>
+<p>@Html.DisplayFor(model => model.Reglement)</p>
 
 <p>Pour consulter vos inscriptions ou vous désinscrire, rendez-vous dans votre espace personnel.</p>
-

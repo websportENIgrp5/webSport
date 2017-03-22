@@ -3,14 +3,18 @@
 @{
     ViewBag.Title = "Inscrire";
 }
+@section css {
+    @Styles.Render("~/Content/Race/css")
+}
 
-<h2>Inscription à la course "@Html.DisplayFor(model=> model.Title)"</h2>
+<h1>Inscription à la course "@Html.DisplayFor(model=> model.Title)"</h1>
 
-<div>
-    @Html.DisplayFor(model => model.Reglement)
-</div>
+<p>Afin de vous inscrire à la course, merci de prendre en compte les informations suivantes.</p>
 
-<div class="button return">
+<p>@Html.DisplayFor(model => model.Reglement)</p>
+
+<div class="actions">
+    <div class="button secondary return">
     @Html.ActionLink("retour", "Details", new { id = Model.Id })
 </div>
 <div class="button confirm">
@@ -22,4 +26,4 @@
     null
     )
 </div>
-
+</div>
