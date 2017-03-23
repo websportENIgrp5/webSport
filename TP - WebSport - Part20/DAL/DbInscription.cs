@@ -48,6 +48,7 @@ namespace DAL
                                                      "INNER JOIN Course c " +
                                                      "ON i.idCourse = c.id " +
                                                      "WHERE i.IdParticipant = @idParticipant ORDER BY i.Id DESC";
+        private const string RQT_COUNT_INSCRIPTION = "SELECT COUNT(*) FROM Inscription WHERE idCourse = @idCourse";
 
         /// <summary>
         /// Permet de récupérer la liste des 3 dernieres inscriptions d'un participant
@@ -133,6 +134,26 @@ namespace DAL
                 list.Add(inscriSuiviRace);
             }
             return list;
+        }
+
+
+        /// <summary>
+        /// Permet de retourner le nombre total d'inscri a une course
+        /// </summary>
+        /// <param name="idCourse"></param>
+        /// <returns></returns>
+        public int GetCountInscriByCourse(int idCourse)
+        {
+            int count = 0;
+            using (DbTools cnx = new DbTools())
+            {
+                using (DbCommand command = cnx.CreerRequete(RQT_COUNT_INSCRIPTION))
+                {
+                    cnx.CreerParametre(command, "@idCourse", idCourse);
+                    count = (int)command.ExecuteScalar();
+                }
+            }
+            return count;
         }
 
 

@@ -48,11 +48,14 @@
     </div>
 
 </nav>
-
-    <p>
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        @Html.ActionLink("Créer une nouvelle course", "Create")
-    </p>
+    @if (User.IsInRole("Administrator"))
+    {
+        <p>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            @Html.ActionLink("Créer une nouvelle course", "Create")
+        </p>
+    }
+    
 
     <table class="table races list">
         <thead>

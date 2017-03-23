@@ -7,11 +7,22 @@
 
 <div class="suscription">
     <div>
-        <span class="suscribers">@Html.DisplayFor(model => model.Inscriptions.Count)</span> inscrits
+
+        <span class="suscribers">@Html.DisplayFor(model => model.Inscriptions.Count)</span>
+        @if (User.IsInRole("Administrator"))
+        {
+             @Html.ActionLink("inscris", "ListInscris", "Admin", new {idCourse = Model.Id, page = 0 } , null)
+        }
+        else
+        {
+            <text>inscris</text>
+        }
     </div>
 
     <span class="button unsubscribe">
         @Html.ActionLink("S'inscrire", "Inscrire", "Inscription", new { id = Model.Id }, null)
+       
+
     </span>
 </div>
 

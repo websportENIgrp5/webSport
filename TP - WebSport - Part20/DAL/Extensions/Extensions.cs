@@ -264,6 +264,26 @@ namespace DAL.Extensions
             };
         }
 
+        public static List<ContributorEntity> ToDataEntities(this List<Competitor> bos)
+        {
+            return bos != null
+               ? bos.Where(x => x != null).Select(x => x.ToDataEntity()).ToList()
+               : null;
+        }
+
+        public static ContributorEntity ToDataEntity(this Competitor bo)
+        {
+
+            return new ContributorEntity
+            {
+                IsCompetitor = bo.IsCompetitor,
+                Person = new PersonEntity()
+                {
+                    Firstname = bo.Prenom,
+                    Lastname = bo.Nom,
+                },
+            };
+        }
 
         #endregion
 

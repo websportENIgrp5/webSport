@@ -1,0 +1,47 @@
+﻿@model  WUI.Helper.IndexViewModel
+@{
+    ViewBag.Title = "ListInscris";
+}
+
+<h2>ListInscris</h2>
+
+<ul>
+    @foreach (var item in Model.Items)
+    {
+        <li>@item.Competitor.Prenom, @item.IdCourse, @item.IdParticipant</li>
+    }
+</ul>
+		
+
+<!-- pager -->
+
+@if (Model.Pager.EndPage > 1)
+{
+    <ul class="pagination">
+        @if (Model.Pager.CurrentPage > 1)
+        {
+            <li>
+                <a href="~/Admin/ListInscris?idCourse=@Model.IdCourse&page=0">First</a>
+            </li>
+            <li>
+               <a href="~/Admin/ListInscris?idCourse=@Model.IdCourse&page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+            </li>
+         }
+
+        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+        {
+            <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                <a href="~/Admin/ListInscris?idCourse=@Model.IdCourse&page=@page">@page</a>
+            </li>    }
+
+        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+        {
+            <li>
+                <a href="~/Admin/ListInscris?idCourse=@Model.IdCourse&page=@(Model.Pager.CurrentPage + 1)">Next</a>
+            </li>
+                            <li>
+                                <a href="~/Admin/ListInscris?idCourse=@Model.IdCourse&page=@(Model.Pager.TotalPages)">Last</a>
+                            </li>
+        }
+    </ul>
+}				
