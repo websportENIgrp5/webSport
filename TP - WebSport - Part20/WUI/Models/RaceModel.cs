@@ -38,7 +38,7 @@ namespace WUI.Models
 
         [Display(Name = "Distance")]
         [Required(ErrorMessage = "La {0} est requise")]
-        public int Distance { get; set; }
+        public int? Distance { get; set; }
 
         [Display(Name = "Heure de départ prévue")]
         [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
@@ -49,6 +49,9 @@ namespace WUI.Models
         [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "L'{0} est requise")]
         public Nullable<TimeSpan> HeureEnd { get; set; }
+
+        public String Reglement { get; set; }
+
 
         [Display(Name = "Niveau")]
         [Required(ErrorMessage = "La {0} est requise")]
@@ -63,7 +66,7 @@ namespace WUI.Models
         public List<PoiModel> Pois { get; set; }
 
 
-        //private readonly List<DifficulteModel> _difficultes;
+        //public List<DifficulteModel> _difficultes { get; set; }
 
         //[Display(Name = "Niveaux")]
         //public int SelectedDifficulteId { get; set; }

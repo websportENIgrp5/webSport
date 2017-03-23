@@ -128,6 +128,8 @@ namespace WUI.Controllers
         // GET: /Race/Create
         public ActionResult Create()
         {
+            var difficultes = MgtDifficulte.GetInstance();
+            ViewData["difficultes"] = difficultes;
             return View();
         }
 
@@ -168,7 +170,7 @@ namespace WUI.Controllers
         // GET: /Race/Edit/5
         public ActionResult Edit(int id = 0)
         {
-            var result = MgtRace.GetInstance().GetRace(id).ToModel();
+            var result = MgtDifficulte.GetInstance();
             if (result == null)
             {
                 return HttpNotFound();

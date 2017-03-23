@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.EntityFramework;
+using DAL.Extensions;
+using BO;
 
 namespace Repository
 {
@@ -27,6 +29,24 @@ namespace Repository
         {
            var test = base.Where(user => user.Name.Equals(name)).Single();
            return test.Id;
+        }
+
+        public User GetById(int id)
+        {
+            var user = this.GetByIdPrivate(id);
+            return user != null ? user.ToBoId() : null;
+        }
+
+        private UserTable GetByIdPrivate(int id)
+        {
+            return base.Where(x => x.Id == id).SingleOrDefault();
+        }
+
+        public void Update(User element)
+        {
+            var raceToUpdate = this.GetByIdPrivate(element.Id);
+            raceToUpdate.Name = element.Login;
+            base.Update(raceToUpdate);
         }
         #endregion
     }

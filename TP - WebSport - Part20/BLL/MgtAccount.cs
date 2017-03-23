@@ -36,5 +36,46 @@ namespace BLL
             DbInscription dbInscription = new DbInscription();
             return dbInscription.GetInscriByIdParticipant(idParticipant);
         }
+
+        public Personne GetIdentityPerson(int idUser)
+        {
+            int idParticipant = _uow.ContributorRepo.Where(x => x.IdUser == idUser).Single().PersonId;
+            Personne Person = _uow.PersonRepo.GetById(idParticipant);
+
+            return Person;
+        }
+
+        public bool ChangeIdentity(string userName, string login, string lastname, string firstname)
+        {
+            // Mise à jour du login
+            int idUser = _uow.UserRepo.GetIdByName(userName);
+            User User = _uow.UserRepo.GetById(idUser);
+            if(login != null)
+            {
+                User.Login = login;
+            }
+           
+            _uow.UserRepo.Update(User);
+
+
+            // Mise à jour du nom et prénom 
+            int idParticipant = _uow.ContributorRepo.Where(x => x.IdUser == idUser).Single().PersonId;
+            Personne Person = _uow.PersonRepo.GetById(idParticipant);
+            if(lastname != null)
+            {
+                Person.Nom = lastname;
+            }
+            
+            if(firstname != null)
+            {
+                Person.Prenom = firstname;
+            }
+            
+            _uow.PersonRepo.Update(Person);
+
+            _uow.Save();
+
+            return true;
+        }
     }
 }

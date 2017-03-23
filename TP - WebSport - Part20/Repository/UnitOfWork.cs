@@ -14,6 +14,7 @@ namespace Repository
         private PoiRepository _poiRepo;
         private UserRepository _userRepo;
         private InscriptionRepo _inscriRepo;
+        private PersonRepository _personRepo;
 
         #region Constructors
 
@@ -102,6 +103,18 @@ namespace Repository
                     _inscriRepo = new InscriptionRepo(this.context);
                 }
                 return _inscriRepo;
+            }
+        }
+
+        public PersonRepository PersonRepo
+        {
+            get
+            {
+                if (_personRepo == null)
+                {
+                    _personRepo = new PersonRepository(this.context);
+                }
+                return _personRepo;
             }
         }
 

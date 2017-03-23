@@ -64,10 +64,10 @@
         </div>
 
         <div class="editor-label">
-            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Niveau</div>
+            @*@Html.LabelFor(model => model.SelectedDifficulteId)*@
         </div>
         <div class="editor-field">
-            @*@Html.DropDownListFor(model => model.SelectedDifficulteId, Model.Difficultes)
+            @*@Html.DropDownListFor(model => ViewData["difficultes"], new SelectList(ViewData["difficultes"], "Id", "Libelle"))
             @Html.ValidationMessageFor(model => model.SelectedDifficulteId)*@
         </div>
 

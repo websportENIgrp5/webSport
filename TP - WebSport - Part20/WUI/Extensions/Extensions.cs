@@ -124,6 +124,7 @@ namespace WUI.Extensions
                 Distance = bo.Distance,
                 HeureStart = bo.HeureStart,
                 HeureEnd = bo.HeureEnd,
+                Reglement = bo.Reglement,
 
                 Difficulte = bo.Difficulte != null ? bo.Difficulte.ToModel() : null,
                 CategoryRace = bo.CategoryRace != null ? bo.CategoryRace.ToModel() : null,
@@ -145,6 +146,7 @@ namespace WUI.Extensions
                 Distance = model.Distance,
                 HeureStart = model.HeureEnd,
                 HeureEnd = model.HeureEnd,
+                Reglement = model.Reglement,
 
                 Difficulte = model.Difficulte.ToBo(),
                 CategoryRace = model.CategoryRace.ToBo()
@@ -197,6 +199,29 @@ namespace WUI.Extensions
 
                 //DisplayConfigurations = bo.DisplayConfigurations.Select(x => x.ToModel()).ToList()
             };
+        }
+
+        public static LocalIdentityModel ToModels(this Personne bo)
+        {
+            return bo != null
+                ? bo.ToModelIdentity()
+                : null;
+        }
+        public static LocalIdentityModel ToModelIdentity(this Personne bo)
+        {
+            if(bo != null)
+            { 
+                return new LocalIdentityModel
+                {
+                    //Login = bo.;
+                    Lastname = bo.Nom,
+                    Firstname = bo.Prenom
+                };
+            }
+            else
+            {
+                return null;
+            }
         }
 
         #endregion
