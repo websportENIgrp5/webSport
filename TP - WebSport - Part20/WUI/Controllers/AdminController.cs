@@ -33,25 +33,5 @@ namespace WUI.Controllers
 
             return View(viewModel);
         }
-        public void Generate(int idCourse)
-        {
-            List<Competitor> competitors = new List<Competitor>();
-            List<int> idCompetitor = new List<int>();
-            UnitOfWork _uow = new UnitOfWork();
-
-            for (int i=1; i<=50000; i++)
-            {
-                Competitor competitor = new Competitor();
-                competitor.IsCompetitor = true;
-                competitor.Prenom = i.ToString();
-                competitor.Nom = (i-1).ToString();
-            }
-            foreach(Competitor comp in competitors)
-            {
-               idCompetitor.Add(_uow.ContributorRepo.Add(comp.ToDataEntity()).PersonId);
-            }
-        }
-
-
     }
 }
