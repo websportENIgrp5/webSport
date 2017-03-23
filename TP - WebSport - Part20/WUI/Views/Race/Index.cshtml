@@ -63,7 +63,7 @@
                 <th class="race-main-column">@Html.DisplayNameFor(model => model.Title)</th>
                 <th class="date">@Html.DisplayNameFor(model => model.DateStart)</th>
                 <th class="town">@Html.DisplayNameFor(model => model.Town)</th>
-                <th class="distance">@Html.DisplayNameFor(model => model.Distance)</th>
+                <th class="Tdistance">@Html.DisplayNameFor(model => model.Distance)</th>
                 <th class="niveau">Niveau</th>
                 <th class="category">Catégorie</th>
                 <th class="details">&nbsp;</th>
@@ -92,7 +92,7 @@
                                 @*Distance*@
                                 <div class="mobile distance">
                                     <strong>@Html.DisplayNameFor(model => model.Distance) : </strong>
-                                    <span>@Html.DisplayFor(modelItem => item.Distance)</span>
+                                    <span class="distance">@Html.DisplayFor(modelItem => item.Distance)</span> <span class="unite">km</span>
             </div>
                                 @*Niveau*@
                                 <div class="mobile niveau">
@@ -115,7 +115,7 @@
 
                         <td class="date">@Html.DisplayFor(modelItem => item.DateStart)</td>
                         <td class="town">@Html.DisplayFor(modelItem => item.Town)</td>
-                        <td class="distance">@Html.DisplayFor(modelItem => item.Distance)</td>
+                        <td class="Tdistance"><span class="distance">@Html.DisplayFor(modelItem => item.Distance)</span><span class="unite">km</span></td>
                         <td class="niveau">@Html.DisplayFor(modelItem => item.Difficulte.Libelle)</td>
                         <td class="category">@Html.DisplayFor(modelItem => item.CategoryRace.Title)</td>
                         <td class="details">

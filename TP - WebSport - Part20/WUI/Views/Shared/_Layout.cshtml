@@ -24,7 +24,7 @@
                         @Html.Partial("_LoginPartial")
                     </section>
                     <section id="ChangeUnitDistance">
-                        <a href="#">Changement unité</a>
+                        <a href="#" id="ChangeUnit" onclick="ChangeUnit()">Changement unité</a>
                     </section>
                     @Html.Partial("_Menu")
                 </div>
@@ -44,5 +44,33 @@
         @Scripts.Render("~/bundles/Site/js")
         @*@Scripts.Render("~/bundles/chart/js")*@
         @RenderSection("scripts", required: false)
+
+        <script type="text/javascript">
+            unit = "km";
+
+            function ChangeUnit()
+            {
+                if (unit === "km") {
+                    unit = "miles";
+                    $('.distance').each(function () {
+                        var element = $(this).text();
+                        element = (element * 1000) / 1600;
+                        $(this).text(element);
+                    });
+                }
+                else{
+                    unit = "km";
+                    $('.distance').each(function () {
+                        var element = $(this).text();
+                        element = (element * 1600) / 1000;
+                        $(this).text(element);
+                    });
+                }
+                $('.unite').each(function () {
+                    $(this).text(unit);
+                })
+            }
+
+        </script>
     </body>
 </html>

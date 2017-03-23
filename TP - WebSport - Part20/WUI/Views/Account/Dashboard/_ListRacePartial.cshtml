@@ -8,7 +8,7 @@
     <thead>
         <tr>
             <th class="race-main-column">Course</th>
-            <th class="distance">Distance</th>
+            <th class="Tdistance">Distance</th>
             <th class="time">Temps personnel</th>
             <th class="classement">Classement</th>
             <th class="etat">Etat</th>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="mobile distance">
                         <strong>Distance : </strong>
-                        <span>@race.Distance mètres</span>
+                        <span class="distance">@race.Distance</span> <span class="unite"> km</span>
                     </div>
                     <div class="mobile time">
                         <strong>Temps personnel : </strong>
@@ -83,7 +83,7 @@
                 </div>
             </td>
 
-            <td class="distance"><span class="distance">@race.Distance</span> <span class="unite">mètres</span></td>
+            <td class="Tdistance"><span class="distance">@race.Distance</span> <span class="unite">km</span></td>
 
             <td class="time"><span class="undefined">
             @if (race.Classement == null)
