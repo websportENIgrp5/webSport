@@ -25,9 +25,9 @@ namespace DAL.EntityFramework
         public string Description { get; set; }
         public System.DateTime DateStart { get; set; }
         public string Town { get; set; }
-        public int IdDifficulte { get; set; }
-        public int Distance { get; set; }
-        public int IdCategorieCourse { get; set; }
+        public Nullable<int> IdDifficulte { get; set; }
+        public Nullable<int> Distance { get; set; }
+        public Nullable<int> IdCategorieCourse { get; set; }
         public Nullable<System.TimeSpan> HeureStart { get; set; }
         public Nullable<System.TimeSpan> HeureEnd { get; set; }
         public string Reglement { get; set; }

@@ -55,6 +55,19 @@ namespace WUI.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class LocalIdentityModel
+    {
+        [Display(Name = "Login")]
+        public string Login { get; set; }
+
+        [Display(Name = "Nom")]
+        public string Lastname { get; set; }
+
+        [Display(Name = "Prénom")]
+        public string Firstname { get; set; }
+    }
+
+
     public class LoginModel
     {
         [Required]

@@ -6,7 +6,8 @@
 
 @section scripts{
     @Scripts.Render("~/bundles/Maps/js");
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzTP3POU1y-NMj2XQVp8EaF4duTdcgEq0&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzTP3POU1y-NMj2XQVp8EaF4duTdcgEq0&callback=initMap" async defer>
+</script>
     <script>
         idCourse =@Model.Id;
     </script>
@@ -15,20 +16,69 @@
     @Styles.Render("~/Content/Race/css")
 }
 
-<div class="two-columns-right">
-    <div class="column right">
-        @Html.Partial("_DetailsPartial")
+<h2>Détails</h2>
+
+<fieldset>
+    <legend>RaceModel</legend>
+
+    <div class="display-label">
+        @Html.DisplayFor(model => model.Inscriptions.Count) inscrits
     </div>
 
-    <div class="main-container">
-        <h1 class="details-race-title">@Html.DisplayFor(model => model.Title)</h1>
+    <p>@Html.ActionLink("S'inscrire", "Inscrire", new { id = Model.Id })</p>
 
-        <p class="description">@Html.DisplayFor(model => model.Description)</p>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Title) : @Html.DisplayFor(model => model.Title)
+    </div>
 
-        <div class="map">
-            <div>
-                <div id="map"></div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+        Catégorie : @Html.DisplayFor(model => model.CategoryRace.Title)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Distance) : @Html.DisplayFor(model => model.Distance) Km
+    </div>
+
+    <div class="display-label">
+        <div>Niveau : @Html.DisplayFor(model => model.Difficulte.Libelle)</div>
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Town) : @Html.DisplayFor(model => model.Town)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.DateStart) : @Html.DisplayFor(model => model.DateStart)
+    </div>
+
+    <div class="display-label">
+        Horaire : de @Html.DisplayFor(model => model.HeureStart) à @Html.DisplayFor(model => model.HeureEnd)
+    </div>
+    
+    <div class="display-label">Classement</div>
+    @foreach (var item in Model.Inscriptions)
+    {
+        if (new List<int?> { 1, 2, 3 }.Contains(item.NumClassement))
+        {
+            <div class="display-label">
+                @Html.DisplayFor(model => item.Competitor.User.Login) : @Html.DisplayFor(model => item.NumClassement)
             </div>
-        </div>
-    </div>
-</div>
+        }
+    }
+
+    <div id="map"></div>
+</fieldset>
+<p>
+    @Html.ActionLink(
+    "Inscrition",
+    "Inscrire",
+    "Inscription",
+    new { id = Model.Id},
+    null
+    )
+</p>
+
