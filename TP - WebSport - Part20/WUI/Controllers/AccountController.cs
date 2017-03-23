@@ -13,6 +13,7 @@ using WUI.Models;
 using BLL;
 using WUI.Extensions;
 using System.Web.Routing;
+using System.IO;
 
 namespace WUI.Controllers
 {
@@ -503,6 +504,28 @@ namespace WUI.Controllers
                     return "Une erreur inconnue s'est produite. Vérifiez votre entrée et réessayez. Si le problème persiste, contactez votre administrateur système.";
             }
         }
+        #endregion
+
+        #region Upload Image
+
+        //[HttpPost]
+        //public ActionResult Upload()
+        //{
+        //    if (Request.Files.Count > 0)
+        //    {
+        //        var file = Request.Files[0];
+
+        //        if (file != null && file.ContentLength > 0)
+        //        {
+        //            var fileName = Path.GetFileName(file.FileName);
+        //            var path = Path.Combine(Server.MapPath("~/Images/ProfilImage"), fileName);
+        //            file.SaveAs(path);
+        //        }
+        //    }
+
+        //    return View("Dashboard");
+        //}
+
         #endregion
     }
 }
