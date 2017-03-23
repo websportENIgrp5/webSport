@@ -49,11 +49,6 @@
 
 </nav>
 
-    <p>
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        @Html.ActionLink("Créer une nouvelle course", "Create")
-    </p>
-
     <table class="table races list">
         <thead>
             <tr>
@@ -90,11 +85,6 @@
                                 <div class="mobile distance">
                                     <strong>@Html.DisplayNameFor(model => model.Distance) : </strong>
                                     <span>@Html.DisplayFor(modelItem => item.Distance)</span>
-            </div>
-                                @*Niveau*@
-                                <div class="mobile niveau">
-                                    <strong>Niveau : </strong>
-                                    <span>@Html.DisplayFor(modelItem => item.Difficulte.Libelle)</span>
             </div>
                                 @*Category*@
                                 <div class="mobile category">

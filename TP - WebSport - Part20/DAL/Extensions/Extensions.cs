@@ -263,6 +263,17 @@ namespace DAL.Extensions
             };
         }
 
+        public static User ToBoId(this UserTable bo, bool withJoin = false)
+        {
+            if (bo == null) return null;
+
+            return new User
+            {
+                Id = bo.Id,
+                Login = bo.Name
+            };
+        }
+
         #endregion
 
         #region Competitor
@@ -314,6 +325,25 @@ namespace DAL.Extensions
                 DateNaissance = bo.Person.BirthDate.HasValue ? bo.Person.BirthDate.Value : DateTime.MinValue,
                 Email = bo.Person.Mail,
                 Phone = bo.Person.Phone
+            };
+        }
+
+        #endregion
+
+        #region Person
+
+        public static Personne ToBoId(this PersonEntity bo, bool withJoin = false)
+        {
+            if (bo == null) return null;
+
+            return new Personne
+            {
+                Id = bo.Id,
+                Nom = bo.Lastname,
+                Prenom = bo.Firstname,
+                DateNaissance = bo.BirthDate.HasValue ? bo.BirthDate.Value : DateTime.MinValue,
+                Email = bo.Mail,
+                Phone = bo.Phone
             };
         }
 

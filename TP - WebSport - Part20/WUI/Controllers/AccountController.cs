@@ -12,6 +12,7 @@ using WUI.Filters;
 using WUI.Models;
 using BLL;
 using WUI.Extensions;
+using System.Web.Routing;
 
 namespace WUI.Controllers
 {
@@ -167,15 +168,31 @@ namespace WUI.Controllers
         //
         // GET: /Account/Manage
 
-        public ActionResult Manage(ManageMessageId? message)
+        public ActionResult Manage(ManageMessageId? message, string login)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Votre mot de passe a été modifié."
                 : message == ManageMessageId.SetPasswordSuccess ? "Votre mot de passe a été défini."
                 : message == ManageMessageId.RemoveLoginSuccess ? "La connexion externe a été supprimée."
+                : message == ManageMessageId.ChangeIdentitySuccess ? "Vos informations personnelles ont été modifié. Veuillez-vous déconnecter et vous reconnecter"
                 : "";
-            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            
+            MgtAccount serviceAccount = new MgtAccount();
+            LocalIdentityModel identity;
+            if (login != null) {
+
+                ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(login));
+                identity = serviceAccount.GetIdentityPerson(WebSecurity.GetUserId(login)).ToModelIdentity();
+            }
+            else
+            {
+                ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+                identity = serviceAccount.GetIdentityPerson(WebSecurity.GetUserId(User.Identity.Name)).ToModelIdentity();  
+            }
+          
             ViewBag.ReturnUrl = Url.Action("Manage");
+            TempData.Add("Identity", identity);
+
             return View();
         }
 
@@ -237,6 +254,47 @@ namespace WUI.Controllers
                     }
                 }
             }
+
+            // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
+            return View(model);
+        }
+
+        //
+        // POST: /Account/Manage
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ManageIdentity(LocalIdentityModel model)
+        {
+            ViewBag.ReturnUrl = Url.Action("ManageIdentity");
+
+                if (ModelState.IsValid)
+                {
+                    // ChangeIdentity va lever une exception plutôt que de renvoyer la valeur False dans certains scénarios de défaillance.
+                    bool changeIdentitySucceded;
+                    try
+                    {
+                        MgtAccount serviceAccount = new MgtAccount();
+                        changeIdentitySucceded = serviceAccount.ChangeIdentity(User.Identity.Name, model.Login, model.Lastname, model.Firstname);
+
+                }
+                    catch (Exception)
+                    {
+                        changeIdentitySucceded = false;
+                    }
+
+                    if (changeIdentitySucceded)
+                    {
+                        if(model.Login == null)
+                        {
+                            model.Login = User.Identity.Name;
+                        }
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangeIdentitySuccess, Login = model.Login });
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "La modification s'est mal passé, veuillez recommencer.");
+                    }
+                }
 
             // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
             return View(model);
@@ -388,6 +446,7 @@ namespace WUI.Controllers
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
+            ChangeIdentitySuccess
         }
 
         internal class ExternalLoginResult : ActionResult

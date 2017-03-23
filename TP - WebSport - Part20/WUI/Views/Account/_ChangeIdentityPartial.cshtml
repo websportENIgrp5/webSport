@@ -1,19 +1,33 @@
-﻿@model WUI.Models.LocalPasswordModel
-
+﻿@model WUI.Models.LocalIdentityModel
+@{
+    ViewBag.Title = "Gérer le compte";
+    WUI.Models.LocalIdentityModel identity = (WUI.Models.LocalIdentityModel)TempData["Identity"];
+}
 <h2>Modifier Mes informations personnelles</h2>
 
-@using (Html.BeginForm("Manage", "Account"))
+@using (Html.BeginForm("ManageIdentity", "Account"))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
 
     <fieldset>
         <legend>Formulaire de modification de l'identité</legend>
-
         <ol>
             <li>
-                <p>TODO: Formulaire du login, nom et prénom</p>
+                @Html.LabelFor(m => m.Login)
+                @Html.TextBoxFor(m => m.Login, new { @placeholder = User.Identity.Name }) 
             </li>
-        </ol>
+            <li>
+                @Html.LabelFor(m => m.Lastname)
+                @Html.TextBoxFor(m => m.Lastname, new { @placeholder = identity.Lastname }) 
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Firstname)
+                @Html.TextBoxFor(m => m.Firstname, new { @placeholder = identity.Firstname }) 
+            </li>
+       </ol>
+       <div class="button">
+           <div><input type="submit" value="Modifier vos informations personnelles"></div>
+       </div>
     </fieldset>
 }

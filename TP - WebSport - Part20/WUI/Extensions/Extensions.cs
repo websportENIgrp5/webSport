@@ -201,6 +201,29 @@ namespace WUI.Extensions
             };
         }
 
+        public static LocalIdentityModel ToModels(this Personne bo)
+        {
+            return bo != null
+                ? bo.ToModelIdentity()
+                : null;
+        }
+        public static LocalIdentityModel ToModelIdentity(this Personne bo)
+        {
+            if(bo != null)
+            { 
+                return new LocalIdentityModel
+                {
+                    //Login = bo.;
+                    Lastname = bo.Nom,
+                    Firstname = bo.Prenom
+                };
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         #endregion
 
         #region Inscription
