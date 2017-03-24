@@ -20,6 +20,7 @@ namespace DAL.EntityFramework
         public string Mail { get; set; }
         public string Phone { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
+        public string NomImage { get; set; }
     
         public virtual ContributorEntity Contributors { get; set; }
     }

@@ -146,8 +146,16 @@ namespace WUI.Controllers
             MgtAccount serviceAccount = new MgtAccount();
             List<RaceDisplayModel> races=  serviceAccount.GetLast3InscriByUserName(User.Identity.Name).ToModels();
 
-        
             TempData.Add("Races", races);
+
+            //Récupération image du profil
+            string nomImage = serviceAccount.GetImageProfil(WebSecurity.CurrentUserId);
+
+            if (nomImage != null)
+            {
+                TempData.Add("NomImage", nomImage);
+            }
+
             return View();
         }
 
@@ -508,23 +516,27 @@ namespace WUI.Controllers
 
         #region Upload Image
 
-        //[HttpPost]
-        //public ActionResult Upload()
-        //{
-        //    if (Request.Files.Count > 0)
-        //    {
-        //        var file = Request.Files[0];
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase file)
+        {
 
-        //        if (file != null && file.ContentLength > 0)
-        //        {
-        //            var fileName = Path.GetFileName(file.FileName);
-        //            var path = Path.Combine(Server.MapPath("~/Images/ProfilImage"), fileName);
-        //            file.SaveAs(path);
-        //        }
-        //    }
+                if (file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/ProfilImage"), fileName);
+                    file.SaveAs(path);
+                    
+                    // Ajout image en BDD
+                    MgtAccount serviceAccount = new MgtAccount();
+                    serviceAccount.AjoutImageProfil(WebSecurity.CurrentUserId, fileName);
 
-        //    return View("Dashboard");
-        //}
+                    path = Url.Content(Path.Combine("~/Images/ProfilImage", fileName));
+
+                    return RedirectToAction("Dashboard");
+            }
+
+            return RedirectToAction("Dashboard");
+        }
 
         #endregion
     }

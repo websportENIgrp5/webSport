@@ -343,7 +343,8 @@ namespace DAL.Extensions
                 Prenom = bo.Firstname,
                 DateNaissance = bo.BirthDate.HasValue ? bo.BirthDate.Value : DateTime.MinValue,
                 Email = bo.Mail,
-                Phone = bo.Phone
+                Phone = bo.Phone,
+                NomImage = bo.NomImage
             };
         }
 
