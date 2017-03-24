@@ -1,4 +1,5 @@
-﻿@{
+﻿@model WUI.Models.RaceModel
+@{
     ViewBag.Title = "Confirmation Inscription";
 }
 @section css {
@@ -6,15 +7,48 @@
 }
 
 <div class="one-column">
-    <h1>Féliciations !</h1>
+
+    <h1>
+        @if (TempData["inscri"].Equals("valide"))
+    {
+        <text>Féliciations !</text>
+    }
+    else
+    {
+        <text>Erreur lors de l'inscription</text>
+    }
+        </h1 >
 
     <div class="inscription-details">
-        <p> Votre demande d'inscription a bien été prise en compte.</p>
+        @if (TempData["inscri"].Equals("valide"))
+        {
 
-        <p>Pour rappel, afin de la valider :</p>
+<p> Votre demande d'inscription a bien été prise en compte.</p>
 
-        <p>---- TODO: afficher règlement ----</p>
+<p>Pour rappel, afin de la valider :</p>
 
-        <p>Pour consulter vos inscriptions ou vous désinscrire, rendez-vous dans votre espace personnel.</p>
+<p>@Html.DisplayFor(model => model.Reglement)</p>
+
+            <p>Pour consulter vos inscriptions ou vous désinscrire, rendez-vous dans votre espace personnel.</p>
+        }
+        else
+        {
+
+            <p>Vous êtes déjà inscrit à cette course</p>
+
+<p>Pour consulter vos inscriptions ou vous désinscrire, rendez-vous dans votre espace personnel.</p>
+        }
+
+        <div class="button secondary return">
+            @Html.ActionLink("Liste des courses", "Index", "Race", null, null)
+        </div>
+
+        <div class="button confirm">
+            @Html.ActionLink("Mon compte", "Dashboard", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })
+        </div>
+
+      
+
+        
     </div>
 </div>

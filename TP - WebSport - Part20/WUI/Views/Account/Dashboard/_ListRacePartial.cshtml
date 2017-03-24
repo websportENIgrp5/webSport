@@ -39,7 +39,7 @@
                     </div>
                     <div class="mobile distance">
                         <strong>Distance : </strong>
-                        <span>@race.Distance km</span>
+                        <span class="nbDistance">@race.Distance</span> <span class="unite"> km</span>
                     </div>
                     <div class="mobile time">
                         <strong>Temps personnel : </strong>
@@ -83,17 +83,18 @@
                 </div>
             </td>
 
-            <td class="distance"><span>@race.Distance km</span></td>
+            <td class="distance"><span class="nbDistance">@race.Distance</span> <span class="unite">km</span></td>
 
-            @* TODO: Temps personnel *@
-            <td class="time"><span class="undefined">@if (race.Classement == null)
+            <td class="time"><span class="undefined">
+            @if (race.Classement == null)
             {
                 <text>Non Determinée</text>
             }
             else
             {
                 <text>@race.Time.Value.Hours:@race.Time.Value.Minutes:@race.Time.Value.Seconds</text>
-}</span></td>
+            }
+                </span></td>
 
             <td class="classement"><span class="undefined">@if (race.Classement == null)
             {
@@ -111,7 +112,7 @@
             <td class="unsubscribe">
                 @* TODO: Gérer la désinscription *@
                 <span class="button unsubscribe">
-                    @Html.ActionLink("Se désinscrire", "")
+                    @Html.ActionLink("Se désinscrire", "Unsubscribe", "Account", new { idCourse = @race.Id}, null)
                 </span>
             </td>
         </tr>

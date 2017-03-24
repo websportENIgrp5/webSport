@@ -7,6 +7,7 @@ namespace WUI.Models
 {
     public class RaceDisplayModel
     {
+        public int Id { get; set; }
         public string Title { get; set; }
 
         public int Distance { get; set; }

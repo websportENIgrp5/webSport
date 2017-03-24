@@ -128,6 +128,8 @@ namespace WUI.Controllers
         // GET: /Race/Create
         public ActionResult Create()
         {
+            var difficultes = MgtDifficulte.GetInstance();
+            ViewData["difficultes"] = difficultes;
             return View();
         }
 
@@ -138,7 +140,7 @@ namespace WUI.Controllers
         // si le token issu du cookie d'authentification a été bien été défini dans
         // la requête HTTP POST pour l'envoi du formulaire
         [ValidateAntiForgeryToken]
-        [Authorize(Roles="organizator,administrator")]
+        [Authorize(Roles="administrator")]
         public ActionResult Create(RaceModel race)
         {
             try
@@ -146,8 +148,7 @@ namespace WUI.Controllers
                 // Met en évidence le ValidationSummary(false) dans la vue
                 //ModelState.AddModelError(string.Empty, "Erreur visble via le ValidationSummary(true) mais pas par le ValidationSummary(false)");
 
-                if (ModelState.IsValid
-                    && serviceRace.AddRace(race.ToBo()))
+                if (ModelState.IsValid && serviceRace.AddRace(race.ToBo()))
                 {
                     //MgtRace.GetInstance()
                     return RedirectToAction("Index");
@@ -168,7 +169,7 @@ namespace WUI.Controllers
         // GET: /Race/Edit/5
         public ActionResult Edit(int id = 0)
         {
-            var result = MgtRace.GetInstance().GetRace(id).ToModel();
+            var result = MgtDifficulte.GetInstance();
             if (result == null)
             {
                 return HttpNotFound();

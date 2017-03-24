@@ -17,7 +17,7 @@ namespace DAL.Extensions
         public static List<Race> ToBos(this List<RaceEntity> bos, bool withJoin = false)
         {
             return bos != null
-                ? bos.Where(x => x != null).Select(x => x.ToBo(withJoin)).ToList()
+                ? bos.Where(x => x != null && x.DateStart >= DateTime.Today).Select(x => x.ToBo(withJoin)).ToList()
                 : null;
         }
 
@@ -35,6 +35,7 @@ namespace DAL.Extensions
                 Distance = bo.Distance,
                 HeureStart = bo.HeureStart,
                 HeureEnd = bo.HeureEnd,
+                Reglement = bo.Reglement,
                 IdDifficulte = bo.IdDifficulte,
                 IdCategoryRace = bo.IdCategorieCourse,
 
@@ -43,6 +44,31 @@ namespace DAL.Extensions
                 Inscriptions = bo.Inscription != null ? bo.Inscription.Where(x => x.IdCourse == bo.Id).Select(x => x.ToInscriptionBo()).ToList() : null,
             };
         }
+
+        public static Race ToBoId(this RaceEntity bo, bool withJoin = false)
+        {
+            if (bo == null) return null;
+
+            return new Race
+            {
+                Id = bo.Id,
+                Title = bo.Title,
+                Description = bo.Description,
+                DateStart = bo.DateStart,
+                Town = bo.Town,
+                Distance = bo.Distance,
+                HeureStart = bo.HeureStart,
+                HeureEnd = bo.HeureEnd,
+                Reglement = bo.Reglement,
+                IdDifficulte = bo.IdDifficulte,
+                IdCategoryRace = bo.IdCategorieCourse,
+
+                Difficulte = bo.Difficulte != null ? bo.Difficulte.ToBo() : null,
+                CategoryRace = bo.CategorieCourse != null ? bo.CategorieCourse.ToBo() : null,
+                Inscriptions = bo.Inscription != null ? bo.Inscription.Where(x => x.IdCourse == bo.Id).Select(x => x.ToInscriptionBo()).ToList() : null,
+            };
+        }
+
 
         public static RaceEntity ToDataEntity(this Race model)
         {
@@ -237,6 +263,17 @@ namespace DAL.Extensions
             };
         }
 
+        public static User ToBoId(this UserTable bo, bool withJoin = false)
+        {
+            if (bo == null) return null;
+
+            return new User
+            {
+                Id = bo.Id,
+                Login = bo.Name
+            };
+        }
+
         #endregion
 
         #region Competitor
@@ -264,6 +301,26 @@ namespace DAL.Extensions
             };
         }
 
+        public static List<ContributorEntity> ToDataEntities(this List<Competitor> bos)
+        {
+            return bos != null
+               ? bos.Where(x => x != null).Select(x => x.ToDataEntity()).ToList()
+               : null;
+        }
+
+        public static ContributorEntity ToDataEntity(this Competitor bo)
+        {
+
+            return new ContributorEntity
+            {
+                IsCompetitor = bo.IsCompetitor,
+                Person = new PersonEntity()
+                {
+                    Firstname = bo.Prenom,
+                    Lastname = bo.Nom,
+                },
+            };
+        }
 
         #endregion
 
@@ -288,6 +345,25 @@ namespace DAL.Extensions
                 DateNaissance = bo.Person.BirthDate.HasValue ? bo.Person.BirthDate.Value : DateTime.MinValue,
                 Email = bo.Person.Mail,
                 Phone = bo.Person.Phone
+            };
+        }
+
+        #endregion
+
+        #region Person
+
+        public static Personne ToBoId(this PersonEntity bo, bool withJoin = false)
+        {
+            if (bo == null) return null;
+
+            return new Personne
+            {
+                Id = bo.Id,
+                Nom = bo.Lastname,
+                Prenom = bo.Firstname,
+                DateNaissance = bo.BirthDate.HasValue ? bo.BirthDate.Value : DateTime.MinValue,
+                Email = bo.Mail,
+                Phone = bo.Phone
             };
         }
 

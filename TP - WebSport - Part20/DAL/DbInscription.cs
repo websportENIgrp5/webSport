@@ -27,7 +27,7 @@ namespace DAL
                                             "inner join Participant p on i.IdParticipant = p.PersonneId " + 
                                             "inner join Personne per on p.PersonneId = per.Id " + 
                                             "inner join UserTable u on p.IdUser = u.Id " + 
-                                            "inner join Course c on i.IdCourse = c.Id " +
+                                            "inner join Course c on i.IdCourse = c.Id " + 
                                             "inner join SuiviInscription s on i.IdSuiviInscription = s.Id " +
                                             "inner join CategorieCourse cat on c.IdCategorieCourse = cat.Id " +
                                             "where u.Id = @idParticipant " +
@@ -58,13 +58,14 @@ namespace DAL
                                                      "WHERE i.IdParticipant = @idParticipant ORDER BY i.Id DESC";
 
 
-        private const string RQT_GET_INSCRI_BY_ID = "SELECT i.NumClassement, i.Temps, si.Libelle, c.Titre, c.DateStart, c.Ville, c.Distance " +
+        private const string RQT_GET_INSCRI_BY_ID = "SELECT i.Id,  i.NumClassement, i.Temps, si.Libelle, c.Titre, c.DateStart, c.Ville, c.Distance " +
                                                      "FROM Inscription i " +
                                                      "INNER JOIN SuiviInscription si " +
                                                      "ON i.IdSuiviInscription = si.Id " +
                                                      "INNER JOIN Course c " +
                                                      "ON i.idCourse = c.id " +
                                                      "WHERE i.IdParticipant = @idParticipant ORDER BY i.Id DESC";
+        private const string RQT_COUNT_INSCRIPTION = "SELECT COUNT(*) FROM Inscription WHERE idCourse = @idCourse";
 
         /// <summary>
         /// Permet de récupérer la liste des 3 dernieres inscriptions d'un participant
@@ -202,6 +203,7 @@ namespace DAL
             while (reader.Read())
             {
                 InscriRaceSuivi inscriSuiviRace = new InscriRaceSuivi();
+                inscriSuiviRace.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                 inscriSuiviRace.Title = reader.GetString(reader.GetOrdinal("Titre"));
                 inscriSuiviRace.State = reader.GetString(reader.GetOrdinal("Libelle"));
                 inscriSuiviRace.Distance = reader.GetInt32(reader.GetOrdinal("Distance"));
@@ -226,6 +228,32 @@ namespace DAL
                 list.Add(inscriSuiviRace);
             }
             return list;
+        }
+
+        public void Remove(int id)
+        {
+            DbTools cnx = new DbTools();
+            DbCommand command = cnx.CreerRequete("DELETE FROM Inscription WHERE Id= @id;");
+            cnx.CreerParametre(command, "@id", id);
+            command.ExecuteNonQuery();
+        }
+        /// <summary>
+        /// Permet de retourner le nombre total d'inscri a une course
+        /// </summary>
+        /// <param name="idCourse"></param>
+        /// <returns></returns>
+        public int GetCountInscriByCourse(int idCourse)
+        {
+            int count = 0;
+            using (DbTools cnx = new DbTools())
+            {
+                using (DbCommand command = cnx.CreerRequete(RQT_COUNT_INSCRIPTION))
+                {
+                    cnx.CreerParametre(command, "@idCourse", idCourse);
+                    count = (int)command.ExecuteScalar();
+                }
+            }
+            return count;
         }
 
         /// <summary>
@@ -333,7 +361,7 @@ namespace DAL
                 averageTime = DateTimeToTimeSpan(DateTime.ParseExact(dfgfd, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture));
             }
             else
-            {
+        {
                 averageTime = null;
             }
 

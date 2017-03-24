@@ -34,7 +34,15 @@ namespace WUI.Controllers
         public ActionResult ConfirmInscription(int idCourse, string loginUser)
         {
             MgtInscription inscriptionManager = MgtInscription.Instance;
-            inscriptionManager.WriteInscription(idCourse, loginUser);
+
+            if(inscriptionManager.WriteInscription(idCourse, loginUser))
+            {
+                TempData.Add("inscri", "valide");
+            }
+            else
+            {
+                TempData.Add("inscri", "alreadyInscri");
+            }
             return View();
         }
     }

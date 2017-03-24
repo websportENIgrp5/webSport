@@ -48,11 +48,14 @@
     </div>
 
 </nav>
-
-    <p>
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        @Html.ActionLink("Créer une nouvelle course", "Create")
-    </p>
+    @if (User.IsInRole("Administrator"))
+    {
+        <p>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            @Html.ActionLink("Créer une nouvelle course", "Create")
+        </p>
+    }
+    
 
     <table class="table races list">
         <thead>
@@ -60,7 +63,7 @@
                 <th class="race-main-column">@Html.DisplayNameFor(model => model.Title)</th>
                 <th class="date">@Html.DisplayNameFor(model => model.DateStart)</th>
                 <th class="town">@Html.DisplayNameFor(model => model.Town)</th>
-                <th class="distance">@Html.DisplayNameFor(model => model.Distance)</th>
+                <th class="Tdistance">@Html.DisplayNameFor(model => model.Distance)</th>
                 <th class="niveau">Niveau</th>
                 <th class="category">Catégorie</th>
                 <th class="details">&nbsp;</th>
@@ -89,12 +92,7 @@
                                 @*Distance*@
                                 <div class="mobile distance">
                                     <strong>@Html.DisplayNameFor(model => model.Distance) : </strong>
-                                    <span>@Html.DisplayFor(modelItem => item.Distance)</span>
-            </div>
-                                @*Niveau*@
-                                <div class="mobile niveau">
-                                    <strong>Niveau : </strong>
-                                    <span>@Html.DisplayFor(modelItem => item.Difficulte.Libelle)</span>
+                                    <span class="nbDistance">@Html.DisplayFor(modelItem => item.Distance)</span> <span class="unite">km</span>
             </div>
                                 @*Category*@
                                 <div class="mobile category">
@@ -112,7 +110,7 @@
 
                         <td class="date">@Html.DisplayFor(modelItem => item.DateStart)</td>
                         <td class="town">@Html.DisplayFor(modelItem => item.Town)</td>
-                        <td class="distance">@Html.DisplayFor(modelItem => item.Distance)</td>
+                        <td class="distance"><span class="nbDistance">@Html.DisplayFor(modelItem => item.Distance)</span><span class="unite">km</span></td>
                         <td class="niveau">@Html.DisplayFor(modelItem => item.Difficulte.Libelle)</td>
                         <td class="category">@Html.DisplayFor(modelItem => item.CategoryRace.Title)</td>
                         <td class="details">

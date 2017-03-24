@@ -56,8 +56,29 @@ namespace BLL
             inscri.IdParticipant = _uow.ContributorRepo.Where(w => w.IdUser == idUser).Single().PersonId;
             inscri.IdSuiviInscription = 6;
 
-            _uow.InscriptionRepo.Add(inscri.ToDataEntity());
+            if(!_uow.InscriptionRepo.CheckAlreadyInscri(idCourse, inscri.IdParticipant))
+            {
+                _uow.InscriptionRepo.Add(inscri.ToDataEntity());
+            }
+            else
+            {
+                return false;
+            }
+            
+
             return true;
+        }
+
+        public List<Inscription> GetInscription(int idCourse, int rowstart, int numberSelect)
+        {
+            return _uow.InscriptionRepo.Where(x => x.IdCourse == idCourse).Skip(rowstart).Take(numberSelect).ToList().ToInscriptionBos();
+        }
+
+        public int GetNumberInscription(int idCourse)
+        {
+            DbInscription inscriptionDB = new DbInscription();
+            return inscriptionDB.GetCountInscriByCourse(idCourse);
+
         }
         #endregion
     }

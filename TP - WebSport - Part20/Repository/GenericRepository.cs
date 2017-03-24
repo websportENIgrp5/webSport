@@ -55,6 +55,7 @@ namespace Repository
             return context.Set<T>().Where(conditionWhere).ToList();
         }
 
+
         public virtual List<T> GetAll()
         {
             return context.Set<T>().ToList();

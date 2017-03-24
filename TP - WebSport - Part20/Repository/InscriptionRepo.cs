@@ -20,5 +20,18 @@ namespace Repository
         {
             base.Add(inscription);
         }
+        public bool  CheckAlreadyInscri(int idCourse, int idUser)
+        {
+           if(base.context.Inscription.Where(i => i.IdCourse == idCourse && i.IdParticipant == idUser).Count() == 0)
+            {
+                return false;
+            }
+           else
+            {
+                return true;
+            }
+        }
+
+            
     }
 }

@@ -170,6 +170,7 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryRaceController.cs" />
     <Compile Include="Controllers\CompetitorController.cs" />
     <Compile Include="Controllers\DifficulteController.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\Pager.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Attributes\CompareDateAttribute.cs" />
     <Compile Include="Models\CategoryRaceModel.cs" />
@@ -421,6 +423,7 @@
     <Content Include="Views\Inscription\ConfirmInscription.cshtml" />
     <Content Include="Views\Account\_ChangeIdentityPartial.cshtml" />
     <Content Include="Views\Race\_DetailsPartial.cshtml" />
+    <Content Include="Views\Admin\ListInscris.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Autres\" />
@@ -438,6 +441,14 @@
     <ProjectReference Include="..\BO\BO.csproj">
       <Project>{bf1f0d7f-70d5-4769-9bdb-715708fe9238}</Project>
       <Name>BO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{30cc4c53-8545-428c-abeb-17eed2e2109f}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{9a709fa9-8b43-489b-8702-f69a03054b78}</Project>
+      <Name>Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
