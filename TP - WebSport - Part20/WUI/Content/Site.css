@@ -44,6 +44,9 @@ mark {
 .float-right {
     float: right;
 }
+#login ul {
+    display: inline-block;
+}
 
 .clear-fix:after {
     content: ".";
@@ -261,7 +264,8 @@ footer {
 /* login
 ----------------------------------------------------------*/
 #login {
-    display: block;
+    display: inline-block;
+    float: left;
     font-size: 11.5px;
     margin: 0 0 10px;
     text-align: right;
@@ -300,6 +304,13 @@ footer {
     .login.button {
         float: right;
     }
+
+    /*.ChangeUnit {
+        color: #fff;
+        font-size: 12px;
+        display: inline-block;
+        margin-left: 
+    }*/
 
 #loginForm, #socialLoginForm {
     margin-top: 30px;
@@ -659,7 +670,12 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
-
+.form-design {
+    width: 65%;margin-top: 40px;
+}
+.form-design .actions {
+    margin-top: 20px;
+}
 
 /* tables
 ----------------------------------------------------------*/

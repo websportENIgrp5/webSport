@@ -118,6 +118,13 @@ td .mobile {
     content: '';
     display: block;
 }
+.see-all {
+    text-align: right;
+    margin-bottom: 20px;
+    margin-top: -18px;
+    display: block;
+    width: 100%;
+}
 
 /*
 * Responsive
@@ -245,7 +252,7 @@ td .mobile {
     }
     .mobile.unsubscribe .button,
     .mobile.details .button {
-        padding: 12px 20px;
+        padding: 12px 15px;
     }
     .table-title {
         padding: 0 !important;

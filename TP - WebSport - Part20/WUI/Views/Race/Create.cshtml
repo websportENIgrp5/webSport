@@ -8,93 +8,90 @@
     @Styles.Render("~/Content/Race/css")
 }
 
-<h2>Création d'une RaceEntity</h2>
+<div class="one-column">
+    <h1>Création d'une Course</h1>
 
-@using (Html.BeginForm("Create", "Race", FormMethod.Post, new { @class = "form-design" }))
-{
-    // Génère un token dans le cookie d'authentification afin de contrer les
-    // attaques de type Cross-site Request forgery
-    @Html.AntiForgeryToken();
-    
-    // Grâce à la propriété "true", on affiche uniquement les erreurs
-    // n'étant pas rattachées à la propriété du model (ici RaceModel)
-    @Html.ValidationSummary(true)
+    @using (Html.BeginForm("Create", "Race", FormMethod.Post, new { @class = "form-design" }))
+    {
+        // Génère un token dans le cookie d'authentification afin de contrer les
+        // attaques de type Cross-site Request forgery
+        @Html.AntiForgeryToken();
 
-    <fieldset>
-        <legend>RaceModel</legend>
+        // Grâce à la propriété "true", on affiche uniquement les erreurs
+        // n'étant pas rattachées à la propriété du model (ici RaceModel)
+        @Html.ValidationSummary(true)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Title)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.Title, new { @class="form-control", size = "30" })
-            @Html.ValidationMessageFor(model => model.Title)
-        </div>
+        <fieldset>
+            <legend>RaceModel</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.Description, new { @class="form-control", placeholder = "20 car. min", size = "30" })
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
+            <ol>
+                <li>
+                    @Html.LabelFor(model => model.Title)
+                    @Html.TextBoxFor(model => model.Title, new { size = "30" })
+                    @Html.ValidationMessageFor(model => model.Title)
+                </li>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DateStart)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.DateStart, new { @class="form-control", placeholder = "JJ/MM/AAAA", type="date", size = "30"})
-            @Html.ValidationMessageFor(model => model.DateStart)
-        </div>
+                <li>
+                    @Html.LabelFor(model => model.Description)
+                    @Html.TextBoxFor(model => model.Description, new { placeholder = "20 car. min", size = "30" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </li>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Town)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.Town, new { @class="form-control", size = "30" })
-            @Html.ValidationMessageFor(model => model.Town)
-        </div>
+                <li>
+                    @Html.LabelFor(model => model.DateStart)
+                    @Html.TextBoxFor(model => model.DateStart, new { placeholder = "JJ/MM/AAAA", type = "date", size = "30" })
+                    @Html.ValidationMessageFor(model => model.DateStart)
+                </li>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Distance)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.Distance, new { @class = "form-control", size = "30" })
-            @Html.ValidationMessageFor(model => model.Distance)
-        </div>
+                <li>
+                    @Html.LabelFor(model => model.Town)
+                    @Html.TextBoxFor(model => model.Town, new { size = "30" })
+                    @Html.ValidationMessageFor(model => model.Town)
+                </li>
 
-        <div class="editor-label">
-            @*@Html.LabelFor(model => model.SelectedDifficulteId)*@
-        </div>
-        <div class="editor-field">
-            @*@Html.DropDownListFor(model => ViewData["difficultes"], new SelectList(ViewData["difficultes"], "Id", "Libelle"))
-            @Html.ValidationMessageFor(model => model.SelectedDifficulteId)*@
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HeureStart)
-        </div>
-        <div class="editor-field">
-           @Html.TextBoxFor(model => model.HeureStart, new { @class = "form-control", placeholder = "hh:mm", size = "30" })
-           @Html.ValidationMessageFor(model => model.HeureStart)
-        </div>
+                <li>
+                    @Html.LabelFor(model => model.Distance)
+                    @Html.TextBoxFor(model => model.Distance, new { size = "30" })
+                    @Html.ValidationMessageFor(model => model.Distance)
+                </li>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HeureEnd)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.HeureEnd, new { @class = "form-control", placeholder = "hh:mm",  size = "30" })
-            @Html.ValidationMessageFor(model => model.HeureEnd)
-        </div>
+                <div class="editor-label">
+                    @*@Html.LabelFor(model => model.SelectedDifficulteId)*@
+                </div>
+                <div class="editor-field">
+                    @*@Html.DropDownListFor(model => ViewData["difficultes"], new SelectList(ViewData["difficultes"], "Id", "Libelle"))
+                        @Html.ValidationMessageFor(model => model.SelectedDifficulteId)*@
+                </div>
 
-        <div class="button secondary return">
-            @Html.ActionLink("Retour à la liste", "Index")
-        </div>
+                <li>
+                    @Html.LabelFor(model => model.HeureStart)
+                    @Html.TextBoxFor(model => model.HeureStart, new { placeholder = "hh:mm", size = "30" })
+                    @Html.ValidationMessageFor(model => model.HeureStart)
+                </li>
 
-        <div class="button confirm">
-            <input type="submit" value="Créer la course" />
+                <li>
+                    @Html.LabelFor(model => model.HeureEnd)
+                    @Html.TextBoxFor(model => model.HeureEnd, new { placeholder = "hh:mm", size = "30" })
+                    @Html.ValidationMessageFor(model => model.HeureEnd)
+                </li>
+
+            </ol>
+
+            <div class="actions">
+                <div class="button secondary return">
+                    @Html.ActionLink("Retour à la liste", "Index")
+                </div>
+
+                <div class="button confirm">
+                    <div>
+                        <input type="submit" style="font-size: 11.5px; padding: 9px 10px;" value="Créer la course" />
+                    </div>
+                </div>
             </div>
-</fieldset>
-}
+        </fieldset>
+    }
+
+</div>
 
 
 @section Scripts {
