@@ -1,16 +1,17 @@
 ﻿
-@using (Html.BeginForm("Upload", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    if (TempData["NomImage"] != null)
-    {
-        <img src='~/Images/ProfilImage/@TempData["NomImage"].ToString()' , alt="Image" />
-    }
-    else
-    {
-        <img src="~/Images/profil-default.png" />
-    }
+<div style="margin: 60px 0">
+    <h2>Modifier mon image de profil</h2>
 
-    <input type="file" name="file" id="file"/>
-    <input type="submit" name="Submit" id="Submit" value="Upload" />
-}
+    @using (Html.BeginForm("Upload", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <input style="margin-bottom: 20px;" type="file" name="file" id="file" />
+
+        <div class="button">
+            <div>
+                <input type="submit" name="Submit" id="Submit" value="Enregistrer l'image" />
+            </div>
+        </div>
+    }
+</div>
     

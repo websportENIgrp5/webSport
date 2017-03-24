@@ -8,7 +8,15 @@
 
 <div class="profil-img">
     @*<img src="~/Images/profil-default.png" />*@
-    @Html.Partial("_ImagePartial")
+    @if (TempData["NomImage"] != null)
+    {
+    <img src='~/Images/ProfilImage/@TempData["NomImage"].ToString()' , alt="Image" />
+    }
+    else
+    {
+    <img src="~/Images/profil-default.png" />
+    }
+
 </div>
 
 <div class="account-menu">

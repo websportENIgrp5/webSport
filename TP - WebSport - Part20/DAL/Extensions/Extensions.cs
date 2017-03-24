@@ -84,7 +84,7 @@ namespace DAL.Extensions
                 Distance = model.Distance,
                 IdDifficulte = model.IdDifficulte,
 
-                Difficulte = model.ToDataEntity().Difficulte
+                //Difficulte = model.ToDataEntity().Difficulte
             };
         }
 

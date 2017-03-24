@@ -15,6 +15,11 @@
 
         @Html.Partial("_ChangeIdentityPartial")
 
+        <div>
+            @*<img src="~/Images/profil-default.png" />*@
+            @Html.Partial("_ImagePartial")
+        </div>
+
         @if (ViewBag.HasLocalPassword)
         {
             @Html.Partial("_ChangePasswordPartial")
