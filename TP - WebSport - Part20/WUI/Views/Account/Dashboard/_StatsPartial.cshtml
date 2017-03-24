@@ -1,4 +1,4 @@
-﻿@model WUI.Models.InscriptionModel
+﻿@model WUI.Models.StatsModel
 @{
     ViewBag.Title = "_StatsPartial";
 }
@@ -6,6 +6,22 @@
     @Styles.Render("~/Content/Account/css")
 }
 
+@{
+    //List<WUI.Models.StatsModel> stats = (List<WUI.Models.StatsModel>)TempData["Stats"];
+    List<List<string>> chartData = (List<List<string>>)ViewData["ChartData"];
+
+
+
+    //foreach (WUI.Models.StatsModel stat in stats)
+    //{
+    //string title = @stat.Title;
+    //string title = HttpUtility.HtmlDecode(@stat.Title);
+        @*<script type="text/javascript">
+            racesLabel.push(@HttpUtility.UrlDecode(title);
+            alert(racesLabel);
+        </script>*@
+    //}
+}
 <h2>Mes statistiques</h2>
 
 <div class="scores">
@@ -29,17 +45,164 @@
     </div>
 </div>
 
-<div class="stats-chart">
+@*<div class="stats-chart">
     <canvas id="scoresChart" width="400" height="400"></canvas>
-</div>
+</div>*@
+
+@{
+    var i = 0;
+    foreach (List<string> chart in chartData)
+    {
+        if (@chart[0] != "")
+        {
+            <h3>@Html.Raw((string)chart[4])</h3>
+
+            <div class="stats-chart">
+                <canvas id="scoresChart-@i" class="score-chart" width="400" height="400"></canvas>
+            </div>
+
+            <script type="text/javascript">
+                //var wrapTitle = $('.score-chart-title');
+                //var wrapContent = $('.score-chart');
+
+                //$('#score-chart-title-0').addClass('wrap-active');
+                //wrapContent.hide();
+
+                // Labels
+                var labels = "@Html.Raw((string)chart[0])";
+                var resultLabels = '\'' + labels.split(',').join('\',\'') + '\'';
+                labels = resultLabels.split(',');
+
+                // My speed
+                var mySpeed = "@Html.Raw((string)chart[1])";
+                mySpeed = mySpeed.split(',');
+
+                // Average speed
+                var AverageSpeed = "@Html.Raw((string)chart[3])";
+                AverageSpeed = AverageSpeed.split(',');
+
+                // Fastest speed
+                var fastestSpeed = "@Html.Raw((string)chart[2])";
+                fastestSpeed = fastestSpeed.split(',');
 
 
-<script type="text/javascript">
+                var ctx = document.getElementById("scoresChart-@i");
+
+                var data = {
+                    labels: labels,
+                    datasets: [
+                        // Ma vitesse moyenne
+                        {
+                            label: "Ma vitesse moyenne",
+                            fill: false,
+                            lineTension: 0.1,
+                            backgroundColor: "rgba(100, 192, 247, 0.2)",
+                            borderColor: "rgba(100, 192, 247, 1)",
+                            borderCapStyle: 'butt',
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: 'miter',
+                            pointBorderColor: "rgba(100, 192, 247, 1)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 8,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(100, 192, 247, 1)",
+                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 1,
+                            pointHitRadius: 10,
+                            data: mySpeed,
+                            spanGaps: false,
+                        },
+                        // Vitesse moyenne générale
+                        {
+                            label: "Vitesse moyenne générale",
+                            fill: true,
+                            lineTension: 0.1,
+                            backgroundColor: "rgba(175, 180, 43, 0.2)",
+                            borderColor: "rgba(175, 180, 43, 1)",
+                            borderCapStyle: 'butt',
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: 'miter',
+                            borderColor: "rgba(175, 180, 43, 1)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 8,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(175, 180, 43, 1)",
+                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 1,
+                            pointHitRadius: 10,
+                            data: AverageSpeed,
+                            spanGaps: false,
+                        },
+                        // Vitesse moyenne la plus rapide
+                        {
+                            label: "Vitesse moyenne la plus rapide",
+                            fill: false,
+                            lineTension: 0.1,
+                            backgroundColor: "rgba(229, 57, 53, 0.2)",
+                            borderColor: "rgba(229, 57, 53, 1)",
+                            borderCapStyle: 'butt',
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: 'miter',
+                            pointBorderColor: "rgba(229, 57, 53, 1)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 8,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(229, 57, 53, 1)",
+                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 1,
+                            pointHitRadius: 10,
+                            data: fastestSpeed,
+                            spanGaps: false,
+                        }
+                    ]
+                };
+
+                var options = {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                fixedStepSize: 1
+                            }
+                        }]
+                    }
+                }
+
+                var myLineChart = new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: options,
+                });
+
+            </script>
+
+            i++;
+        }
+
+
+        @*foreach (string data in chart)
+            {
+                <div>@data</div>
+            }
+            <br />*@
+
+    }
+}
+
+
+@*<script type="text/javascript">
     var ctx = document.getElementById("scoresChart");
 
     var data = {
         labels: ["Les petites foulées", "La campagne à vélo", "Grand marathon"],
         datasets: [
+            // Ma vitesse moyenne
             {
                 label: "Ma vitesse moyenne",
                 fill: false,
@@ -62,6 +225,7 @@
                 data: [7.8, 7.9, 6.4],
                 spanGaps: false,
             },
+            // Vitesse moyenne générale
             {
                 label: "Vitesse moyenne générale",
                 fill: true,
@@ -84,6 +248,7 @@
                 data: [8.0, 7.6, 6.1],
                 spanGaps: false,
             },
+            // Vitesse moyenne la plus rapide
             {
                 label: "Vitesse moyenne la plus rapide",
                 fill: false,
@@ -125,4 +290,4 @@
         data: data,
         options: options,
     });
-</script>
+</script>*@

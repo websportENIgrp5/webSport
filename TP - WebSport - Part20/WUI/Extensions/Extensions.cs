@@ -329,6 +329,14 @@ namespace WUI.Extensions
                 ? bo.Where(x => x != null).Select(x => x.ToModel()).ToList()
                 : null;
         }
+
+        public static List<StatsModel> ToModels(this List<UserStats> bo)
+        {
+            return bo != null
+                ? bo.Where(x => x != null).Select(x => x.ToModel()).ToList()
+                : null;
+        }
+
         public static RaceDisplayModel ToModel(this InscriRaceSuivi bo)
         {
             return new RaceDisplayModel
@@ -343,6 +351,23 @@ namespace WUI.Extensions
                 State = bo.State,
             };
         }
+
+        public static StatsModel ToModel(this UserStats bo)
+        {
+            return new StatsModel
+            {
+                IdCourse = bo.IdCourse,
+                Title = bo.Title,
+                Distance = bo.Distance,
+                Time = bo.Time,
+                FastestTime = bo.FastestTime,
+                Category = bo.Category,
+                MySpeed = bo.MySpeed,
+                AverageSpeed = bo.AverageSpeed,
+                FastestSpeed = bo.FastestSpeed
+            };
+        }
+
         #endregion
 
 

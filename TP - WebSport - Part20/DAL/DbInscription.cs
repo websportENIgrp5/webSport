@@ -22,17 +22,34 @@ namespace DAL
             return _instance;
         }
 
-        private const string RQT_GET_STATS = "select *" + 
+        private const string RQT_GET_STATS = "select c.Titre, i.Temps, c.Distance, cat.Libelle, c.Id " + 
                                             "from Inscription i " + 
                                             "inner join Participant p on i.IdParticipant = p.PersonneId " + 
                                             "inner join Personne per on p.PersonneId = per.Id " + 
                                             "inner join UserTable u on p.IdUser = u.Id " + 
                                             "inner join Course c on i.IdCourse = c.Id " + 
+                                            "inner join SuiviInscription s on i.IdSuiviInscription = s.Id " +
                                             "inner join CategorieCourse cat on c.IdCategorieCourse = cat.Id " +
-                                            "where u.Id = @userId " +
-                                            "and cat.Id = @catId ";
+                                            "where u.Id = @idParticipant " +
+                                            "and cat.Id = @catId " +
+                                            "and s.Id = 7";
 
-        private const string RQT_GET_LAST_3_INSCRI = "SELECT TOP 3 i.Id, i.NumClassement, i.Temps, si.Libelle, c.Titre, c.DateStart, c.Ville, c.Distance " +
+        private const string RQT_GET_FASTEST_TIME = "select i.Temps " +
+                                            "from Inscription i " +
+                                            "inner join Course c on i.IdCourse = c.Id " +
+                                            "where i.NumClassement = 1 " +
+                                            "and c.Id = @idCourse";
+
+        private const string RQT_GET_AVERAGE_TIME = "select cast(cast(avg(cast(CAST(i.Temps as datetime) as float)) as datetime) as time) TimeResult " +
+                                            "from Inscription i " +
+                                            "inner join Course c on i.IdCourse = c.Id " +
+                                            "where c.Id = @idCourse " +
+                                            "and i.IdSuiviInscription = 7";
+
+        private const string RQT_GET_CATEGORY_ID = "select cat.Id " +
+                                            "from CategorieCourse cat";
+
+        private const string RQT_GET_LAST_3_INSCRI = "SELECT TOP 3 i.NumClassement, i.Temps, si.Libelle, c.Titre, c.DateStart, c.Ville, c.Distance " +
                                                      "FROM Inscription i " +
                                                      "INNER JOIN SuiviInscription si " +
                                                      "ON i.IdSuiviInscription = si.Id " +
@@ -96,6 +113,82 @@ namespace DAL
             }
 
             return racesInscri;
+        }
+
+        /// <summary>
+        /// Permet de récupérer les statistiques de chaque course du participant, par catégorie.
+        /// </summary>
+        /// <param name="idParticipant">Contient l'id du participant</param>
+        /// <param category="catId">Contient l'id de la catégorie</param>
+        /// <returns></returns>
+        public List<UserStats> getStatsByCategory(int idParticipant, int catId)
+        {
+            List<UserStats> listStats = new List<UserStats>();
+
+            var instance = new DbTools();
+            var command = instance.CreerRequete(RQT_GET_STATS);
+
+            instance.CreerParametre(command, "@idParticipant", idParticipant);
+            instance.CreerParametre(command, "@catId", catId);
+
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                listStats = BuildListUserStats(reader);
+            }
+
+            if (listStats.Count > 0)
+            {
+                foreach (UserStats list in listStats)
+                {
+                    var commandFastestSpeed = instance.CreerRequete(RQT_GET_FASTEST_TIME);
+                    instance.CreerParametre(commandFastestSpeed, "@idCourse", list.IdCourse);
+
+                    using (DbDataReader readerFastestSpeed = commandFastestSpeed.ExecuteReader())
+                    {
+                        list.FastestTime = BuildFastestTime(readerFastestSpeed);
+                        if (list.FastestTime != null)
+                        {
+                            list.FastestSpeed = CalculSpeed(list.Distance, list.FastestTime.Value);
+                        }
+                    }
+
+                    var commandAverageSpeed = instance.CreerRequete(RQT_GET_AVERAGE_TIME);
+                    instance.CreerParametre(commandAverageSpeed, "@idCourse", list.IdCourse);
+
+                    using (DbDataReader readerAverageSpeed = commandAverageSpeed.ExecuteReader())
+                    {
+                        var averageTime = BuildAverageTime(readerAverageSpeed);
+                        if (averageTime != null)
+                        {
+                            list.AverageSpeed = CalculSpeed(list.Distance, averageTime.Value);
+                        }
+                    }
+                }
+            }
+
+            return listStats;
+        }
+
+        /// <summary>
+        /// Récupère la liste des ids de chaque catégories.
+        /// </summary>
+        /// <returns></returns>
+        public List<int> getCategoriesId()
+        {
+            List<int> listCategoriesId = new List<int>();
+
+            var instance = new DbTools();
+            var command = instance.CreerRequete(RQT_GET_CATEGORY_ID);
+
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    listCategoriesId.Add(reader.GetInt32(reader.GetOrdinal("Id")));
+                }
+            }
+
+            return listCategoriesId;
         }
 
         /// <summary>
@@ -163,19 +256,133 @@ namespace DAL
             return count;
         }
 
-
-        public List<BO.Inscription> getStatsByCategory(int userId, int catId)
+        /// <summary>
+        /// Permet de construire la liste des statistiques de l'utilisateur.
+        /// </summary>
+        /// <returns></returns>
+        public List<UserStats> BuildListUserStats(DbDataReader reader)
         {
-            List<BO.Inscription> list = new List<BO.Inscription>();
+            List<UserStats> list = new List<UserStats>();
 
-            var instance = new DbTools();
-            var command = instance.CreerRequete(RQT_GET_STATS);
+            while (reader.Read())
+            {
+                UserStats listStats = new UserStats();
+                listStats.IdCourse = reader.GetInt32(reader.GetOrdinal("Id"));
+                listStats.Title = reader.GetString(reader.GetOrdinal("Titre"));
+                listStats.Distance = reader.GetInt32(reader.GetOrdinal("Distance"));
+                listStats.Category = reader.GetString(reader.GetOrdinal("Libelle"));
 
-            instance.CreerParametre(command, "@userId", userId);
-            instance.CreerParametre(command, "@catId", catId);
+                // Time
+                var time = reader.GetValue(reader.GetOrdinal("Temps"));
+                // Nullable
+                if (time != DBNull.Value)
+                {
+                    listStats.Time = DateTimeToTimeSpan(DateTime.ParseExact(time.ToString(), "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture));
+                }
 
-            DbDataReader reader = command.ExecuteReader();
-            return this.BuildInscriptionList(reader);
+                //string labels = "";
+                //double mySpeed = 0;
+                //string averageSpeed = "";
+
+                // Labels
+                //if (labels != "")
+                //{
+                //    labels = labels + ", ";
+                //}
+                //labels = labels + listStats.Title;
+                //listStats.Labels = labels;
+
+                // My speed
+                if (listStats.IdCourse != 0)
+                {
+                    listStats.MySpeed = CalculSpeed(listStats.Distance, (TimeSpan)listStats.Time);
+                }
+
+                //if (mySpeed != "")
+                //{
+                //    mySpeed = mySpeed + ", ";
+                //}
+                //mySpeed = mySpeed + speed;
+
+
+                list.Add(listStats);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Récupère le temps le plus rapide de la course.
+        /// </summary>
+        /// <returns></returns>
+        public TimeSpan? BuildFastestTime(DbDataReader readerFastestSpeed)
+        {
+            Object fastestTimeValue = null;
+            TimeSpan? fastestTime = new TimeSpan();
+
+            while (readerFastestSpeed.Read())
+            {
+                // FastestTime
+                fastestTimeValue = readerFastestSpeed.GetValue(readerFastestSpeed.GetOrdinal("Temps"));
+
+            }
+            // Nullable
+            if (fastestTimeValue != null)
+            {
+                fastestTime = DateTimeToTimeSpan(DateTime.ParseExact(fastestTimeValue.ToString(), "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture));
+            }
+            else
+            {
+                fastestTime = null;
+            }
+
+            return fastestTime;
+        }
+        
+        /// <summary>
+        /// Récupère le temps moyen de la course.
+        /// </summary>
+        /// <returns></returns>
+        public TimeSpan? BuildAverageTime(DbDataReader readerAverageSpeed)
+        {
+            Object averageTimeValue = null;
+            TimeSpan? averageTime = new TimeSpan();
+
+            while (readerAverageSpeed.Read())
+            {
+                // Average time
+                averageTimeValue = readerAverageSpeed.GetValue(readerAverageSpeed.GetOrdinal("TimeResult"));
+
+            }
+
+            if (averageTimeValue != null)
+            {
+                var dfgfd = averageTimeValue.ToString().Substring(0, 8);
+                averageTime = DateTimeToTimeSpan(DateTime.ParseExact(dfgfd, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture));
+            }
+            else
+        {
+                averageTime = null;
+            }
+
+            return averageTime;
+        }
+
+        /// <summary>
+        /// Calcule la vitesse en fonction de la distance et du temps.
+        /// </summary>
+        /// <returns></returns>
+        public double CalculSpeed(int distance, TimeSpan time)
+        {
+            TimeSpan timeValue = (TimeSpan)time;
+            double hours = (double)timeValue.Hours;
+            double min = ((double)timeValue.Minutes) / 60;
+            double sec = ((double)timeValue.Seconds) / 3660;
+            double timeDecimal = hours + min + sec;
+
+            double speed = distance / timeDecimal;
+
+            return speed;
         }
 
         private List<BO.Inscription> BuildInscriptionList(DbDataReader reader)

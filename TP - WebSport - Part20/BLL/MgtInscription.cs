@@ -42,10 +42,10 @@ namespace BLL
 
 
         #region Methods
-        public List<Inscription> getStatsByCategory()
-        {
-            return DbInscription.GetInstance().getStatsByCategory(1, 1);
-        }
+        //public List<Inscription> getStatsByCategory()
+        //{
+        //    return DbInscription.GetInstance().getStatsByCategory(1, 1);
+        //}
 
         public bool WriteInscription(int idCourse, string nameUser)
         {

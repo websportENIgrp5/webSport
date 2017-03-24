@@ -73,7 +73,15 @@ h2 {
 }
 
 h3 {
-    font-size: 1.2em;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    background: #fff;
+    display: inline-block !important;
+    width: auto !important;
+    margin-bottom: 0 !important;
+    padding: 10px 15px !important;
+    /*text-transform: uppercase !important;*/
+
 }
 
 h4 {

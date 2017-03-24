@@ -37,6 +37,23 @@ namespace BLL
             return dbInscription.GetInscriByIdParticipant(idParticipant);
         }
 
+        public List<UserStats> GetUserStats(string name, int category)
+        {
+            int idUser = _uow.UserRepo.GetIdByName(name);
+            int idParticipant = _uow.ContributorRepo.Where(x => x.IdUser == idUser).Single().PersonId;
+
+            DbInscription dbInscription = new DbInscription();
+
+            return dbInscription.getStatsByCategory(idParticipant, category);
+        }
+
+        public List<int> GetCategoriesId()
+        {
+            DbInscription dbInscription = new DbInscription();
+
+            return dbInscription.getCategoriesId();
+        }
+
         public Personne GetIdentityPerson(int idUser)
         {
             int idParticipant = _uow.ContributorRepo.Where(x => x.IdUser == idUser).Single().PersonId;

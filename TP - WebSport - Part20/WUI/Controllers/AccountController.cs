@@ -134,26 +134,87 @@ namespace WUI.Controllers
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Dashboard");
 
-            //var result = MgtInscription.GetInstance().getStatsByCategory();
-            //if (result == null)
-            //{
-            //    return HttpNotFound();
-            //}
-
-            //return View(result);
-
             MgtAccount serviceAccount = new MgtAccount();
-            List<RaceDisplayModel> races=  serviceAccount.GetLast3InscriByUserName(User.Identity.Name).ToModels();
+
+            List<List<StatsModel>> racesListByCategory = new List<List<StatsModel>>();
+            List<int> listCategoriesId = serviceAccount.GetCategoriesId();
+            List<List<string>> listChartData = new List<List<string>>();
+            //IDictionary<string, List<string>> listChartData = new Dictionary<string, List<string>>();
+
+            foreach (int catId in listCategoriesId)
+            {
+                List<StatsModel> stats = serviceAccount.GetUserStats(User.Identity.Name, catId).ToModels();
+                racesListByCategory.Add(stats);
+            }
+
+
+            foreach (List<StatsModel> category in racesListByCategory)
+            {
+                List<string> ChartData = new List<string>();
+                string labels = "";
+                string mySpeed = "";
+                string fastestSpeed = "";
+                string averageSpeed = "";
+
+                foreach (StatsModel race in category)
+                {
+                    // Labels
+                    if (labels != "")
+                    {
+                        labels = labels + ", ";
+                    }
+                    labels = labels + race.Title;
+
+                    // Ma vitesse moyenne
+                    if (mySpeed != "")
+                    {
+                        mySpeed = mySpeed + ", ";
+                    }
+                    var mySpeedVal = race.MySpeed.ToString().Replace(',', '.');
+                    mySpeed = mySpeed + mySpeedVal;
+
+                    // Vitesse moyenne générale
+                    if (fastestSpeed != "")
+                    {
+                        fastestSpeed = fastestSpeed + ", ";
+                    }
+                    var averageSpeedVal = race.FastestSpeed.ToString().Replace(',', '.');
+                    fastestSpeed = fastestSpeed + averageSpeedVal;
+
+                    // Vitesse moyenne la plus rapide de la course
+                    if (averageSpeed != "")
+                    {
+                        averageSpeed = averageSpeed + ", ";
+                    }
+                    var fastestSpeedVal = race.AverageSpeed.ToString().Replace(',', '.');
+                    averageSpeed = averageSpeed + fastestSpeedVal;
+                }
+                ChartData.Add(labels);
+                ChartData.Add(mySpeed);
+                ChartData.Add(fastestSpeed);
+                ChartData.Add(averageSpeed);
+                if (category.Count > 0)
+                {
+                    ChartData.Add(category[0].Category);
+                }
+                listChartData.Add(ChartData);
+                //listChartData[category[0].Category] = ChartData;
+            }
+
+            List<RaceDisplayModel> races =  serviceAccount.GetLast3InscriByUserName(User.Identity.Name).ToModels();
 
             if (TempData["Races"] ==null)
             {
-                TempData.Add("Races", races);
+            TempData.Add("Races", races);
             }
             else
             {
                 TempData["Races"] = races;
             }
             
+            //TempData.Add("Stats", racesListByCategory);
+            ViewData.Add("ChartData", listChartData);
+
             return View();
         }
 
@@ -193,7 +254,7 @@ namespace WUI.Controllers
             }
             else
             {
-                ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
                 identity = serviceAccount.GetIdentityPerson(WebSecurity.GetUserId(User.Identity.Name)).ToModelIdentity();  
             }
           
