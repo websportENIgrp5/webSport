@@ -54,6 +54,9 @@
     font-size: 13px;
     text-decoration: underline;
 }
+.scores {
+    margin-bottom: 40px;
+}
 .score {
     /*width: 175px;*/
     display: inline-block;
@@ -89,9 +92,9 @@
 }
 .stats-chart {
     background: #fff;
-    margin-top: 40px;
     padding: 20px;
     border-radius: 3px;
+    margin-bottom: 40px;
 }
 
 /*
@@ -175,6 +178,12 @@ td .mobile {
     }
     .races.list th.date, .races.list td.date {
         display: none;
+    }
+    .scores {
+        margin-bottom: 20px;
+    }
+    .stats-chart {
+        margin-bottom: 20px;
     }
 }
 
@@ -280,6 +289,6 @@ td .mobile {
         margin-bottom: 20px;
     }
     .stats-chart {
-        margin-top: 30px;
+        margin-bottom: 10px;
     }
 }
