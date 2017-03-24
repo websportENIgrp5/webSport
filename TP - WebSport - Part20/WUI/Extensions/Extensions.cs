@@ -333,6 +333,7 @@ namespace WUI.Extensions
         {
             return new RaceDisplayModel
             {
+                Id = bo.Id,
                 Title = bo.Title,
                 City = bo.City,
                 Classement = bo.Classement,
@@ -343,6 +344,8 @@ namespace WUI.Extensions
             };
         }
         #endregion
+
+
         public static UnitDistanceModel ToModel(this UnitDistance bo)
         {
             UnitDistanceModel result;

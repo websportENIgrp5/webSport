@@ -45,6 +45,12 @@ namespace BLL
             return Person;
         }
 
+        public void DeleteInscription(int idInscri)
+        {
+            DbInscription dbInscrition = new DbInscription();
+            dbInscrition.Remove(idInscri);
+        }
+
         public bool ChangeIdentity(string userName, string login, string lastname, string firstname)
         {
             // Mise à jour du login

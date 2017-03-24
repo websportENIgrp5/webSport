@@ -145,8 +145,15 @@ namespace WUI.Controllers
             MgtAccount serviceAccount = new MgtAccount();
             List<RaceDisplayModel> races=  serviceAccount.GetLast3InscriByUserName(User.Identity.Name).ToModels();
 
-        
-            TempData.Add("Races", races);
+            if (TempData["Races"] ==null)
+            {
+                TempData.Add("Races", races);
+            }
+            else
+            {
+                TempData["Races"] = races;
+            }
+            
             return View();
         }
 
@@ -428,6 +435,13 @@ namespace WUI.Controllers
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
 
+
+        public ActionResult Unsubscribe(int idCourse)
+        {
+            MgtAccount serviceAccount = new MgtAccount();
+            serviceAccount.DeleteInscription(idCourse);
+            return RedirectToAction("Dashboard");
+        }
         #region Applications auxiliaires
         private ActionResult RedirectToLocal(string returnUrl)
         {

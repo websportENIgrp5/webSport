@@ -92,7 +92,7 @@
                                 @*Distance*@
                                 <div class="mobile distance">
                                     <strong>@Html.DisplayNameFor(model => model.Distance) : </strong>
-                                    <span class="distance">@Html.DisplayFor(modelItem => item.Distance)</span> <span class="unite">km</span>
+                                    <span class="nbDistance">@Html.DisplayFor(modelItem => item.Distance)</span> <span class="unite">km</span>
             </div>
                                 @*Category*@
                                 <div class="mobile category">
@@ -110,7 +110,7 @@
 
                         <td class="date">@Html.DisplayFor(modelItem => item.DateStart)</td>
                         <td class="town">@Html.DisplayFor(modelItem => item.Town)</td>
-                        <td class="Tdistance"><span class="distance">@Html.DisplayFor(modelItem => item.Distance)</span><span class="unite">km</span></td>
+                        <td class="distance"><span class="nbDistance">@Html.DisplayFor(modelItem => item.Distance)</span><span class="unite">km</span></td>
                         <td class="niveau">@Html.DisplayFor(modelItem => item.Difficulte.Libelle)</td>
                         <td class="category">@Html.DisplayFor(modelItem => item.CategoryRace.Title)</td>
                         <td class="details">

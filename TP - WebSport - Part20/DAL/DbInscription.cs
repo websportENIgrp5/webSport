@@ -32,7 +32,7 @@ namespace DAL
                                             "where u.Id = @userId " +
                                             "and cat.Id = @catId ";
 
-        private const string RQT_GET_LAST_3_INSCRI = "SELECT TOP 3 i.NumClassement, i.Temps, si.Libelle, c.Titre, c.DateStart, c.Ville, c.Distance " +
+        private const string RQT_GET_LAST_3_INSCRI = "SELECT TOP 3 i.Id, i.NumClassement, i.Temps, si.Libelle, c.Titre, c.DateStart, c.Ville, c.Distance " +
                                                      "FROM Inscription i " +
                                                      "INNER JOIN SuiviInscription si " +
                                                      "ON i.IdSuiviInscription = si.Id " +
@@ -41,7 +41,7 @@ namespace DAL
                                                      "WHERE i.IdParticipant = @idParticipant ORDER BY i.Id DESC";
 
 
-        private const string RQT_GET_INSCRI_BY_ID = "SELECT i.NumClassement, i.Temps, si.Libelle, c.Titre, c.DateStart, c.Ville, c.Distance " +
+        private const string RQT_GET_INSCRI_BY_ID = "SELECT i.Id,  i.NumClassement, i.Temps, si.Libelle, c.Titre, c.DateStart, c.Ville, c.Distance " +
                                                      "FROM Inscription i " +
                                                      "INNER JOIN SuiviInscription si " +
                                                      "ON i.IdSuiviInscription = si.Id " +
@@ -110,6 +110,7 @@ namespace DAL
             while (reader.Read())
             {
                 InscriRaceSuivi inscriSuiviRace = new InscriRaceSuivi();
+                inscriSuiviRace.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                 inscriSuiviRace.Title = reader.GetString(reader.GetOrdinal("Titre"));
                 inscriSuiviRace.State = reader.GetString(reader.GetOrdinal("Libelle"));
                 inscriSuiviRace.Distance = reader.GetInt32(reader.GetOrdinal("Distance"));
@@ -136,7 +137,13 @@ namespace DAL
             return list;
         }
 
-
+        public void Remove(int id)
+        {
+            DbTools cnx = new DbTools();
+            DbCommand command = cnx.CreerRequete("DELETE FROM Inscription WHERE Id= @id;");
+            cnx.CreerParametre(command, "@id", id);
+            command.ExecuteNonQuery();
+        }
         /// <summary>
         /// Permet de retourner le nombre total d'inscri a une course
         /// </summary>
