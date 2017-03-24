@@ -67,6 +67,8 @@ namespace DAL
                                                      "WHERE i.IdParticipant = @idParticipant ORDER BY i.Id DESC";
         private const string RQT_COUNT_INSCRIPTION = "SELECT COUNT(*) FROM Inscription WHERE idCourse = @idCourse";
 
+        private const string RQT_GET_TOTAL_RACE = "SELECT  c.distance, c.IdCategorieCourse, cc.Libelle FROM Inscription i INNER JOIN Course c ON c.Id = i.IdCourse Inner join CategorieCourse cc ON cc.Id = c.IdCategorieCourse WHERE i.IdParticipant=@idParticipant;";
+
         /// <summary>
         /// Permet de récupérer la liste des 3 dernieres inscriptions d'un participant
         /// </summary>
@@ -423,6 +425,36 @@ namespace DAL
             return elapsedTime;
 
         }
+
+        public List<DistanceRaceCategorie> GetDistanceCategoryRaceByIdParticipant(int idParticipant)
+        {
+            List<DistanceRaceCategorie> distanceByRace = new List<DistanceRaceCategorie>();
+            using (DbTools cnx = new DbTools())
+            {
+                using (DbCommand command = cnx.CreerRequete(RQT_GET_TOTAL_RACE))
+                {
+                    cnx.CreerParametre(command, "@idParticipant", idParticipant);
+                    using (DbDataReader reader = command.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            distanceByRace.Add(new DistanceRaceCategorie
+                            {
+                                Distance = reader.GetInt32(reader.GetOrdinal("distance")),
+                                Categorie = reader.GetInt32(reader.GetOrdinal("IdCategorieCourse")),
+                                CategorieString = reader.GetString(reader.GetOrdinal("Libelle")),
+
+                            });
+                            
+                        }
+                    }
+                }
+                
+            }
+            return distanceByRace;
+
+        }
+
         //private BO.Inscription BuildInscription(DbDataReader reader)
         //{
         //    // On lit la première ligne
