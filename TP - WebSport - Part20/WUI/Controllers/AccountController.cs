@@ -13,6 +13,7 @@ using WUI.Models;
 using BLL;
 using WUI.Extensions;
 using System.Web.Routing;
+using System.IO;
 
 namespace WUI.Controllers
 {
@@ -201,17 +202,26 @@ namespace WUI.Controllers
                 //listChartData[category[0].Category] = ChartData;
             }
 
-            List<RaceDisplayModel> races =  serviceAccount.GetLast3InscriByUserName(User.Identity.Name).ToModels();
+            // Récupération image du profil
+            string nomImage = serviceAccount.GetImageProfil(WebSecurity.CurrentUserId);
 
-            if (TempData["Races"] ==null)
+            if (nomImage != null)
             {
-            TempData.Add("Races", races);
+                TempData.Add("NomImage", nomImage);
+            }
+
+            // Récupération des 3 dernières courses
+            List<RaceDisplayModel> races = serviceAccount.GetLast3InscriByUserName(User.Identity.Name).ToModels();
+
+            if (TempData["Races"] == null)
+            {
+                TempData.Add("Races", races);
             }
             else
             {
                 TempData["Races"] = races;
             }
-            
+
             //TempData.Add("Stats", racesListByCategory);
             ViewData.Add("ChartData", listChartData);
 
@@ -254,7 +264,7 @@ namespace WUI.Controllers
             }
             else
             {
-            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+                ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
                 identity = serviceAccount.GetIdentityPerson(WebSecurity.GetUserId(User.Identity.Name)).ToModelIdentity();  
             }
           
@@ -578,6 +588,32 @@ namespace WUI.Controllers
                     return "Une erreur inconnue s'est produite. Vérifiez votre entrée et réessayez. Si le problème persiste, contactez votre administrateur système.";
             }
         }
+        #endregion
+
+        #region Upload Image
+
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase file)
+        {
+
+                if (file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/ProfilImage"), fileName);
+                    file.SaveAs(path);
+                    
+                    // Ajout image en BDD
+                    MgtAccount serviceAccount = new MgtAccount();
+                    serviceAccount.AjoutImageProfil(WebSecurity.CurrentUserId, fileName);
+
+                    path = Url.Content(Path.Combine("~/Images/ProfilImage", fileName));
+
+                    return RedirectToAction("Dashboard");
+            }
+
+            return RedirectToAction("Dashboard");
+        }
+
         #endregion
     }
 }
