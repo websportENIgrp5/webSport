@@ -18,6 +18,10 @@
 
         <div class="dashboard-races block">
             @Html.Partial("Dashboard/_ListRacePartial")
+
+            <span class="see-all">
+                @Html.ActionLink("Voir toutes mes courses", "MyRaces")
+            </span>
         </div>
 
         <div class="dashboard-stats block">

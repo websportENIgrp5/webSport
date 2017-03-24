@@ -49,7 +49,7 @@ namespace DAL
         private const string RQT_GET_CATEGORY_ID = "select cat.Id " +
                                             "from CategorieCourse cat";
 
-        private const string RQT_GET_LAST_3_INSCRI = "SELECT TOP 3 i.NumClassement, i.Temps, si.Libelle, c.Titre, c.DateStart, c.Ville, c.Distance " +
+        private const string RQT_GET_LAST_3_INSCRI = "SELECT TOP 3 i.NumClassement, i.Temps, si.Libelle, c.Titre, c.DateStart, c.Ville, c.Distance, i.Id " +
                                                      "FROM Inscription i " +
                                                      "INNER JOIN SuiviInscription si " +
                                                      "ON i.IdSuiviInscription = si.Id " +
