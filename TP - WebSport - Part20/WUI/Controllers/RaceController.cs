@@ -148,8 +148,7 @@ namespace WUI.Controllers
                 // Met en évidence le ValidationSummary(false) dans la vue
                 //ModelState.AddModelError(string.Empty, "Erreur visble via le ValidationSummary(true) mais pas par le ValidationSummary(false)");
 
-                if (ModelState.IsValid
-                    && serviceRace.AddRace(race.ToBo()))
+                if (ModelState.IsValid && serviceRace.AddRace(race.ToBo()))
                 {
                     //MgtRace.GetInstance()
                     return RedirectToAction("Index");

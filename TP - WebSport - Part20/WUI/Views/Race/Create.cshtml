@@ -18,7 +18,7 @@
     
     // Grâce à la propriété "true", on affiche uniquement les erreurs
     // n'étant pas rattachées à la propriété du model (ici RaceModel)
-    @Html.ValidationSummary(false)
+    @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>RaceModel</legend>
@@ -43,7 +43,7 @@
             @Html.LabelFor(model => model.DateStart)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.DateStart, new { @class="form-control", placeholder = "JJ/MM/AAAA", type="date", size = "30" })
+            @Html.TextBoxFor(model => model.DateStart, new { @class="form-control", placeholder = "JJ/MM/AAAA", type="date", size = "30"})
             @Html.ValidationMessageFor(model => model.DateStart)
         </div>
 
@@ -70,24 +70,32 @@
             @*@Html.DropDownListFor(model => ViewData["difficultes"], new SelectList(ViewData["difficultes"], "Id", "Libelle"))
             @Html.ValidationMessageFor(model => model.SelectedDifficulteId)*@
         </div>
-
         <div class="editor-label">
-            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Catégorie</div>
+            @Html.LabelFor(model => model.HeureStart)
         </div>
         <div class="editor-field">
-            @*@Html.DropDownListFor(model => model.Difficultes, Model.Difficultes)
-            @Html.ValidationMessageFor(model => model.IdDifficulte)*@
+           @Html.TextBoxFor(model => model.HeureStart, new { @class = "form-control", placeholder = "hh:mm", size = "30" })
+           @Html.ValidationMessageFor(model => model.HeureStart)
         </div>
 
-        <p>
-            <input type="submit" value="Créer la Course" />
-        </p>
-    </fieldset>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HeureEnd)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.HeureEnd, new { @class = "form-control", placeholder = "hh:mm",  size = "30" })
+            @Html.ValidationMessageFor(model => model.HeureEnd)
+        </div>
+
+        <div class="button secondary return">
+            @Html.ActionLink("Retour à la liste", "Index")
+        </div>
+
+        <div class="button confirm">
+            <input type="submit" value="Créer la course" />
+            </div>
+</fieldset>
 }
 
-<div>
-    @Html.ActionLink("Retour à la liste", "Index")
-</div>
 
 @section Scripts {
 

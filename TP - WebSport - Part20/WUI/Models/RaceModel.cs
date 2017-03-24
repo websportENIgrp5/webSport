@@ -54,11 +54,11 @@ namespace WUI.Models
 
 
         [Display(Name = "Niveau")]
-        [Required(ErrorMessage = "La {0} est requise")]
+       // [Required(ErrorMessage = "La {0} est requise")]
         public DifficulteModel Difficulte { get; set; }
 
         [Display(Name = "Catégorie")]
-        [Required(ErrorMessage = "La {0} est requise")]
+       // [Required(ErrorMessage = "La {0} est requise")]
         public CategoryRaceModel CategoryRace { get; set; }
 
         public List<InscriptionModel> Inscriptions { get; set; }
