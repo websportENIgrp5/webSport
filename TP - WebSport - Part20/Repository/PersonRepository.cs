@@ -36,6 +36,7 @@ namespace Repository
             var raceToUpdate = this.GetByIdPrivate(element.Id);
             raceToUpdate.Lastname = element.Nom;
             raceToUpdate.Firstname = element.Prenom;
+            raceToUpdate.NomImage = element.NomImage;
             base.Update(raceToUpdate);
         }
         #endregion

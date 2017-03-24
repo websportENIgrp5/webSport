@@ -81,6 +81,7 @@
           <Property Name="Email" Type="varchar" MaxLength="500" />
           <Property Name="Telephone" Type="varchar" MaxLength="10" />
           <Property Name="DateNaissance" Type="datetime" />
+          <Property Name="NomImage" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Poi">
           <Key>
@@ -358,6 +359,7 @@
           <Property Name="Phone" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="BirthDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Contributors" Relationship="BddLoginModel.FK_Competiteur_Personne" FromRole="Person" ToRole="Contributor" />
+          <Property Name="NomImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Competiteur_Personne">
           <End Role="Person" Type="BddLoginModel.PersonEntity" Multiplicity="1" />
@@ -594,6 +596,7 @@
           <EntitySetMapping Name="PersonEntities">
             <EntityTypeMapping TypeName="BddLoginModel.PersonEntity">
               <MappingFragment StoreEntitySet="Personne">
+                <ScalarProperty Name="NomImage" ColumnName="NomImage" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Lastname" ColumnName="Nom" />
                 <ScalarProperty Name="Firstname" ColumnName="Prenom" />

@@ -100,5 +100,33 @@ namespace BLL
 
             return true;
         }
+
+        public bool AjoutImageProfil(int idUser, string nomImage)
+        {
+            int idParticipant = _uow.ContributorRepo.Where(x => x.IdUser == idUser).Single().PersonId;
+            Personne Person = _uow.PersonRepo.GetById(idParticipant);
+            if(nomImage != null)
+            {
+                Person.NomImage = nomImage;
+            }
+
+            _uow.PersonRepo.Update(Person);
+
+            _uow.Save();
+
+            return true;
+        }
+
+        public string GetImageProfil(int idUser)
+        {
+            int idParticipant = _uow.ContributorRepo.Where(x => x.IdUser == idUser).Single().PersonId;
+            Personne Person = _uow.PersonRepo.GetById(idParticipant);
+            if(Person.NomImage != null)
+            {
+                return Person.NomImage;
+            }
+
+            return null;
+        }
     }
 }
